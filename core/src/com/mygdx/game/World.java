@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -26,6 +27,9 @@ public class World {
 
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera(MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
+        for (int i = 0; i < map.getLayers().get("walls").getObjects().getCount(); i++){
+            System.out.println(map.getLayers().get("walls").getObjects().get(i).getProperties().get("x"));
+        }
     }
 
     public OrthogonalTiledMapRenderer getRenderer(){

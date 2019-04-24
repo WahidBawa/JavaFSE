@@ -23,6 +23,7 @@ public class Player {
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
         player.setX(x);
         player.setY(y);
+
         rect = new Rectangle((int) player.getX(), (int) player.getY(), (int) player.getWidth(), (int) player.getHeight()); // creates a rect based on the sprite's dimensions
 
         this.render(batch);
