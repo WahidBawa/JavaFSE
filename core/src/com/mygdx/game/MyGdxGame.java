@@ -13,11 +13,13 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	int x, y = 0;
 	Player player;
+	World world;
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		graphics.setWindowedMode(1366, 1024);
 		player = new Player(x, y);
+		world = new World();
 	}
 
 	@Override
@@ -29,7 +31,8 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		batch.begin();
 		// updating of classes and drawing happens here
-		player.update(batch);
+		world.render(batch);
+//		player.update(batch);
 
 		batch.end();
 	}

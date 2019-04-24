@@ -14,9 +14,9 @@ public class Player {
 
     private void render(SpriteBatch batch){
         batch.draw(player, x, y);
-    }
+    } // render image on screen
 
-    public void update(SpriteBatch batch){
+    public void update(SpriteBatch batch){ // all data will be updated here (pos, char states, etc)
         this.setX(x);
         this.setY(y);
         this.render(batch);
