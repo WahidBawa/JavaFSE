@@ -35,7 +35,6 @@ public class MyGdxGame extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // all logic happens here
         movePlayer();
-        System.out.println(walls.size());
 
         world.update(); // renders world
 
@@ -45,6 +44,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
         batch.end();
 
+        for (Wall w : walls) w.render();
     }
 
     @Override
