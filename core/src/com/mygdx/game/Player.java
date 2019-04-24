@@ -1,53 +1,58 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import java.awt.*;
 
 public class Player {
     int x, y;
-    Texture player = new Texture("badlogic.jpg");
+    Sprite player = new Sprite(new Texture("badlogic.jpg"));
+    Rectangle rect;
 
-    public Player(int x, int y){
+    public Player(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    private void render(SpriteBatch batch){
-        batch.draw(player, x, y);
-    } // render image on screen
+    private void render(SpriteBatch batch) {
+        player.draw(batch);
+    }
 
-    public void update(SpriteBatch batch){ // all data will be updated here (pos, char states, etc)
-        this.setX(x);
-        this.setY(y);
+    public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
+        player.setX(x);
+        player.setY(y);
+        rect = new Rectangle((int) player.getX(), (int) player.getY(), (int) player.getWidth(), (int) player.getHeight()); // creates a rect based on the sprite's dimensions
+
         this.render(batch);
     }
 
-    public int getX() {
-        return x;
+    public float getX(){
+        return player.getX();
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public float getY(){
+        return player.getY();
     }
 
-    public int getY() {
-        return y;
+    public Rectangle getRect(){
+        return rect;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void goLeft() {
+        x -= 1;
     }
 
-    public void goLeft(){
-        x -= 8;
+    public void goRight() {
+        x += 1;
     }
-    public void goRight(){
-        x += 8;
+
+    public void goUp() {
+        y += 1;
     }
-    public void goUp(){
-        y += 8;
-    }
-    public void goDown(){
-        y -= 8;
+
+    public void goDown() {
+        y -= 1;
     }
 }

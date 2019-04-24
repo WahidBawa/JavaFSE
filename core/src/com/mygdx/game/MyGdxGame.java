@@ -10,42 +10,44 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import static com.badlogic.gdx.Gdx.graphics;
 
 public class MyGdxGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	int x, y = 0;
-	Player player;
-	World world;
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		graphics.setWindowedMode(1366, 1024);
-		player = new Player(x, y);
-		world = new World();
-	}
+    SpriteBatch batch;
+    int x, y = 0;
+    Player player;
+    World world;
+    public static int WIDTH = 1366, HEIGHT = 1024;
 
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		// all logic happens here
-		movePlayer();
+    @Override
+    public void create() {
+        batch = new SpriteBatch();
+        graphics.setWindowedMode(WIDTH, HEIGHT);
+        player = new Player(x, y);
+        world = new World();
+    }
 
-		batch.begin();
-		// updating of classes and drawing happens here
-		world.render(batch);
-//		player.update(batch);
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        // all logic happens here
+        movePlayer();
 
-		batch.end();
-	}
-	
-	@Override
-	public void dispose () {
-		batch.dispose();
-	}
+        batch.begin();
+        // updating of classes and drawing happens here
+        world.render(batch);
+		player.update(batch);
 
-	public void movePlayer(){
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) player.goLeft();
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) player.goRight();
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) player.goDown();
-		if (Gdx.input.isKeyPressed(Input.Keys.UP)) player.goUp();
-	}
+        batch.end();
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+    }
+
+    public void movePlayer() {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) player.goLeft();
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) player.goRight();
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) player.goDown();
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) player.goUp();
+    }
 }
