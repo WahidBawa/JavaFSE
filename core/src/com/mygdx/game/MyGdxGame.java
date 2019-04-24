@@ -24,12 +24,11 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) x -= 10;
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) x += 10;
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) y -= 10;
-		if (Gdx.input.isKeyPressed(Input.Keys.UP)) y += 10;
+		// all logic happens here
+		movePlayer();
 
+		batch.begin();
+		// updating of classes and drawing happens here
 		player.update(batch);
 
 		batch.end();
@@ -38,5 +37,12 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
+	}
+
+	public void movePlayer(){
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) player.goLeft();
+		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) player.goRight();
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) player.goDown();
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)) player.goUp();
 	}
 }

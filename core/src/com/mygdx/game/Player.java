@@ -17,7 +17,8 @@ public class Player {
     }
 
     public void update(SpriteBatch batch){
-
+        this.setX(x);
+        this.setY(y);
         this.render(batch);
     }
 
@@ -35,5 +36,18 @@ public class Player {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void goLeft(){
+        x -= 8;
+    }
+    public void goRight(){
+        x += 8;
+    }
+    public void goUp(){
+        y += 8;
+    }
+    public void goDown(){
+        y -= 8;
     }
 }
