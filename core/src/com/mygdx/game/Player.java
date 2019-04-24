@@ -14,7 +14,7 @@ public class Player {
     public Player(int x, int y) {
         this.x = x;
         this.y = y;
-        speed = MyGdxGame.speed;
+        speed = Main.speed;
     }
 
     private void render(SpriteBatch batch) {
@@ -22,9 +22,6 @@ public class Player {
     }
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
-
-        player.setX(World.camera.position.x - player.getWidth() / 2);
-        player.setY(World.camera.position.y - player.getHeight() / 2);
 
         rect = new Rectangle((int) player.getX(), (int) player.getY(), (int) player.getWidth(), (int) player.getHeight()); // creates a rect based on the sprite's dimensions
 
