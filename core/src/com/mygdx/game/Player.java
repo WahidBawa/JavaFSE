@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class Player {
     int x, y;
-    Sprite player = new Sprite(new Texture("badlogic.jpg"));
+    Sprite player = new Sprite(new Texture("ASSETS/SPRITES/1.png"));
     Rectangle rect;
 
     public Player(int x, int y) {
@@ -41,18 +41,18 @@ public class Player {
     }
 
     public void goLeft() {
-        x -= 1;
+        x -= 8;
     }
 
     public void goRight() {
-        x += 1;
+        x += 8;
     }
 
     public void goUp() {
-        y += 1;
+        y += 8;
     }
 
     public void goDown() {
-        y -= 1;
+        y -= 8;
     }
 }

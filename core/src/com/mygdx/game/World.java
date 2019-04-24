@@ -11,11 +11,11 @@ public class World {
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
 
-    public void update(SpriteBatch batch) {
-        this.render(batch);
+    public void update() {
+        this.render();
     }
 
-    public void render(SpriteBatch batch) {
+    public void render() {
         renderer.setView(camera);
         renderer.render();
     }
@@ -23,15 +23,13 @@ public class World {
     public World() {
         TmxMapLoader loader = new TmxMapLoader();
         map = loader.load("ASSETS/MAPS/grasslands.tmx");
-        
+
         renderer = new OrthogonalTiledMapRenderer(map);
-        camera = new OrthographicCamera(1366, 1024);
+        camera = new OrthographicCamera(MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
     }
 
-    public void resize(int width, int height) {
-        camera.viewportWidth = width;
-        camera.viewportHeight = height;
-        camera.update();
+    public OrthogonalTiledMapRenderer getRenderer(){
+        return renderer;
     }
 }
 
