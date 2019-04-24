@@ -43,7 +43,7 @@ public class World {
         camera.position.x = mapWidthInPixels * .5f;
         camera.position.y = mapHeightInPixels * .35f;
 
-        renderer = new OrthogonalTiledMapRenderer(map);
+        renderer = new OrthogonalTiledMapRenderer(map, 0.5f);
 
 
         for (int i = 0; i < map.getLayers().get("walls").getObjects().getCount(); i++) {

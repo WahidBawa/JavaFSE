@@ -10,20 +10,13 @@ public class Wall {
     Rectangle rect;
     ShapeRenderer shapeRenderer = new ShapeRenderer();
     public Wall(float x, float y, float width, float height){
-        float floatWidth = width / (World.camera.viewportWidth / MyGdxGame.WIDTH);
-        float floatHeight = height / (World.camera.viewportHeight / MyGdxGame.HEIGHT);
+        rect = new Rectangle((int) x, (int) y, (int) width, (int) height);
 
-        float floatX = x / (World.camera.viewportWidth / MyGdxGame.WIDTH);
-        float floatY = y / (World.camera.viewportHeight / MyGdxGame.HEIGHT);
+//        rect.x = rect.x * (1 / 2);
+//        rect.y = rect.y * (1 / 2);
+//        rect.width = rect.width * (1 / 2);
+//        rect.height = rect.height * (1 / 2);
 
-        int newX = (int) floatX;
-        int newY = (int) floatY;
-
-        int newWidth = (int) floatWidth;
-        int newHeight = (int) floatHeight;
-
-        rect = new Rectangle(newX, newY, newWidth, newHeight);
-//        rect = new Rectangle((int) x, (int) y, (int) width, (int) height);
         MyGdxGame.walls.add(this);
     }
 

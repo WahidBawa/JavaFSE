@@ -7,8 +7,8 @@ import com.mygdx.game.MyGdxGame;
 public class DesktopLauncher {
     public static void main(String[] arg) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.backgroundFPS = 0;
-        config.foregroundFPS = 0;
+        config.backgroundFPS = 60;
+        config.foregroundFPS = 60;
         new LwjglApplication(new MyGdxGame(), config);
     }
 }
