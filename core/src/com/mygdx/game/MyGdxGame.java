@@ -47,12 +47,16 @@ public class MyGdxGame extends ApplicationAdapter {
 
         batch.end();
 
-//        for (Wall w : walls) w.render();
+        drawWalls();
     }
 
     @Override
     public void dispose() {
         batch.dispose();
+    }
+
+    public void drawWalls(){
+        for (Wall w : walls) w.update();
     }
 
     public void movePlayer() {
