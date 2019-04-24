@@ -6,13 +6,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.lang.reflect.WildcardType;
 import java.util.ArrayList;
 
 import static com.badlogic.gdx.Gdx.graphics;
 
 public class MyGdxGame extends ApplicationAdapter {
     SpriteBatch batch;
-    int x, y = 0;
     Player player;
     World world;
 
@@ -23,7 +23,7 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         graphics.setWindowedMode(WIDTH, HEIGHT);
-        player = new Player(x, y);
+        player = new Player(WIDTH / 2, HEIGHT / 2);
         walls = new ArrayList<Wall>();
         world = new World();
         batch = (SpriteBatch) world.getRenderer().getBatch();
@@ -44,7 +44,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
         batch.end();
 
-        for (Wall w : walls) w.render();
+//        for (Wall w : walls) w.render();
     }
 
     @Override
@@ -53,9 +53,17 @@ public class MyGdxGame extends ApplicationAdapter {
     }
 
     public void movePlayer() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) player.goLeft();
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) player.goRight();
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) player.goDown();
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) player.goUp();
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            World.camera.translate(-8, 0);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            World.camera.translate(8, 0);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            World.camera.translate(0, -8);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+            World.camera.translate(0, 8);
+        }
     }
 }

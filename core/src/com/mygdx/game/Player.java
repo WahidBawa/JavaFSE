@@ -40,20 +40,4 @@ public class Player {
     public Rectangle getRect(){
         return rect;
     }
-
-    public void goLeft() {
-        x -= 8;
-    }
-
-    public void goRight() {
-        x += 8;
-    }
-
-    public void goUp() {
-        y += 8;
-    }
-
-    public void goDown() {
-        y -= 8;
-    }
 }
