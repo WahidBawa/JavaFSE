@@ -4,8 +4,9 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import java.util.ArrayList;
 
 import static com.badlogic.gdx.Gdx.graphics;
 
@@ -14,12 +15,16 @@ public class MyGdxGame extends ApplicationAdapter {
     int x, y = 0;
     Player player;
     World world;
+
+    public static ArrayList<Wall> walls;
+
     public static int WIDTH = 1366, HEIGHT = 1024;
 
     @Override
     public void create() {
         graphics.setWindowedMode(WIDTH, HEIGHT);
         player = new Player(x, y);
+        walls = new ArrayList<Wall>();
         world = new World();
         batch = (SpriteBatch) world.getRenderer().getBatch();
     }
@@ -30,6 +35,7 @@ public class MyGdxGame extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // all logic happens here
         movePlayer();
+        System.out.println(walls.size());
 
         world.update(); // renders world
 

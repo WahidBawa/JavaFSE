@@ -27,12 +27,22 @@ public class World {
 
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera(MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
-        for (int i = 0; i < map.getLayers().get("walls").getObjects().getCount(); i++){
-            System.out.println(map.getLayers().get("walls").getObjects().get(i).getProperties().get("x"));
+
+        for (int i = 0; i < map.getLayers().get("walls").getObjects().getCount(); i++) {
+            System.out.println("i am being made");
+
+            MapProperties currObj = map.getLayers().get("walls").getObjects().get(i).getProperties();
+
+            float x = Float.parseFloat(currObj.get("x").toString());
+            float y = Float.parseFloat(currObj.get("y").toString());
+            float width = Float.parseFloat(currObj.get("width").toString());
+            float height = Float.parseFloat(currObj.get("height").toString());
+
+            new Wall(x, y, width, height);
         }
     }
 
-    public OrthogonalTiledMapRenderer getRenderer(){
+    public OrthogonalTiledMapRenderer getRenderer() {
         return renderer;
     }
 }
