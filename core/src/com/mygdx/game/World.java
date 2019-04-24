@@ -3,13 +3,10 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-
-import javax.jnlp.IntegrationService;
 
 public class World {
     TiledMap map;
@@ -38,6 +35,7 @@ public class World {
         int tileHeight = properties.get("tileheight", Integer.class);
         int mapWidthInTiles = properties.get("width", Integer.class);
         int mapHeightInTiles = properties.get("height", Integer.class);
+
         int mapWidthInPixels = mapWidthInTiles * tileWidth;
         int mapHeightInPixels = mapHeightInTiles * tileHeight;
 
@@ -46,7 +44,6 @@ public class World {
         camera.position.y = mapHeightInPixels * .35f;
 
         renderer = new OrthogonalTiledMapRenderer(map);
-//        camera = new OrthographicCamera(MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
 
 
         for (int i = 0; i < map.getLayers().get("walls").getObjects().getCount(); i++) {
