@@ -13,7 +13,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.util.ArrayList;
 
@@ -27,7 +26,7 @@ public class Main extends ApplicationAdapter {
 
 	public static int WIDTH = 1366, HEIGHT = 1024;
 
-	public World world;
+	public static World world;
 
 	WorldCreator wc;
 
