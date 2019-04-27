@@ -19,12 +19,15 @@ public class Player {
 
 
 
-    public Player(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Player() {
+        x = Main.WIDTH / 2- player.getWidth();
+        y = Main.HEIGHT / 2- player.getHeight();
+
+        player.setPosition(x, y);
+
         speed = Main.speed;
 
-        rect = new Rectangle(x, y, (int) player.getWidth(), (int) player.getHeight());
+        rect = new Rectangle((int) x, (int) y, (int) player.getWidth(), (int) player.getHeight());
 
         BodyDef bdef = new BodyDef();
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -34,6 +37,7 @@ public class Player {
         PolygonShape shape = new PolygonShape();
 
         fdef.shape = shape;
+
         shape.setAsBox(rect.width / 2, rect.height / 2);
 
         this.body.createFixture(fdef);
@@ -42,7 +46,6 @@ public class Player {
 
         this.body.setTransform((float) rect.getX(), (float) rect.getY(), 0);
 
-
     }
 
     private void render(SpriteBatch batch) {
@@ -50,11 +53,13 @@ public class Player {
     }
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
-        x = body.getPosition().x;
-        y = body.getPosition().y;
-        player.setX(x);
-        player.setY(y);
-        rect = new Rectangle((int) player.getX(), (int) player.getY(), (int) player.getWidth(), (int) player.getHeight()); // creates a rect based on the sprite's dimensions
+        player.setPosition(Main.WIDTH / 2- player.getWidth(), Main.HEIGHT / 2 - player.getHeight());
+
+        rect.setLocation((int) x, (int) y);
+
+        body.setTransform((float) rect.getX(), (float) rect.getY(), body.getAngle());
+
+        System.out.println(this.body.getPosition());
 
         this.render(batch);
     }

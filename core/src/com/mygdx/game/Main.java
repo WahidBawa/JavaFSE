@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class Main extends ApplicationAdapter {
 	public void create() {
 		graphics.setWindowedMode(WIDTH, HEIGHT);
 		world = new World(new Vector2(0, 0), true);
-		player = new Player(0, 0);
+		player = new Player();
 
 
 		TmxMapLoader loader = new TmxMapLoader();
@@ -54,6 +55,8 @@ public class Main extends ApplicationAdapter {
 		wc = new WorldCreator(world, map);
 
 		dbr = new Box2DDebugRenderer();
+
+		world.setContactListener(new CollisionListener());
 	}
 
 	@Override
