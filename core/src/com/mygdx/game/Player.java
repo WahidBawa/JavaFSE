@@ -25,6 +25,7 @@ public class Player {
         speed = Main.speed;
 
         rect = new Rectangle(x, y, (int) player.getWidth(), (int) player.getHeight());
+
         BodyDef bdef = new BodyDef();
         bdef.type = BodyDef.BodyType.DynamicBody;
         this.body = Main.world.createBody(bdef);

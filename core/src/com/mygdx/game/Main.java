@@ -38,8 +38,8 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void create() {
 		graphics.setWindowedMode(WIDTH, HEIGHT);
-		player = new Player(0, 0);
 		world = new World(new Vector2(0, 0), true);
+		player = new Player(0, 0);
 
 
 		TmxMapLoader loader = new TmxMapLoader();
