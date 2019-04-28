@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.utils.Array;
 
 import java.awt.*;
 
@@ -20,8 +21,8 @@ public class Player {
 
 
     public Player() {
-        x = Main.WIDTH / 2- player.getWidth();
-        y = Main.HEIGHT / 2- player.getHeight();
+        x = 0;
+        y = 0;
 
         player.setPosition(x, y);
 
@@ -55,11 +56,12 @@ public class Player {
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
         player.setPosition(Main.WIDTH / 2- player.getWidth(), Main.HEIGHT / 2 - player.getHeight());
 
-        rect.setLocation((int) x, (int) y);
+        rect.setLocation((int) x - (int) speed, (int) y - (int) speed);
 
         body.setTransform((float) rect.getX(), (float) rect.getY(), body.getAngle());
 
-        System.out.println(this.body.getPosition());
+        System.out.println(body.getPosition() + ":::::::::::" + Main.wc.getAsList().get(0).getPosition());
+//        System.out.println(this.body.getPosition());
 
         this.render(batch);
     }
@@ -74,6 +76,10 @@ public class Player {
 
     public Rectangle getRect(){
         return rect;
+    }
+
+    public Body getBody(){
+        return body;
     }
 
     public void goLeft(){

@@ -5,10 +5,14 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
+
+import java.util.ArrayList;
 
 
 public class WorldCreator {
     Body body;
+    ArrayList<Body> blocks = new ArrayList<Body>();
     public WorldCreator(World world, TiledMap map){
         for(int i = 0; i < map.getLayers().getCount(); i++){
             for (MapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)){
@@ -32,7 +36,14 @@ public class WorldCreator {
 //                for (Fixture f : body.getFixtureList()){
 //                    f.setUserData(1);
 //                }
+
+                blocks.add(body);
+
             }
         }
+    }
+
+    public ArrayList<Body> getAsList(){
+        return blocks;
     }
 }

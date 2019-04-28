@@ -6,26 +6,16 @@ import java.util.ArrayList;
 
 public class CollisionListener implements ContactListener {
 
-    public ArrayList<Fixture> objectsInRange;
-
     public CollisionListener () {
-        this.objectsInRange = new ArrayList<Fixture>();
+        System.out.println("usu");
     }
 
     @Override
     public void beginContact(Contact contact) {
-        Fixture a = contact.getFixtureA();
-        Fixture b = contact.getFixtureB();
-
-
-
-        if (a.getUserData() != null && (Integer) a.getUserData() == -1000){
-            if (b.getUserData() != null && (Integer) b.getUserData() < -1000){
-                this.objectsInRange.add(b);
-            }
-        } else if (b.getUserData() != null && (Integer) b.getUserData() == -1000){
-            if (a.getUserData() != null && (Integer) a.getUserData() < -1000){
-                this.objectsInRange.add(a);
+        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        for (Body i : Main.wc.getAsList()){
+            if((contact.getFixtureA().getBody() == Main.player.getBody() && contact.getFixtureB().getBody() == i) || (contact.getFixtureA().getBody() == i && contact.getFixtureB().getBody() == Main.player.getBody())) {
+                System.out.println("uwu");
             }
         }
     }
@@ -34,15 +24,6 @@ public class CollisionListener implements ContactListener {
     public void endContact(Contact contact) {
         Fixture a = contact.getFixtureA();
         Fixture b = contact.getFixtureB();
-        if (a.getUserData() != null && (Integer) a.getUserData() == -1000){
-            if (b.getUserData() != null && (Integer) b.getUserData() < -1000){
-                this.objectsInRange.remove(b);
-            }
-        } else if (b.getUserData() != null && (Integer) b.getUserData() == -1000){
-            if (a.getUserData() != null && (Integer) a.getUserData() < -1000){
-                this.objectsInRange.remove(a);
-            }
-        }
     }
 
     @Override
