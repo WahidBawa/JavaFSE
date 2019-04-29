@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -21,8 +22,8 @@ public class Player {
 
 
     public Player() {
-        x = 0;
-        y = 0;
+        x = 60;
+        y = 60;
 
         player.setPosition(x, y);
 
@@ -56,10 +57,6 @@ public class Player {
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
         player.setPosition(Main.WIDTH / 2- player.getWidth(), Main.HEIGHT / 2 - player.getHeight());
 
-        rect.setLocation((int) x - (int) speed, (int) y - (int) speed);
-
-        body.setTransform((float) rect.getX(), (float) rect.getY(), body.getAngle());
-
         System.out.println(body.getPosition() + ":::::::::::" + Main.wc.getAsList().get(0).getPosition());
 //        System.out.println(this.body.getPosition());
 
@@ -83,10 +80,10 @@ public class Player {
     }
 
     public void goLeft(){
-        x += -speed;
+        body.applyLinearImpulse(new Vector2(-speed * body.getMass(), 0), body.getWorldCenter(), true);
     }
     public void goRight(){
-        x += speed;
+        body.applyLinearImpulse(new Vector2(speed * body.getMass(), 0), body.getWorldCenter(), true);
     }
     public void goDown(){
         y += -speed;

@@ -43,6 +43,7 @@ public class Main extends ApplicationAdapter {
 		player = new Player();
 
 
+
 		TmxMapLoader loader = new TmxMapLoader();
 		TiledMap map = loader.load("ASSETS/MAPS/grasslands.tmx");
 
@@ -61,6 +62,8 @@ public class Main extends ApplicationAdapter {
 
 	@Override
 	public void render() {
+
+		world.step(1/60f, 6, 2);
 		Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
