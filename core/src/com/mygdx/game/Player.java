@@ -27,7 +27,7 @@ public class Player {
 
         player.setPosition(x, y);
 
-        speed = Main.speed;
+        speed = 345;
 
         rect = new Rectangle((int) x, (int) y, (int) player.getWidth(), (int) player.getHeight());
 
@@ -57,9 +57,6 @@ public class Player {
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
         player.setPosition(Main.WIDTH / 2- player.getWidth(), Main.HEIGHT / 2 - player.getHeight());
 
-        System.out.println(body.getPosition() + ":::::::::::" + Main.wc.getAsList().get(0).getPosition());
-//        System.out.println(this.body.getPosition());
-
         this.render(batch);
     }
 
@@ -86,9 +83,9 @@ public class Player {
         body.applyLinearImpulse(new Vector2(speed * body.getMass(), 0), body.getWorldCenter(), true);
     }
     public void goDown(){
-        y += -speed;
+        body.applyLinearImpulse(new Vector2(0, -speed * body.getMass()), body.getWorldCenter(), true);
     }
     public void  goUp(){
-        y += speed;
+        body.applyLinearImpulse(new Vector2(0, speed * body.getMass()), body.getWorldCenter(), true);
     }
 }

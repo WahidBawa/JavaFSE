@@ -89,24 +89,26 @@ public class Main extends ApplicationAdapter {
 	}
 
 	public void movePlayer() {
+		player.body.setLinearVelocity(0, 0);
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
 			player.goLeft();
-			camera.translate(-speed, 0);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
 			player.goRight();
-			camera.translate(speed, 0);
 
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
 			player.goDown();
-			camera.translate(0, -speed);
 
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)){
 			player.goUp();
-			camera.translate(0, speed);
 
 		}
+
+		player.x = player.body.getPosition().x;
+		player.y = player.body.getPosition().y;
+		camera.position.x = player.x;
+		camera.position.y = player.y;
 	}
 }
