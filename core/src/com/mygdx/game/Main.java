@@ -89,7 +89,6 @@ public class Main extends ApplicationAdapter {
 	}
 
 	public void movePlayer() {
-		player.body.setLinearVelocity(0, 0);
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
 			player.goLeft();
 		}

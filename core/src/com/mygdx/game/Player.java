@@ -27,7 +27,7 @@ public class Player {
 
         player.setPosition(x, y);
 
-        speed = 345;
+        speed = 10000;
 
         rect = new Rectangle((int) x, (int) y, (int) player.getWidth(), (int) player.getHeight());
 
@@ -77,15 +77,15 @@ public class Player {
     }
 
     public void goLeft(){
-        body.applyLinearImpulse(new Vector2(-speed * body.getMass(), 0), body.getWorldCenter(), true);
+        body.applyLinearImpulse(new Vector2(-10000 * 2, 0), body.getWorldCenter(), true);
     }
     public void goRight(){
-        body.applyLinearImpulse(new Vector2(speed * body.getMass(), 0), body.getWorldCenter(), true);
+        body.applyLinearImpulse(new Vector2(10000 * 2, 0), body.getWorldCenter(), true);
     }
     public void goDown(){
-        body.applyLinearImpulse(new Vector2(0, -speed * body.getMass()), body.getWorldCenter(), true);
+        body.applyLinearImpulse(new Vector2(0, -10000 * 2), body.getWorldCenter(), true);
     }
     public void  goUp(){
-        body.applyLinearImpulse(new Vector2(0, speed * body.getMass()), body.getWorldCenter(), true);
+        body.applyLinearImpulse(new Vector2(0, 10000 * 2), body.getWorldCenter(), true);
     }
 }
