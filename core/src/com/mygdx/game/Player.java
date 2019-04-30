@@ -22,31 +22,30 @@ public class Player {
 
 
     public Player() {
-        x = 60;
-        y = 60;
+        x = 0;
+        y = 0;
 
         player.setPosition(x, y);
 
-        speed = 10000;
+        speed = Float.MAX_VALUE;
 
         rect = new Rectangle((int) x, (int) y, (int) player.getWidth(), (int) player.getHeight());
 
         BodyDef bdef = new BodyDef();
         bdef.type = BodyDef.BodyType.DynamicBody;
         this.body = Main.world.createBody(bdef);
-
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
 
         fdef.shape = shape;
 
-        shape.setAsBox(rect.width / 2, rect.height / 2);
+        shape.setAsBox(rect.width / 2  * Main.PPM, rect.height / 2  * Main.PPM);
 
         this.body.createFixture(fdef);
 
         this.body.getFixtureList().get(0).setUserData("PLAYER");
 
-        this.body.setTransform((float) rect.getX(), (float) rect.getY(), 0);
+        this.body.setTransform((float) rect.getX()  * Main.PPM, (float) rect.getY()  * Main.PPM, 0);
 
     }
 

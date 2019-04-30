@@ -31,6 +31,8 @@ public class Main extends ApplicationAdapter {
 
 	public static WorldCreator wc;
 
+	public static final float PPM = 0.3f;
+
 	OrthogonalTiledMapRenderer renderer;
 	OrthographicCamera camera;
 
@@ -49,7 +51,7 @@ public class Main extends ApplicationAdapter {
 
 		camera = new OrthographicCamera(800f, 600f);
 
-		renderer = new OrthogonalTiledMapRenderer(map);
+		renderer = new OrthogonalTiledMapRenderer(map, PPM);
 
 		batch = new SpriteBatch();
 
@@ -58,10 +60,13 @@ public class Main extends ApplicationAdapter {
 		dbr = new Box2DDebugRenderer();
 
 		world.setContactListener(new CollisionListener());
+
 	}
 
 	@Override
 	public void render() {
+
+		camera.zoom = PPM;
 
 		world.step(1/60f, 6, 2);
 		Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);

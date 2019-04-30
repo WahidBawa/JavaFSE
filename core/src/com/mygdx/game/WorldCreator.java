@@ -23,11 +23,11 @@ public class WorldCreator {
 
                 bdef.type = BodyDef.BodyType.StaticBody;
 
-                bdef.position.set(rect.getX() + rect.getWidth() / 2, rect.getY() + rect.getHeight() / 2);
+                bdef.position.set(rect.getX() * Main.PPM + rect.getWidth() / 2 * Main.PPM, rect.getY() * Main.PPM + rect.getHeight() / 2 * Main.PPM);
 
                 body = world.createBody(bdef);
 
-                shape.setAsBox(rect.getWidth() / 2, rect.getHeight() / 2);
+                shape.setAsBox(rect.getWidth() / 2 * Main.PPM, rect.getHeight() / 2 * Main.PPM);
 
                 def.shape = shape;
 
