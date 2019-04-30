@@ -22,6 +22,8 @@ import static com.badlogic.gdx.Gdx.graphics;
 public class Main extends ApplicationAdapter {
 	SpriteBatch batch;
 	public static Player player;
+	public static Enemy goose1;
+
 
 	public static int speed = 8;
 
@@ -43,6 +45,7 @@ public class Main extends ApplicationAdapter {
 		graphics.setWindowedMode(WIDTH, HEIGHT);
 		world = new World(new Vector2(0, 0), true);
 		player = new Player();
+		goose1 = new Enemy();
 
 
 
@@ -81,7 +84,8 @@ public class Main extends ApplicationAdapter {
 
 		batch.begin();
 		// updating of classes and drawing happens here
-		player.update(batch);
+        goose1.update(batch);
+        player.update(batch);
 
 		batch.end();
 
