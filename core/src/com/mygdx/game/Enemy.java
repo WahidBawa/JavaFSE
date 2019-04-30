@@ -53,12 +53,13 @@ public class Enemy {
     }
     private void render(SpriteBatch batch) {
         enemy.draw(batch);
+
     }
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
-        enemy.setPosition(Main.WIDTH / 2- enemy.getWidth(), Main.HEIGHT / 2 - enemy.getHeight());
-
         this.render(batch);
+        //enemy.setPosition(Main.WIDTH / 2- enemy.getWidth(), Main.HEIGHT / 2 - enemy.getHeight());
+
     }
 
 
