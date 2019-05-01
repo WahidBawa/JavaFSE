@@ -5,18 +5,19 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
 
 
 public class WorldCreator {
     Body body;
-    ArrayList<Body> blocks = new ArrayList<Body>();
+    ArrayList<Body> walls = new ArrayList<Body>();
+    ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
     public WorldCreator(World world, TiledMap map) {
         for (int i = 0; i < map.getLayers().getCount(); i++) {
             for (MapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
+
                 Rectangle rect = ((RectangleMapObject) obj).getRectangle();
                 BodyDef bdef = new BodyDef();
                 FixtureDef def = new FixtureDef();
@@ -38,13 +39,23 @@ public class WorldCreator {
 //                    f.setUserData(1);
 //                }
 
-                blocks.add(body);
+                if (obj.getName().equals("NPC")){
+                    Enemy enemy = new Enemy(100, 100, body);
+                    enemies.add(enemy);
+
+                } else if (obj.getName().equals("walls")){
+                    walls.add(body);
+                }
 
             }
         }
     }
 
-    public ArrayList<Body> getAsList() {
-        return blocks;
+    public ArrayList<Body> getWalls() {
+        return walls;
+    }
+
+    public ArrayList<Enemy> getEnemies(){
+        return enemies;
     }
 }

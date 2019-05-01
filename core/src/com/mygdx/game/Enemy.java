@@ -25,8 +25,8 @@ public class Enemy {
     Rectangle rect;
 
 
-    public Enemy() {
-        enemy.setPosition(100, 100);
+    public Enemy(int x, int y, Body body) {
+        enemy.setPosition(x, y);
 
         speed = 10000;
         rect = new Rectangle((int) enemy.getX(), (int) enemy.getY(), (int) enemy.getX(), (int) enemy.getY());
@@ -62,8 +62,28 @@ public class Enemy {
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
         this.render(batch);
 //        enemy.setPosition(Main.WIDTH / 2 - enemy.getWidth(), Main.HEIGHT / 2 - enemy.getHeight());
-        enemy.setPosition(100, 100);
+        enemy.setPosition(Main.player.getX() - Main.camera.position.x + 100, Main.player.getY() - Main.camera.position.y + 100);
 
+    }
+
+    public float getX() {
+        return enemy.getX();
+    }
+
+    public float getY() {
+        return enemy.getY();
+    }
+
+    public void setX(float x) {
+        enemy.setX(x);
+    }
+
+    public void setY(float y) {
+        enemy.setY(y);
+    }
+
+    public Body getBody() {
+        return body;
     }
 
 

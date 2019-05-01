@@ -63,6 +63,14 @@ public class Player {
         return player.getY();
     }
 
+    public float getWidth(){
+        return player.getWidth();
+    }
+
+    public float getHeight(){
+        return player.getHeight();
+    }
+
     public void setX(float x) {
         player.setX(x);
     }

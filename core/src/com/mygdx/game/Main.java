@@ -36,7 +36,7 @@ public class Main extends ApplicationAdapter {
     public static final float PPM = 0.3f;
 
     OrthogonalTiledMapRenderer renderer;
-    OrthographicCamera camera;
+    public static OrthographicCamera camera;
 
     Box2DDebugRenderer dbr;
 
@@ -45,7 +45,7 @@ public class Main extends ApplicationAdapter {
         graphics.setWindowedMode(WIDTH, HEIGHT);
         world = new World(new Vector2(0, 0), true);
         player = new Player();
-        goose1 = new Enemy();
+        goose1 = new Enemy(100, 100);
 
 
         TmxMapLoader loader = new TmxMapLoader();
@@ -89,6 +89,7 @@ public class Main extends ApplicationAdapter {
         batch.end();
 
         dbr.render(world, camera.combined);
+
     }
 
     @Override
@@ -120,9 +121,6 @@ public class Main extends ApplicationAdapter {
         camera.position.y = player.getY();
 
         System.out.println(camera.position.x + " " + camera.position.y);
-
-//		goose1.x -= player.getBody().getLinearVelocity().x;
-//		goose1.y -= player.getBody().getLinearVelocity().y;
 
 //		goose1.x = goose1.body.getPosition().x - camera.position.x;
 //		goose1.y = goose1.body.getPosition().y + camera.position.y;
