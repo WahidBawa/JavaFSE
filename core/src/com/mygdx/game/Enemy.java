@@ -33,22 +33,22 @@ public class Enemy {
         speed = 10000;
         rect = new Rectangle((int) x, (int) y, (int) enemy.getWidth(), (int) enemy.getHeight());
 
-        BodyDef bdef = new BodyDef();
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        this.body = Main.world.createBody(bdef);
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        this.body = Main.world.createBody(bodyDef);
 
-        FixtureDef fdef = new FixtureDef();
+        FixtureDef fixDef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
 
-        fdef.shape = shape;
+        fixDef.shape = shape;
 
-        shape.setAsBox(rect.width / 2, rect.height / 2);
+        shape.setAsBox(20, 20);
 
-        this.body.createFixture(fdef);
+        this.body.createFixture(fixDef);
 
-        this.body.getFixtureList().get(0).setUserData("PLAYER");
+        //this.body.getFixtureList().get(0).setUserData("PLAYER");
 
-        this.body.setTransform((float) rect.getX(), (float) rect.getY(), 0);
+        //this.body.setTransform((float) rect.getX(), (float) rect.getY(), 0);
 
     }
     private void render(SpriteBatch batch) {
