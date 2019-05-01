@@ -31,7 +31,7 @@ public class Enemy {
         enemy.setPosition(x,y);
 
         speed = 10000;
-        rect = new Rectangle((int) x, (int) y, (int) enemy.getWidth(), (int) enemy.getHeight());
+        rect = new Rectangle((int) x, (int) y, (int) enemy.getX(), (int) enemy.getY());
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -42,7 +42,7 @@ public class Enemy {
 
         fixDef.shape = shape;
 
-        shape.setAsBox(20, 20);
+        shape.setAsBox(rect.width/10, rect.width/10);
 
         this.body.createFixture(fixDef);
 
@@ -54,11 +54,12 @@ public class Enemy {
     private void render(SpriteBatch batch) {
         enemy.draw(batch);
 
+
     }
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
         this.render(batch);
-        //enemy.setPosition(Main.WIDTH / 2- enemy.getWidth(), Main.HEIGHT / 2 - enemy.getHeight());
+        enemy.setPosition(100, 100);
 
     }
 
