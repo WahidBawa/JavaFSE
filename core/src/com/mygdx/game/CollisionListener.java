@@ -17,6 +17,7 @@ public class CollisionListener implements ContactListener {
 //                // this is just sample code of how you would do shit if you hit a specific block
 //            }
 //        }
+//        System.out.println(contact.isTouching());
     }
 
     @Override

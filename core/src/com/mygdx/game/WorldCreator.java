@@ -17,13 +17,12 @@ public class WorldCreator {
     public WorldCreator(World world, TiledMap map) {
         for (int i = 0; i < map.getLayers().getCount(); i++) {
             for (MapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
-
                 Rectangle rect = ((RectangleMapObject) obj).getRectangle();
                 BodyDef bdef = new BodyDef();
                 FixtureDef def = new FixtureDef();
                 PolygonShape shape = new PolygonShape();
 
-                bdef.type = BodyDef.BodyType.StaticBody;
+                bdef.type = (obj.getName().equals("wall") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
 
                 bdef.position.set(rect.getX() * Main.PPM + rect.getWidth() / 2 * Main.PPM, rect.getY() * Main.PPM + rect.getHeight() / 2 * Main.PPM);
 
@@ -35,18 +34,13 @@ public class WorldCreator {
 
                 this.body.createFixture(def);
 
+                String name = obj.getName();
+                if (name.equals("wall")) walls.add(body);
+                else if (name.equals("NPC")) enemies.add(new Enemy(body.getPosition().x, body.getPosition().y, body));
+
 //                for (Fixture f : body.getFixtureList()){
 //                    f.setUserData(1);
 //                }
-
-                if (obj.getName().equals("NPC")){
-                    Enemy enemy = new Enemy(100, 100, body);
-                    enemies.add(enemy);
-
-                } else if (obj.getName().equals("walls")){
-                    walls.add(body);
-                }
-
             }
         }
     }
@@ -55,7 +49,7 @@ public class WorldCreator {
         return walls;
     }
 
-    public ArrayList<Enemy> getEnemies(){
+    public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
 }

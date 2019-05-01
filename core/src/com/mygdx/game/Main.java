@@ -22,7 +22,6 @@ import static com.badlogic.gdx.Gdx.graphics;
 public class Main extends ApplicationAdapter {
     SpriteBatch batch;
     public static Player player;
-    public static Enemy goose1;
 
 
     public static int speed = 10000;
@@ -45,7 +44,6 @@ public class Main extends ApplicationAdapter {
         graphics.setWindowedMode(WIDTH, HEIGHT);
         world = new World(new Vector2(0, 0), true);
         player = new Player();
-        goose1 = new Enemy(100, 100);
 
 
         TmxMapLoader loader = new TmxMapLoader();
@@ -83,8 +81,8 @@ public class Main extends ApplicationAdapter {
 
         batch.begin();
         // updating of classes and drawing happens here
-        goose1.update(batch);
         player.update(batch);
+        for (Enemy i : wc.getEnemies()) i.update(batch);
 
         batch.end();
 
@@ -120,7 +118,7 @@ public class Main extends ApplicationAdapter {
         camera.position.x = player.getX();
         camera.position.y = player.getY();
 
-        System.out.println(camera.position.x + " " + camera.position.y);
+//        System.out.println(camera.position.x + " " + camera.position.y);
 
 //		goose1.x = goose1.body.getPosition().x - camera.position.x;
 //		goose1.y = goose1.body.getPosition().y + camera.position.y;
