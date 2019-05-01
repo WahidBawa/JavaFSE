@@ -14,22 +14,18 @@ import com.badlogic.gdx.utils.Array;
 import java.awt.*;
 
 public class Player {
-    float x, y, speed;
+    float speed;
     Sprite player = new Sprite(new Texture("ASSETS/SPRITES/1.png"));
     Body body;
     Rectangle rect;
 
 
-
     public Player() {
-        x = 0;
-        y = 0;
+        player.setPosition(Main.WIDTH / 2 - player.getWidth(), Main.HEIGHT / 2 - player.getHeight()); // this will essentially become the x and y of your Box2D Body
 
-        player.setPosition(x, y);
+        speed = 10000;
 
-        speed = Float.MAX_VALUE;
-
-        rect = new Rectangle((int) x, (int) y, (int) player.getWidth(), (int) player.getHeight());
+        rect = new Rectangle((int) player.getX(), (int) player.getY(), (int) player.getWidth(), (int) player.getHeight());
 
         BodyDef bdef = new BodyDef();
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -39,13 +35,13 @@ public class Player {
 
         fdef.shape = shape;
 
-        shape.setAsBox(rect.width / 2  * Main.PPM, rect.height / 2  * Main.PPM);
+        shape.setAsBox(rect.width / 2 * Main.PPM, rect.height / 2 * Main.PPM);
 
         this.body.createFixture(fdef);
 
         this.body.getFixtureList().get(0).setUserData("PLAYER");
 
-        this.body.setTransform((float) rect.getX()  * Main.PPM, (float) rect.getY()  * Main.PPM, 0);
+        this.body.setTransform((float) rect.getX() * Main.PPM, (float) rect.getY() * Main.PPM, 0);
 
     }
 
@@ -54,37 +50,36 @@ public class Player {
     }
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
-        player.setPosition(Main.WIDTH / 2- player.getWidth(), Main.HEIGHT / 2 - player.getHeight());
+        player.setPosition(Main.WIDTH / 2 - player.getWidth(), Main.HEIGHT / 2 - player.getHeight());
 
         this.render(batch);
     }
 
-    public float getX(){
+    public float getX() {
         return player.getX();
     }
 
-    public float getY(){
+    public float getY() {
         return player.getY();
     }
 
-    public Rectangle getRect(){
-        return rect;
+    public float getWidth(){
+        return player.getWidth();
     }
 
-    public Body getBody(){
+    public float getHeight(){
+        return player.getHeight();
+    }
+
+    public void setX(float x) {
+        player.setX(x);
+    }
+
+    public void setY(float y) {
+        player.setY(y);
+    }
+
+    public Body getBody() {
         return body;
-    }
-
-    public void goLeft(){
-        body.applyLinearImpulse(new Vector2(-10000 * 2, 0), body.getWorldCenter(), true);
-    }
-    public void goRight(){
-        body.applyLinearImpulse(new Vector2(10000 * 2, 0), body.getWorldCenter(), true);
-    }
-    public void goDown(){
-        body.applyLinearImpulse(new Vector2(0, -10000 * 2), body.getWorldCenter(), true);
-    }
-    public void  goUp(){
-        body.applyLinearImpulse(new Vector2(0, 10000 * 2), body.getWorldCenter(), true);
     }
 }

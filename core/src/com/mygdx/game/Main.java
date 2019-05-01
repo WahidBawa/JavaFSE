@@ -20,103 +20,120 @@ import java.util.ArrayList;
 import static com.badlogic.gdx.Gdx.graphics;
 
 public class Main extends ApplicationAdapter {
-	SpriteBatch batch;
-	public static Player player;
-	public static Enemy goose1;
+    SpriteBatch batch;
+    public static Player player;
 
 
-	public static int speed = 8;
+    public static int speed = 10000;
 
-	public static int WIDTH = 1366, HEIGHT = 1024;
+    public static int WIDTH = 1366, HEIGHT = 1024;
 
-	public static World world;
+    public static World world;
 
-	public static WorldCreator wc;
+    public static WorldCreator wc;
 
-	public static final float PPM = 0.3f;
+    public static final float PPM = 0.3f;
 
-	OrthogonalTiledMapRenderer renderer;
-	OrthographicCamera camera;
+    OrthogonalTiledMapRenderer renderer;
+    public static OrthographicCamera camera;
 
-	Box2DDebugRenderer dbr;
+    Box2DDebugRenderer dbr;
 
-	@Override
-	public void create() {
-		graphics.setWindowedMode(WIDTH, HEIGHT);
-		world = new World(new Vector2(0, 0), true);
-		player = new Player();
-		goose1 = new Enemy();
-
+    @Override
+    public void create() {
+        graphics.setWindowedMode(WIDTH, HEIGHT);
+        world = new World(new Vector2(0, 0), true);
+        player = new Player();
 
 
-		TmxMapLoader loader = new TmxMapLoader();
-		TiledMap map = loader.load("ASSETS/MAPS/grasslands.tmx");
+        TmxMapLoader loader = new TmxMapLoader();
+        TiledMap map = loader.load("ASSETS/MAPS/grasslands.tmx");
 
-		camera = new OrthographicCamera(800f, 600f);
+        camera = new OrthographicCamera(800f, 600f);
 
-		renderer = new OrthogonalTiledMapRenderer(map, PPM);
+        renderer = new OrthogonalTiledMapRenderer(map, PPM);
 
-		batch = new SpriteBatch();
+        batch = new SpriteBatch();
 
-		wc = new WorldCreator(world, map);
+        wc = new WorldCreator(world, map);
 
-		dbr = new Box2DDebugRenderer();
+        dbr = new Box2DDebugRenderer();
 
-		world.setContactListener(new CollisionListener());
+        world.setContactListener(new CollisionListener());
 
-	}
+    }
 
-	@Override
-	public void render() {
+    @Override
+    public void render() {
 
-		camera.zoom = PPM;
+        camera.zoom = PPM;
 
-		world.step(1/60f, 6, 2);
-		Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        world.step(1 / 60f, 6, 2);
+        Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
-		camera.update();
-		renderer.setView(camera);
-		renderer.render();
+        camera.update();
+        renderer.setView(camera);
+        renderer.render();
 
-		movePlayer();
+        movePlayer();
 
-		batch.begin();
-		// updating of classes and drawing happens here
-        goose1.update(batch);
+        batch.begin();
+        // updating of classes and drawing happens here
         player.update(batch);
+        for (Enemy i : wc.getEnemies()) i.update(batch);
 
-		batch.end();
+        batch.end();
 
-		dbr.render(world, camera.combined);
-	}
+        dbr.render(world, camera.combined);
 
-	@Override
-	public void dispose() {
-		batch.dispose();
-	}
+    }
 
-	public void movePlayer() {
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-			player.goLeft();
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-			player.goRight();
+    @Override
+    public void dispose() {
+        batch.dispose();
+    }
 
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-			player.goDown();
+    public void movePlayer() {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
 
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-			player.goUp();
+        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            player.getBody().applyLinearImpulse(new Vector2(speed * 2, 0), player.getBody().getWorldCenter(), true);
 
-		}
+        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            player.getBody().applyLinearImpulse(new Vector2(0, -speed * 2), player.getBody().getWorldCenter(), true);
 
-		player.x = player.body.getPosition().x;
-		player.y = player.body.getPosition().y;
-		camera.position.x = player.x;
-		camera.position.y = player.y;
-	}
+        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            player.getBody().applyLinearImpulse(new Vector2(0, speed * 2), player.getBody().getWorldCenter(), true);
+
+        } else {
+            player.getBody().applyLinearImpulse(new Vector2(player.getBody().getLinearVelocity().x * -1, player.getBody().getLinearVelocity().y * -1), player.getBody().getWorldCenter(), true);
+        }
+
+        player.setX(player.body.getPosition().x);
+        player.setY(player.body.getPosition().y);
+
+        camera.position.x = player.getX();
+        camera.position.y = player.getY();
+
+        for (Enemy i : wc.getEnemies()){
+            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+                i.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), i.getBody().getWorldCenter(), true);
+
+            } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                i.getBody().applyLinearImpulse(new Vector2(speed * 2, 0), i.getBody().getWorldCenter(), true);
+
+            } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                i.getBody().applyLinearImpulse(new Vector2(0, -speed * 2), i.getBody().getWorldCenter(), true);
+
+            } else if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+                i.getBody().applyLinearImpulse(new Vector2(0, speed * 2), i.getBody().getWorldCenter(), true);
+
+            } else {
+                i.getBody().applyLinearImpulse(new Vector2(i.getBody().getLinearVelocity().x * -1, i.getBody().getLinearVelocity().y * -1), i.getBody().getWorldCenter(), true);
+            }
+        }
+    }
 }

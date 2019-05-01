@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="left-up" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="222">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="left-up" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="271">
  <tileset firstgid="1" name="Revolution_Grasslands" tilewidth="32" tileheight="32" tilecount="190" columns="10">
   <image source="revolution_grasslands.png" trans="a349a4" width="320" height="608"/>
   <tile id="5">
@@ -189,13 +189,6 @@
     <property name="item" value="Secret Journal"/>
    </properties>
   </object>
-  <object id="197" name="NPC" type="1" x="390" y="814" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
   <object id="200" name="Quest_NPC" type="0" x="1007" y="864" width="20" height="30">
    <properties>
     <property name="Complete" type="bool" value="false"/>
@@ -218,10 +211,24 @@
   </object>
   <object id="213" name="wall" x="0.181818" y="-31.4545" width="1598.91" height="31.6364"/>
   <object id="214" name="wall" x="1600" y="0" width="26" height="1600.67"/>
-  <object id="215" name="wall" x="2.545" y="1602.18" width="1598.91" height="31.6364"/>
+  <object id="215" name="wall" x="-1.455" y="1601.18" width="1598.91" height="31.6364"/>
   <object id="216" name="wall" x="-26.8182" y="-0.971364" width="26" height="1600.67"/>
   <object id="217" name="wall" x="666" y="510" width="20" height="30"/>
   <object id="218" name="wall" x="1009" y="862" width="20" height="30"/>
   <object id="221" name="wall" x="383" y="1218" width="129" height="122"/>
+  <object id="268" name="enemy" type="1" x="727" y="1332" width="20" height="30">
+   <properties>
+    <property name="Dialogue" value="HALLLOO"/>
+    <property name="Name" value="Stupid Boy"/>
+    <property name="item" value="NULL"/>
+   </properties>
+  </object>
+  <object id="269" name="enemy" type="1" x="726" y="1046" width="20" height="30">
+   <properties>
+    <property name="Dialogue" value="HALLLOO"/>
+    <property name="Name" value="Stupid Boy"/>
+    <property name="item" value="NULL"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
