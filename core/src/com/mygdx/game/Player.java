@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.Array;
 import java.awt.*;
 
 public class Player {
-    float x, y, speed;
+    float speed;
     Sprite player = new Sprite(new Texture("ASSETS/SPRITES/1.png"));
     Body body;
     Rectangle rect;
@@ -22,14 +22,11 @@ public class Player {
 
 
     public Player() {
-        x = 0;
-        y = 0;
+        player.setPosition(Main.WIDTH / 2- player.getWidth(), Main.HEIGHT / 2 - player.getHeight()); // this will essentially become the x and y of your Box2D Body
 
-        player.setPosition(x, y);
+        speed = 10000;
 
-        speed = Float.MAX_VALUE;
-
-        rect = new Rectangle((int) x, (int) y, (int) player.getWidth(), (int) player.getHeight());
+        rect = new Rectangle((int) player.getX(), (int) player.getY(), (int) player.getWidth(), (int) player.getHeight());
 
         BodyDef bdef = new BodyDef();
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -67,24 +64,37 @@ public class Player {
         return player.getY();
     }
 
+    public void setX(float x){
+        player.setX(x);
+    }
+
+    public void setY(float y){
+        player.setY(y);
+    }
+
     public Rectangle getRect(){
         return rect;
+    }
+
+    public Body getBod(){
+        return body;
     }
 
     public Body getBody(){
         return body;
     }
 
-    public void goLeft(){
-        body.applyLinearImpulse(new Vector2(-10000 * 2, 0), body.getWorldCenter(), true);
-    }
     public void goRight(){
-        body.applyLinearImpulse(new Vector2(10000 * 2, 0), body.getWorldCenter(), true);
+        body.applyLinearImpulse(new Vector2(speed * 2, 0), body.getWorldCenter(), true);
     }
-    public void goDown(){
-        body.applyLinearImpulse(new Vector2(0, -10000 * 2), body.getWorldCenter(), true);
+    public void goLeft(){
+        body.applyLinearImpulse(new Vector2(-speed * 2, 0), body.getWorldCenter(), true);
     }
     public void  goUp(){
-        body.applyLinearImpulse(new Vector2(0, 10000 * 2), body.getWorldCenter(), true);
+        body.applyLinearImpulse(new Vector2(0, speed * 2), body.getWorldCenter(), true);
     }
+    public void goDown(){
+        body.applyLinearImpulse(new Vector2(0, -speed * 2), body.getWorldCenter(), true);
+    }
+    public void stop(){ body.applyLinearImpulse(new Vector2(body.getLinearVelocity().x * -1, body.getLinearVelocity().y * -1), body.getWorldCenter(), true); }
 }

@@ -100,23 +100,32 @@ public class Main extends ApplicationAdapter {
 	public void movePlayer() {
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
 			player.goLeft();
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+		}else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
 			player.goRight();
 
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+		}else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
 			player.goDown();
 
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+		}else if (Gdx.input.isKeyPressed(Input.Keys.UP)){
 			player.goUp();
 
+		}else{
+			player.stop();
 		}
 
-		player.x = player.body.getPosition().x;
-		player.y = player.body.getPosition().y;
-		camera.position.x = player.x;
-		camera.position.y = player.y;
+		player.setX(player.body.getPosition().x);
+		player.setY(player.body.getPosition().y);
+
+		camera.position.x = player.getX();
+		camera.position.y = player.getY();
+
+		System.out.println(camera.position.x + " " + camera.position.y);
+
+//		goose1.x -= player.getBod().getLinearVelocity().x;
+//		goose1.y -= player.getBod().getLinearVelocity().y;
+
+//		goose1.x = goose1.body.getPosition().x - camera.position.x;
+//		goose1.y = goose1.body.getPosition().y + camera.position.y;
+
 	}
 }
