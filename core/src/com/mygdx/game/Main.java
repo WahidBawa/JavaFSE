@@ -20,107 +20,106 @@ import java.util.ArrayList;
 import static com.badlogic.gdx.Gdx.graphics;
 
 public class Main extends ApplicationAdapter {
-	SpriteBatch batch;
-	public static Player player;
-	public static Enemy goose1;
+    SpriteBatch batch;
+    public static Player player;
+    public static Enemy goose1;
 
 
-	public static int speed = 10000;
+    public static int speed = 10000;
 
-	public static int WIDTH = 1366, HEIGHT = 1024;
+    public static int WIDTH = 1366, HEIGHT = 1024;
 
-	public static World world;
+    public static World world;
 
-	public static WorldCreator wc;
+    public static WorldCreator wc;
 
-	public static final float PPM = 0.3f;
+    public static final float PPM = 0.3f;
 
-	OrthogonalTiledMapRenderer renderer;
-	OrthographicCamera camera;
+    OrthogonalTiledMapRenderer renderer;
+    OrthographicCamera camera;
 
-	Box2DDebugRenderer dbr;
+    Box2DDebugRenderer dbr;
 
-	@Override
-	public void create() {
-		graphics.setWindowedMode(WIDTH, HEIGHT);
-		world = new World(new Vector2(0, 0), true);
-		player = new Player();
-		goose1 = new Enemy();
-
-
-
-		TmxMapLoader loader = new TmxMapLoader();
-		TiledMap map = loader.load("ASSETS/MAPS/grasslands.tmx");
-
-		camera = new OrthographicCamera(800f, 600f);
-
-		renderer = new OrthogonalTiledMapRenderer(map, PPM);
-
-		batch = new SpriteBatch();
-
-		wc = new WorldCreator(world, map);
-
-		dbr = new Box2DDebugRenderer();
-
-		world.setContactListener(new CollisionListener());
-
-	}
-
-	@Override
-	public void render() {
-
-		camera.zoom = PPM;
-
-		world.step(1/60f, 6, 2);
-		Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    @Override
+    public void create() {
+        graphics.setWindowedMode(WIDTH, HEIGHT);
+        world = new World(new Vector2(0, 0), true);
+        player = new Player();
+        goose1 = new Enemy();
 
 
-		camera.update();
-		renderer.setView(camera);
-		renderer.render();
+        TmxMapLoader loader = new TmxMapLoader();
+        TiledMap map = loader.load("ASSETS/MAPS/grasslands.tmx");
 
-		movePlayer();
+        camera = new OrthographicCamera(800f, 600f);
 
-		batch.begin();
-		// updating of classes and drawing happens here
+        renderer = new OrthogonalTiledMapRenderer(map, PPM);
+
+        batch = new SpriteBatch();
+
+        wc = new WorldCreator(world, map);
+
+        dbr = new Box2DDebugRenderer();
+
+        world.setContactListener(new CollisionListener());
+
+    }
+
+    @Override
+    public void render() {
+
+        camera.zoom = PPM;
+
+        world.step(1 / 60f, 6, 2);
+        Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
+        camera.update();
+        renderer.setView(camera);
+        renderer.render();
+
+        movePlayer();
+
+        batch.begin();
+        // updating of classes and drawing happens here
         goose1.update(batch);
         player.update(batch);
 
-		batch.end();
+        batch.end();
 
-		dbr.render(world, camera.combined);
-	}
+        dbr.render(world, camera.combined);
+    }
 
-	@Override
-	public void dispose() {
-		batch.dispose();
-	}
+    @Override
+    public void dispose() {
+        batch.dispose();
+    }
 
-	public void movePlayer() {
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-			player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
+    public void movePlayer() {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
 
-		}else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-			player.getBody().applyLinearImpulse(new Vector2(speed * 2, 0), player.getBody().getWorldCenter(), true);
+        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            player.getBody().applyLinearImpulse(new Vector2(speed * 2, 0), player.getBody().getWorldCenter(), true);
 
-		}else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-			player.getBody().applyLinearImpulse(new Vector2(0, -speed * 2), player.getBody().getWorldCenter(), true);
+        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            player.getBody().applyLinearImpulse(new Vector2(0, -speed * 2), player.getBody().getWorldCenter(), true);
 
-		}else if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-			player.getBody().applyLinearImpulse(new Vector2(0, speed * 2), player.getBody().getWorldCenter(), true);
+        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            player.getBody().applyLinearImpulse(new Vector2(0, speed * 2), player.getBody().getWorldCenter(), true);
 
-		}else{
-			player.getBody().applyLinearImpulse(new Vector2(player.getBody().getLinearVelocity().x * -1, player.getBody().getLinearVelocity().y * -1), player.getBody().getWorldCenter(), true);
-		}
+        } else {
+            player.getBody().applyLinearImpulse(new Vector2(player.getBody().getLinearVelocity().x * -1, player.getBody().getLinearVelocity().y * -1), player.getBody().getWorldCenter(), true);
+        }
 
-		player.setX(player.body.getPosition().x);
-		player.setY(player.body.getPosition().y);
+        player.setX(player.body.getPosition().x);
+        player.setY(player.body.getPosition().y);
 
-		camera.position.x = player.getX();
-		camera.position.y = player.getY();
+        camera.position.x = player.getX();
+        camera.position.y = player.getY();
 
-		System.out.println(camera.position.x + " " + camera.position.y);
+        System.out.println(camera.position.x + " " + camera.position.y);
 
 //		goose1.x -= player.getBody().getLinearVelocity().x;
 //		goose1.y -= player.getBody().getLinearVelocity().y;
@@ -128,5 +127,5 @@ public class Main extends ApplicationAdapter {
 //		goose1.x = goose1.body.getPosition().x - camera.position.x;
 //		goose1.y = goose1.body.getPosition().y + camera.position.y;
 
-	}
+    }
 }

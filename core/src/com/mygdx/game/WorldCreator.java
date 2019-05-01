@@ -13,11 +13,12 @@ import java.util.ArrayList;
 public class WorldCreator {
     Body body;
     ArrayList<Body> blocks = new ArrayList<Body>();
-    public WorldCreator(World world, TiledMap map){
-        for(int i = 0; i < map.getLayers().getCount(); i++){
-            for (MapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)){
-                Rectangle rect  = ((RectangleMapObject) obj).getRectangle();
-                BodyDef bdef  = new BodyDef();
+
+    public WorldCreator(World world, TiledMap map) {
+        for (int i = 0; i < map.getLayers().getCount(); i++) {
+            for (MapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
+                Rectangle rect = ((RectangleMapObject) obj).getRectangle();
+                BodyDef bdef = new BodyDef();
                 FixtureDef def = new FixtureDef();
                 PolygonShape shape = new PolygonShape();
 
@@ -43,7 +44,7 @@ public class WorldCreator {
         }
     }
 
-    public ArrayList<Body> getAsList(){
+    public ArrayList<Body> getAsList() {
         return blocks;
     }
 }

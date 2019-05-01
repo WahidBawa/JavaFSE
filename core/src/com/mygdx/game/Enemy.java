@@ -40,7 +40,7 @@ public class Enemy {
 
         fixDef.shape = shape;
 
-        shape.setAsBox(rect.width / 2  * Main.PPM, rect.height / 2  * Main.PPM);
+        shape.setAsBox(rect.width / 2 * Main.PPM, rect.height / 2 * Main.PPM);
 
         this.body.createFixture(fixDef);
 
@@ -49,12 +49,13 @@ public class Enemy {
         this.body.setTransform((float) rect.getX(), (float) rect.getY(), 0);
 
     }
+
     private void render(SpriteBatch batch) {
         enemy.draw(batch);
 
         rect = new Rectangle((int) enemy.getX(), (int) enemy.getY(), (int) enemy.getWidth(), (int) enemy.getHeight());
 
-        this.body.setTransform((float) rect.getX()  * Main.PPM, (float) rect.getY()  * Main.PPM, 0);
+        this.body.setTransform((float) rect.getX() * Main.PPM, (float) rect.getY() * Main.PPM, 0);
 
     }
 
@@ -64,8 +65,6 @@ public class Enemy {
         enemy.setPosition(100, 100);
 
     }
-
-
 
 
 }

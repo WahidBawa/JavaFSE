@@ -20,9 +20,8 @@ public class Player {
     Rectangle rect;
 
 
-
     public Player() {
-        player.setPosition(Main.WIDTH / 2- player.getWidth(), Main.HEIGHT / 2 - player.getHeight()); // this will essentially become the x and y of your Box2D Body
+        player.setPosition(Main.WIDTH / 2 - player.getWidth(), Main.HEIGHT / 2 - player.getHeight()); // this will essentially become the x and y of your Box2D Body
 
         speed = 10000;
 
@@ -36,13 +35,13 @@ public class Player {
 
         fdef.shape = shape;
 
-        shape.setAsBox(rect.width / 2  * Main.PPM, rect.height / 2  * Main.PPM);
+        shape.setAsBox(rect.width / 2 * Main.PPM, rect.height / 2 * Main.PPM);
 
         this.body.createFixture(fdef);
 
         this.body.getFixtureList().get(0).setUserData("PLAYER");
 
-        this.body.setTransform((float) rect.getX()  * Main.PPM, (float) rect.getY()  * Main.PPM, 0);
+        this.body.setTransform((float) rect.getX() * Main.PPM, (float) rect.getY() * Main.PPM, 0);
 
     }
 
@@ -51,46 +50,28 @@ public class Player {
     }
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
-        player.setPosition(Main.WIDTH / 2- player.getWidth(), Main.HEIGHT / 2 - player.getHeight());
+        player.setPosition(Main.WIDTH / 2 - player.getWidth(), Main.HEIGHT / 2 - player.getHeight());
 
         this.render(batch);
     }
 
-    public float getX(){
+    public float getX() {
         return player.getX();
     }
 
-    public float getY(){
+    public float getY() {
         return player.getY();
     }
 
-    public void setX(float x){
+    public void setX(float x) {
         player.setX(x);
     }
 
-    public void setY(float y){
+    public void setY(float y) {
         player.setY(y);
     }
 
-    public Rectangle getRect(){
-        return rect;
-    }
-
-    public Body getBody(){
+    public Body getBody() {
         return body;
     }
-
-    public void goRight(){
-        body.applyLinearImpulse(new Vector2(speed * 2, 0), body.getWorldCenter(), true);
-    }
-    public void goLeft(){
-        body.applyLinearImpulse(new Vector2(-speed * 2, 0), body.getWorldCenter(), true);
-    }
-    public void  goUp(){
-        body.applyLinearImpulse(new Vector2(0, speed * 2), body.getWorldCenter(), true);
-    }
-    public void goDown(){
-        body.applyLinearImpulse(new Vector2(0, -speed * 2), body.getWorldCenter(), true);
-    }
-    public void stop(){ body.applyLinearImpulse(new Vector2(body.getLinearVelocity().x * -1, body.getLinearVelocity().y * -1), body.getWorldCenter(), true); }
 }
