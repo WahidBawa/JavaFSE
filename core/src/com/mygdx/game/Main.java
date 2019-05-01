@@ -118,10 +118,22 @@ public class Main extends ApplicationAdapter {
         camera.position.x = player.getX();
         camera.position.y = player.getY();
 
-//        System.out.println(camera.position.x + " " + camera.position.y);
+        for (Enemy i : wc.getEnemies()){
+            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+                i.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), i.getBody().getWorldCenter(), true);
 
-//		goose1.x = goose1.body.getPosition().x - camera.position.x;
-//		goose1.y = goose1.body.getPosition().y + camera.position.y;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                i.getBody().applyLinearImpulse(new Vector2(speed * 2, 0), i.getBody().getWorldCenter(), true);
 
+            } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                i.getBody().applyLinearImpulse(new Vector2(0, -speed * 2), i.getBody().getWorldCenter(), true);
+
+            } else if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+                i.getBody().applyLinearImpulse(new Vector2(0, speed * 2), i.getBody().getWorldCenter(), true);
+
+            } else {
+                i.getBody().applyLinearImpulse(new Vector2(i.getBody().getLinearVelocity().x * -1, i.getBody().getLinearVelocity().y * -1), i.getBody().getWorldCenter(), true);
+            }
+        }
     }
 }

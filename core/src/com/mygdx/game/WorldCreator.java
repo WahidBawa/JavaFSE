@@ -17,26 +17,29 @@ public class WorldCreator {
     public WorldCreator(World world, TiledMap map) {
         for (int i = 0; i < map.getLayers().getCount(); i++) {
             for (MapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
-                Rectangle rect = ((RectangleMapObject) obj).getRectangle();
-                BodyDef bdef = new BodyDef();
-                FixtureDef def = new FixtureDef();
-                PolygonShape shape = new PolygonShape();
+                if (obj.getName().equals("enemy") || obj.getName().equals("wall")){
+                    Rectangle rect = ((RectangleMapObject) obj).getRectangle();
+                    BodyDef bdef = new BodyDef();
+                    FixtureDef def = new FixtureDef();
+                    PolygonShape shape = new PolygonShape();
 
-                bdef.type = (obj.getName().equals("wall") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
+                    bdef.type = (obj.getName().equals("wall") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
 
-                bdef.position.set(rect.getX() * Main.PPM + rect.getWidth() / 2 * Main.PPM, rect.getY() * Main.PPM + rect.getHeight() / 2 * Main.PPM);
+                    bdef.position.set(rect.getX() * Main.PPM + rect.getWidth() / 2 * Main.PPM, rect.getY() * Main.PPM + rect.getHeight() / 2 * Main.PPM);
 
-                body = world.createBody(bdef);
+                    body = world.createBody(bdef);
 
-                shape.setAsBox(rect.getWidth() / 2 * Main.PPM, rect.getHeight() / 2 * Main.PPM);
+                    shape.setAsBox(rect.getWidth() / 2 * Main.PPM, rect.getHeight() / 2 * Main.PPM);
 
-                def.shape = shape;
+                    def.shape = shape;
 
-                this.body.createFixture(def);
+                    this.body.createFixture(def);
+                }
 
                 String name = obj.getName();
+
                 if (name.equals("wall")) walls.add(body);
-                else if (name.equals("NPC")) enemies.add(new Enemy(body.getPosition().x, body.getPosition().y, body));
+                else if (name.equals("enemy")) enemies.add(new Enemy(body.getPosition().x, body.getPosition().y, body));
 
 //                for (Fixture f : body.getFixtureList()){
 //                    f.setUserData(1);

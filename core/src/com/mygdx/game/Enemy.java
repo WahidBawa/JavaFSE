@@ -27,30 +27,13 @@ public class Enemy {
 
 
     public Enemy(float x, float y, Body body) {
-        enemy.setPosition(x, y);
+        enemy.setPosition(x / Main.PPM, y / Main.PPM);
 
         this.body = body;
-//        rect = new Rectangle((int) enemy.getX(), (int) enemy.getY(), (int) enemy.getWidth(), (int) enemy.getHeight());
-
-//        BodyDef bdef = new BodyDef();
-//        FixtureDef def = new FixtureDef();
-//        PolygonShape shape = new PolygonShape();
-//
-//        bdef.type = BodyDef.BodyType.DynamicBody;
-//
-//        bdef.position.set(enemy.getX() * Main.PPM + enemy.getWidth() / 2 * Main.PPM, enemy.getY() * Main.PPM + enemy.getHeight() / 2 * Main.PPM);
-//
-//        body = Main.world.createBody(bdef);
-//
-//        shape.setAsBox(enemy.getWidth() / 2 * Main.PPM, enemy.getHeight() / 2 * Main.PPM);
-//
-//        def.shape = shape;
-//
-//        this.body.createFixture(def);
 
         this.body.getFixtureList().get(0).setUserData("ENEMY");
 
-        this.body.setTransform(enemy.getX(), enemy.getY(), 0);
+        this.body.setTransform(x * Main.PPM, y * Main.PPM, 0);
 
     }
 
@@ -59,14 +42,14 @@ public class Enemy {
 
 //        rect = new Rectangle((int) enemy.getX(), (int) enemy.getY(), (int) enemy.getWidth(), (int) enemy.getHeight());
 
-//        this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
+//        this.body.setTransform(enemy.getX() * Main.PPM * Main.PPM, enemy.getY() * Main.PPM * Main.PPM, 0);
 
     }
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
         this.render(batch);
 //        enemy.setPosition(Main.WIDTH / 2 - enemy.getWidth(), Main.HEIGHT / 2 - enemy.getHeight());
-        enemy.setPosition(Main.player.getX() - Main.camera.position.x + 100, Main.player.getY() - Main.camera.position.y + 100);
+//        enemy.setPosition(Main.player.getX() - Main.camera.position.x + 100, Main.player.getY() - Main.camera.position.y + 100);
 
     }
 
