@@ -17,8 +17,8 @@ public class WorldCreator {
     public WorldCreator(World world, TiledMap map) {
         for (int i = 0; i < map.getLayers().getCount(); i++) {
             for (MapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
+                Rectangle rect = ((RectangleMapObject) obj).getRectangle();
                 if (obj.getName().equals("enemy") || obj.getName().equals("wall")){
-                    Rectangle rect = ((RectangleMapObject) obj).getRectangle();
                     BodyDef bdef = new BodyDef();
                     FixtureDef def = new FixtureDef();
                     PolygonShape shape = new PolygonShape();
@@ -39,7 +39,7 @@ public class WorldCreator {
                 String name = obj.getName();
 
                 if (name.equals("wall")) walls.add(body);
-                else if (name.equals("enemy")) enemies.add(new Enemy(body.getPosition().x, body.getPosition().y, body));
+                else if (name.equals("enemy")) enemies.add(new Enemy(rect.x, rect.y, body));
 
 //                for (Fixture f : body.getFixtureList()){
 //                    f.setUserData(1);

@@ -27,13 +27,13 @@ public class Enemy {
 
 
     public Enemy(float x, float y, Body body) {
-        enemy.setPosition(x / Main.PPM, y / Main.PPM);
+        enemy.setPosition(x, y);
 
         this.body = body;
 
         this.body.getFixtureList().get(0).setUserData("ENEMY");
 
-        this.body.setTransform(x * Main.PPM, y * Main.PPM, 0);
+//        this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
 
     }
 
@@ -48,7 +48,6 @@ public class Enemy {
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
         this.render(batch);
-//        enemy.setPosition(Main.WIDTH / 2 - enemy.getWidth(), Main.HEIGHT / 2 - enemy.getHeight());
 //        enemy.setPosition(Main.player.getX() - Main.camera.position.x + 100, Main.player.getY() - Main.camera.position.y + 100);
 
     }
