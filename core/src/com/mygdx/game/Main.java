@@ -25,7 +25,7 @@ public class Main extends ApplicationAdapter {
 	public static Enemy goose1;
 
 
-	public static int speed = 8;
+	public static int speed = 10000;
 
 	public static int WIDTH = 1366, HEIGHT = 1024;
 
@@ -99,18 +99,19 @@ public class Main extends ApplicationAdapter {
 
 	public void movePlayer() {
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-			player.goLeft();
+			player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
+
 		}else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-			player.goRight();
+			player.getBody().applyLinearImpulse(new Vector2(speed * 2, 0), player.getBody().getWorldCenter(), true);
 
 		}else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-			player.goDown();
+			player.getBody().applyLinearImpulse(new Vector2(0, -speed * 2), player.getBody().getWorldCenter(), true);
 
 		}else if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-			player.goUp();
+			player.getBody().applyLinearImpulse(new Vector2(0, speed * 2), player.getBody().getWorldCenter(), true);
 
 		}else{
-			player.stop();
+			player.getBody().applyLinearImpulse(new Vector2(player.getBody().getLinearVelocity().x * -1, player.getBody().getLinearVelocity().y * -1), player.getBody().getWorldCenter(), true);
 		}
 
 		player.setX(player.body.getPosition().x);
@@ -121,8 +122,8 @@ public class Main extends ApplicationAdapter {
 
 		System.out.println(camera.position.x + " " + camera.position.y);
 
-//		goose1.x -= player.getBod().getLinearVelocity().x;
-//		goose1.y -= player.getBod().getLinearVelocity().y;
+//		goose1.x -= player.getBody().getLinearVelocity().x;
+//		goose1.y -= player.getBody().getLinearVelocity().y;
 
 //		goose1.x = goose1.body.getPosition().x - camera.position.x;
 //		goose1.y = goose1.body.getPosition().y + camera.position.y;

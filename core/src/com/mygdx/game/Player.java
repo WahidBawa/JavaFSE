@@ -76,10 +76,6 @@ public class Player {
         return rect;
     }
 
-    public Body getBod(){
-        return body;
-    }
-
     public Body getBody(){
         return body;
     }
