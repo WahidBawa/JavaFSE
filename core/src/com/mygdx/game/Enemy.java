@@ -26,7 +26,7 @@ public class Enemy {
     Rectangle rect;
 
 
-    public Enemy(float x, float y, Body body) {
+    public Enemy(float x, float y) {
         enemy.setPosition(x, y);
 
         BodyDef bdef = new BodyDef();
@@ -37,13 +37,13 @@ public class Enemy {
 
         fdef.shape = shape;
 
-        shape.setAsBox(enemy.getWidth() * Main.PPM, enemy.getHeight() * Main.PPM);
+        shape.setAsBox(enemy.getWidth() * Main.PPM * Main.PPM, enemy.getHeight() * Main.PPM * Main.PPM);
 
         this.body.createFixture(fdef);
 
         this.body.getFixtureList().get(0).setUserData("Enemy");
 
-        this.body.setTransform((float) enemy.getX() * Main.PPM, (float) enemy.getY() * Main.PPM, 0);
+        this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
 
 //        this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
 
