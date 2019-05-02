@@ -37,7 +37,7 @@ public class Enemy {
 
         fdef.shape = shape;
 
-        shape.setAsBox(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM);
+        shape.setAsBox(enemy.getWidth() * Main.PPM, enemy.getHeight() * Main.PPM);
 
         this.body.createFixture(fdef);
 
