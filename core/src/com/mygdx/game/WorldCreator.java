@@ -18,7 +18,7 @@ public class WorldCreator {
         for (int i = 0; i < map.getLayers().getCount(); i++) {
             for (MapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) obj).getRectangle();
-                if (obj.getName().equals("wall")){
+                if (obj.getName().equals("wall")) {
                     BodyDef bdef = new BodyDef();
                     FixtureDef def = new FixtureDef();
                     PolygonShape shape = new PolygonShape();

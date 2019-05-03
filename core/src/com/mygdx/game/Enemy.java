@@ -19,12 +19,13 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Enemy {
     float speed = 10000;
     Sprite enemy = new Sprite(new Texture("ASSETS/SPRITES/goose.jpg"));
     Body body;
-    Rectangle rect;
+    Random rand = new Random();
 
 
     public Enemy(float x, float y) {
@@ -44,26 +45,17 @@ public class Enemy {
 
         this.body.getFixtureList().get(0).setUserData("Enemy");
 
-        this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
-
-//        this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
-
+        this.body.setTransform(rand.nextInt(Main.WIDTH - (int) enemy.getWidth()) * Main.PPM, rand.nextInt(Main.HEIGHT - (int) enemy.getHeight()) * Main.PPM, 0);
     }
 
     private void render(SpriteBatch batch) {
-        batch.draw(enemy, body.getPosition().x - enemy.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - enemy.getHeight() * (float) Math.pow(Main.PPM, 2), enemy.getWidth() * (float) Math.pow(Main.PPM, 2)*2, enemy.getHeight() * (float) Math.pow(Main.PPM, 2)*2);
-
-//        rect = new Rectangle((int) enemy.getX(), (int) enemy.getY(), (int) enemy.getWidth(), (int) enemy.getHeight());
-
-//        this.body.setTransform(enemy.getX() * Main.PPM * Main.PPM, enemy.getY() * Main.PPM * Main.PPM, 0);
-
+        batch.draw(enemy, body.getPosition().x - enemy.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - enemy.getHeight() * (float) Math.pow(Main.PPM, 2), enemy.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, enemy.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
     }
 
     public void update(SpriteBatch batch, Player player) { // all data will be updated here (pos, char states, etc)
         //enemy.setPosition(  (body.getPosition().x + player.getBody().getPosition().x) *(float)(-5.7) +Main.WIDTH/2 ,  (body.getPosition().y + player.getBody().getPosition().y) * (float) (-5.7) + Main.HEIGHT/2);
-        Gdx.app.log("#INFO", "" + player.getBody().getPosition().x);
+//        Gdx.app.log("#INFO", "" + player.getBody().getPosition().x);
         this.render(batch);
-//        enemy.setPosition(Main.player.getX() - Main.camera.position.x + 100, Main.player.getY() - Main.camera.position.y + 100);
 
     }
 

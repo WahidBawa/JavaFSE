@@ -3,13 +3,10 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.utils.Array;
 
 import java.awt.*;
 
@@ -19,10 +16,7 @@ public class Player {
     Body body;
     Rectangle rect;
 
-
     public Player() {
-        //player.setPosition(Main.WIDTH / 2 - player.getWidth(), Main.HEIGHT / 2 - player.getHeight()); // this will essentially become the x and y of your Box2D Body
-
         speed = 10000;
 
         player.setPosition(100, 100);
@@ -44,17 +38,14 @@ public class Player {
         this.body.getFixtureList().get(0).setUserData("PLAYER");
 
         this.body.setTransform((float) rect.getX() * Main.PPM, (float) rect.getY() * Main.PPM, 0);
-
     }
 
     private void render(SpriteBatch batch) {
-        //player.draw(batch);
-        batch.draw(player, body.getPosition().x - player.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - player.getHeight() * (float) Math.pow(Main.PPM, 2), player.getWidth() * (float) Math.pow(Main.PPM, 2)*2, player.getHeight() * (float) Math.pow(Main.PPM, 2)*2);
+        batch.draw(player, body.getPosition().x - player.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - player.getHeight() * (float) Math.pow(Main.PPM, 2), player.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, player.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
     }
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
-        player.setPosition(body.getPosition().x,body.getPosition().y  );
-
+        player.setPosition(body.getPosition().x, body.getPosition().y);
 
         this.render(batch);
     }
@@ -67,11 +58,11 @@ public class Player {
         return player.getY();
     }
 
-    public float getWidth(){
+    public float getWidth() {
         return player.getWidth();
     }
 
-    public float getHeight(){
+    public float getHeight() {
         return player.getHeight();
     }
 
