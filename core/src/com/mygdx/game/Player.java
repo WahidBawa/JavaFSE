@@ -21,7 +21,7 @@ public class Player {
 
 
     public Player() {
-        player.setPosition(Main.WIDTH / 2 - player.getWidth(), Main.HEIGHT / 2 - player.getHeight()); // this will essentially become the x and y of your Box2D Body
+        //player.setPosition(Main.WIDTH / 2 - player.getWidth(), Main.HEIGHT / 2 - player.getHeight()); // this will essentially become the x and y of your Box2D Body
 
         speed = 10000;
 
@@ -46,11 +46,13 @@ public class Player {
     }
 
     private void render(SpriteBatch batch) {
-        player.draw(batch);
+        //player.draw(batch);
+        batch.draw(player, body.getPosition().x - player.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - player.getHeight() * (float) Math.pow(Main.PPM, 2), player.getWidth() * (float) Math.pow(Main.PPM, 2)*2, player.getHeight() * (float) Math.pow(Main.PPM, 2)*2);
     }
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
-        player.setPosition(Main.WIDTH / 2 - player.getWidth(), Main.HEIGHT / 2 - player.getHeight());
+        player.setPosition(body.getPosition().x,body.getPosition().y  );
+
 
         this.render(batch);
     }
