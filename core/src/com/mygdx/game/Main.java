@@ -73,16 +73,19 @@ public class Main extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
+
         camera.update();
         renderer.setView(camera);
         renderer.render();
 
+        batch.setProjectionMatrix(camera.combined);
         movePlayer();
+
 
         batch.begin();
         // updating of classes and drawing happens here
         player.update(batch);
-        for (Enemy i : wc.getEnemies()) i.update(batch);
+        for (Enemy i : wc.getEnemies()) i.update(batch, player);
 
         batch.end();
 

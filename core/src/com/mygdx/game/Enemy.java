@@ -8,6 +8,7 @@ package com.mygdx.game;
 //they all have cool names
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -43,14 +44,14 @@ public class Enemy {
 
         this.body.getFixtureList().get(0).setUserData("Enemy");
 
-        this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
+        //this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
 
 //        this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
 
     }
 
     private void render(SpriteBatch batch) {
-        enemy.draw(batch);
+        batch.draw(enemy, body.getPosition().x - enemy.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - enemy.getHeight() * (float) Math.pow(Main.PPM, 2), enemy.getWidth() * (float) Math.pow(Main.PPM, 2)*2, enemy.getHeight() * (float) Math.pow(Main.PPM, 2)*2);
 
 //        rect = new Rectangle((int) enemy.getX(), (int) enemy.getY(), (int) enemy.getWidth(), (int) enemy.getHeight());
 
@@ -58,7 +59,9 @@ public class Enemy {
 
     }
 
-    public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
+    public void update(SpriteBatch batch, Player player) { // all data will be updated here (pos, char states, etc)
+        //enemy.setPosition(  (body.getPosition().x + player.getBody().getPosition().x) *(float)(-5.7) +Main.WIDTH/2 ,  (body.getPosition().y + player.getBody().getPosition().y) * (float) (-5.7) + Main.HEIGHT/2);
+        Gdx.app.log("#INFO", "" + player.getBody().getPosition().x);
         this.render(batch);
 //        enemy.setPosition(Main.player.getX() - Main.camera.position.x + 100, Main.player.getY() - Main.camera.position.y + 100);
 
