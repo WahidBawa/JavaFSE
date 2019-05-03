@@ -25,6 +25,8 @@ public class Player {
 
         speed = 10000;
 
+        player.setPosition(100, 100);
+
         rect = new Rectangle((int) player.getX(), (int) player.getY(), (int) player.getWidth(), (int) player.getHeight());
 
         BodyDef bdef = new BodyDef();

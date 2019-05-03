@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class CollisionListener implements ContactListener {
 
     public CollisionListener() {
-        System.out.println("usu");
     }
 
     @Override

@@ -44,7 +44,7 @@ public class Enemy {
 
         this.body.getFixtureList().get(0).setUserData("Enemy");
 
-        //this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
+        this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
 
 //        this.body.setTransform(enemy.getX() * Main.PPM, enemy.getY() * Main.PPM, 0);
 
