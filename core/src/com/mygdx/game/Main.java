@@ -30,6 +30,9 @@ public class Main extends ApplicationAdapter {
     public static final float PPM = 0.3f;
 
     OrthogonalTiledMapRenderer renderer;
+
+    OrthogonalTiledMapRenderer topsRenderer;
+
     public static OrthographicCamera camera;
 
     Box2DDebugRenderer dbr;
@@ -42,11 +45,15 @@ public class Main extends ApplicationAdapter {
 
 
         TmxMapLoader loader = new TmxMapLoader();
-        TiledMap map = loader.load("ASSETS/MAPS/grasslands.tmx");
+        TiledMap map = loader.load("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
+
+        TiledMap tops = loader.load("ASSETS/MAPS/OLD_MAPS/over0.tmx");
 
         camera = new OrthographicCamera(800f, 600f);
 
         renderer = new OrthogonalTiledMapRenderer(map, PPM);
+
+        topsRenderer = new OrthogonalTiledMapRenderer(tops, PPM);
 
         batch = new SpriteBatch();
 
@@ -77,7 +84,12 @@ public class Main extends ApplicationAdapter {
         batch.begin();
         // updating of classes and drawing happens here
         player.update(batch);
+
+
         for (Enemy i : wc.getEnemies()) i.update(batch, player);
+
+        topsRenderer.setView(camera);
+        topsRenderer.render();
 
         batch.end();
 
