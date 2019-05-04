@@ -23,6 +23,8 @@ public class Main extends ApplicationAdapter {
 
     public static int WIDTH = 1366, HEIGHT = 1024;
 
+    public static int MAP_WIDTH, MAP_HEIGHT;
+
     public static World world;
 
     public static WorldCreator wc;
@@ -45,7 +47,10 @@ public class Main extends ApplicationAdapter {
 
 
         TmxMapLoader loader = new TmxMapLoader();
-        TiledMap map = loader.load("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
+        TiledMap map = loader.load("ASSETS/MAPS/OWO.tmx");
+
+        MAP_WIDTH = (Integer) map.getProperties().get("width") * 16;
+        MAP_HEIGHT = (Integer) map.getProperties().get("height") * 16;
 
         TiledMap tops = loader.load("ASSETS/MAPS/OLD_MAPS/over0.tmx");
 
@@ -88,8 +93,8 @@ public class Main extends ApplicationAdapter {
 
         for (Enemy i : wc.getEnemies()) i.update(batch, player);
 
-        topsRenderer.setView(camera);
-        topsRenderer.render();
+//        topsRenderer.setView(camera);
+//        topsRenderer.render();
 
         batch.end();
 

@@ -45,7 +45,7 @@ public class Enemy {
 
         this.body.getFixtureList().get(0).setUserData("Enemy");
 
-        this.body.setTransform(rand.nextInt(Main.WIDTH - (int) enemy.getWidth()) * Main.PPM, rand.nextInt(Main.HEIGHT - (int) enemy.getHeight()) * Main.PPM, 0);
+        this.body.setTransform(rand.nextInt(Main.MAP_WIDTH - (int) enemy.getWidth()) * Main.PPM, rand.nextInt(Main.MAP_HEIGHT - (int) enemy.getHeight()) * Main.PPM, 0);
     }
 
     private void render(SpriteBatch batch) {
