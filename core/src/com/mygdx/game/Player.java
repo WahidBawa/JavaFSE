@@ -8,17 +8,87 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
+import javax.lang.model.type.ArrayType;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player {
-    float speed;
     Sprite player = new Sprite(new Texture("ASSETS/SPRITES/1.png"));
     Body body;
     Rectangle rect;
 
-    public Player() {
-        speed = 10000;
+    int counter = 0;
+    int animation_speed = 7;
+    int pos = 0;
 
+    ArrayList<ArrayList<Texture>> sprites = new ArrayList<ArrayList<Texture>>();
+    ArrayList<Texture> tmpSprites;
+
+
+    HashMap stats = new HashMap();
+
+    public Player() {
+        createBody();
+
+        loadSprites();
+
+
+        stats.put("strength", 8);
+        stats.put("agility", 6);
+        stats.put("intelligence", 10);
+
+
+        System.out.println(stats);
+
+    }
+
+    private void render(SpriteBatch batch) {
+        batch.draw(player, body.getPosition().x - player.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - player.getHeight() * (float) Math.pow(Main.PPM, 2), player.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, player.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
+    }
+
+    public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
+        player.setPosition(body.getPosition().x, body.getPosition().y);
+
+
+        if (Main.moving){
+            counter += 1;
+            if (counter > animation_speed){
+                counter = 0;
+                pos += 1;
+                if (pos >= 3){
+                    pos = 0;
+                }
+            }
+        }
+
+
+        player.set(new Sprite(sprites.get(Main.dir).get(pos)));
+
+        this.render(batch);
+    }
+
+    public float getX() {
+        return player.getX();
+    }
+
+    public float getY() {
+        return player.getY();
+    }
+
+    public void setX(float x) {
+        player.setX(x);
+    }
+
+    public void setY(float y) {
+        player.setY(y);
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public void createBody(){
         player.setPosition(100, 100);
 
         rect = new Rectangle((int) player.getX(), (int) player.getY(), (int) player.getWidth(), (int) player.getHeight());
@@ -40,41 +110,13 @@ public class Player {
         this.body.setTransform((float) rect.getX() * Main.PPM, (float) rect.getY() * Main.PPM, 0);
     }
 
-    private void render(SpriteBatch batch) {
-        batch.draw(player, body.getPosition().x - player.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - player.getHeight() * (float) Math.pow(Main.PPM, 2), player.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, player.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
-    }
-
-    public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
-        player.setPosition(body.getPosition().x, body.getPosition().y);
-
-        this.render(batch);
-    }
-
-    public float getX() {
-        return player.getX();
-    }
-
-    public float getY() {
-        return player.getY();
-    }
-
-    public float getWidth() {
-        return player.getWidth();
-    }
-
-    public float getHeight() {
-        return player.getHeight();
-    }
-
-    public void setX(float x) {
-        player.setX(x);
-    }
-
-    public void setY(float y) {
-        player.setY(y);
-    }
-
-    public Body getBody() {
-        return body;
+    public void loadSprites(){
+        for (String i : new String[]{"Up", "Down", "Left", "Right"}){
+            tmpSprites = new ArrayList<Texture>();
+            for (int n = 0; n < 3; n++){
+                tmpSprites.add(new Texture("ASSETS/SPRITES/" + i + "/" + n + ".png")); // change this to current sprites
+            }
+            sprites.add(tmpSprites);
+        }
     }
 }

@@ -37,6 +37,15 @@ public class Main extends ApplicationAdapter {
 
     public static OrthographicCamera camera;
 
+    public static boolean moving = false;
+
+    public static final int UP = 0;
+    public static final int DOWN = 1;
+    public static final int LEFT = 2;
+    public static final int RIGHT = 3;
+
+    public static int dir = DOWN;
+
     Box2DDebugRenderer dbr;
 
     @Override
@@ -110,18 +119,23 @@ public class Main extends ApplicationAdapter {
     public void movePlayer() {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
-
+            moving = true;
+            dir = LEFT;
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             player.getBody().applyLinearImpulse(new Vector2(speed * 2, 0), player.getBody().getWorldCenter(), true);
-
+            moving = true;
+            dir = RIGHT;
         } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             player.getBody().applyLinearImpulse(new Vector2(0, -speed * 2), player.getBody().getWorldCenter(), true);
-
+            moving = true;
+            dir = DOWN;
         } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             player.getBody().applyLinearImpulse(new Vector2(0, speed * 2), player.getBody().getWorldCenter(), true);
-
+            moving = true;
+            dir = UP;
         } else {
             player.getBody().applyLinearImpulse(new Vector2(player.getBody().getLinearVelocity().x * -1, player.getBody().getLinearVelocity().y * -1), player.getBody().getWorldCenter(), true);
+            moving = false;
         }
 
         player.setX(player.body.getPosition().x);
