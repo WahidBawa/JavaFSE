@@ -10,13 +10,24 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Chest {
+    final int OPEN = 1;
+    final int CLOSED = 0;
+    int chestState = CLOSED;
+
     Sprite chest = new Sprite(new Texture("ASSETS/CHESTS/0.png"));
     Body body;
+    Rectangle rect;
 
-    public Chest(Rectangle rect) {
+    String name;
+
+    public Chest(Rectangle rect, String name) {
         chest.setPosition(rect.x, rect.y);
 
+        this.rect = rect;
+
         createBody();
+
+        this.name = name; // name will be used to differentiate the chest and to tell if it has been opened before
     }
 
     public void render(SpriteBatch batch) {

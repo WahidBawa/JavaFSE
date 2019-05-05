@@ -56,7 +56,7 @@ public class Main extends ApplicationAdapter {
 
 
         TmxMapLoader loader = new TmxMapLoader();
-        TiledMap map = loader.load("ASSETS/MAPS/OWO.tmx");
+        TiledMap map = loader.load("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
 
         MAP_WIDTH = (Integer) map.getProperties().get("width") * TILESIZE;
         MAP_HEIGHT = (Integer) map.getProperties().get("height") * TILESIZE;
@@ -88,10 +88,9 @@ public class Main extends ApplicationAdapter {
         camera.update();
 
         renderer.setView(camera);
-        renderer.render(new int[]{0, 1});
+        renderer.render(new int[]{0, 1, 2, 3});
 
         batch.setProjectionMatrix(camera.combined);
-
 
         batch.begin();
 
@@ -101,7 +100,7 @@ public class Main extends ApplicationAdapter {
 
         movePlayer();
 
-        renderer.render(new int[]{2});
+        renderer.render(new int[]{4});
 
         dbr.render(world, camera.combined);
     }
@@ -112,19 +111,19 @@ public class Main extends ApplicationAdapter {
     }
 
     public void movePlayer() {
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
             player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
             moving = true;
             dir = LEFT;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
             player.getBody().applyLinearImpulse(new Vector2(speed * 2, 0), player.getBody().getWorldCenter(), true);
             moving = true;
             dir = RIGHT;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
             player.getBody().applyLinearImpulse(new Vector2(0, -speed * 2), player.getBody().getWorldCenter(), true);
             moving = true;
             dir = DOWN;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
             player.getBody().applyLinearImpulse(new Vector2(0, speed * 2), player.getBody().getWorldCenter(), true);
             moving = true;
             dir = UP;

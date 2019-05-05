@@ -8,7 +8,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-import javax.lang.model.type.ArrayType;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,15 +17,17 @@ public class Player {
     Body body;
     Rectangle rect;
 
-    int counter = 0;
-    int animation_speed = 7;
-    int pos = 0;
+    private int counter = 0;
+    private int animation_speed = 7;
+    private int pos = 0;
 
-    ArrayList<ArrayList<Texture>> sprites = new ArrayList<ArrayList<Texture>>();
-    ArrayList<Texture> tmpSprites;
+    private ArrayList<ArrayList<Texture>> sprites = new ArrayList<ArrayList<Texture>>();
+    private ArrayList<Texture> tmpSprites;
 
 
     HashMap stats = new HashMap();
+
+    ArrayList<Item> inventory = new ArrayList<Item>();
 
     public Player() {
         createBody();
@@ -57,28 +58,8 @@ public class Player {
         this.render(batch);
     }
 
-    public float getX() {
-        return player.getX();
-    }
-
-    public float getY() {
-        return player.getY();
-    }
-
-    public void setX(float x) {
-        player.setX(x);
-    }
-
-    public void setY(float y) {
-        player.setY(y);
-    }
-
-    public Body getBody() {
-        return body;
-    }
-
     public void createBody() {
-        player.setPosition(100, 100);
+        player.setPosition(500, 500);
 
         rect = new Rectangle((int) player.getX(), (int) player.getY(), (int) player.getWidth(), (int) player.getHeight());
 
@@ -123,4 +104,25 @@ public class Player {
             pos = 0;
         }
     }
+
+    public float getX() {
+        return player.getX();
+    }
+
+    public float getY() {
+        return player.getY();
+    }
+
+    public void setX(float x) {
+        player.setX(x);
+    }
+
+    public void setY(float y) {
+        player.setY(y);
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
 }

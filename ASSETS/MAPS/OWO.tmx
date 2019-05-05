@@ -91,10 +91,26 @@
 </data>
  </layer>
  <objectgroup name="owo">
-  <object id="4904" name="chest" x="280" y="56.6667" width="34.6667" height="20"/>
-  <object id="4906" name="chest" x="286.667" y="142" width="34.6667" height="20"/>
-  <object id="4907" name="chest" x="299.333" y="267.333" width="34.6667" height="20"/>
-  <object id="4908" name="chest" x="88.6667" y="138" width="34.6667" height="20"/>
+  <object id="4904" name="chest" x="280" y="56.6667" width="34.6667" height="20">
+   <properties>
+    <property name="item" value="Potion"/>
+   </properties>
+  </object>
+  <object id="4906" name="chest" x="286.667" y="142" width="34.6667" height="20">
+   <properties>
+    <property name="item" value="Potion"/>
+   </properties>
+  </object>
+  <object id="4907" name="chest" x="299.333" y="267.333" width="34.6667" height="20">
+   <properties>
+    <property name="item" value="Potion"/>
+   </properties>
+  </object>
+  <object id="4908" name="chest" x="88.6667" y="138" width="34.6667" height="20">
+   <properties>
+    <property name="item" value="Potion"/>
+   </properties>
+  </object>
   <object id="4909" name="wall" x="78.875" y="331.25" width="25.25" height="18.75"/>
   <object id="4910" name="wall" x="188.667" y="331.333" width="25.25" height="18.75"/>
   <object id="4954" name="enemy" x="529.667" y="133" width="34.6667" height="20"/>

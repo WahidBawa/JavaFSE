@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="left-up" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="895">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="219">
  <tileset firstgid="1" name="Revolution_Grasslands" tilewidth="32" tileheight="32" tilecount="190" columns="10">
   <image source="revolution_grasslands.png" trans="a349a4" width="320" height="608"/>
   <tile id="5">
@@ -95,33 +95,28 @@
   <object id="41" name="wall" x="1312" y="864" width="64" height="64"/>
   <object id="51" name="chest" type="4" x="544" y="385.333" width="61.3333" height="60">
    <properties>
-    <property name="ChestName" value="Chest2"/>
     <property name="Item" value="Potion"/>
+    <property name="chestName" value="Chest2"/>
    </properties>
   </object>
   <object id="58" name="chest" type="3" x="641.666" y="386.833" width="61.3333" height="60">
    <properties>
-    <property name="ChestName" value="Chest3"/>
     <property name="Item" value="Potion // Sword // Potion"/>
+    <property name="chestName" value="Chest3"/>
    </properties>
   </object>
   <object id="60" name="chest" type="1" x="426.333" y="317.5" width="61.3333" height="60">
    <properties>
-    <property name="ChestName" value="Chest1"/>
     <property name="Item" value="Elixer"/>
+    <property name="chestName" value="Chest1"/>
    </properties>
   </object>
-  <object id="63" name="wall" x="726.833" y="297" width="33.3333" height="34.6667"/>
-  <object id="64" name="wall" x="427.667" y="319" width="33.3333" height="36"/>
-  <object id="65" name="wall" x="643.166" y="387.834" width="29.3333" height="32"/>
-  <object id="66" name="wall" x="544" y="385.5" width="34.6666" height="30.6667"/>
   <object id="68" name="chest" type="4" x="544" y="478" width="61.3333" height="60">
    <properties>
-    <property name="ChestName" value="Chest5"/>
     <property name="Item" value="Potion"/>
+    <property name="chestName" value="Chest5"/>
    </properties>
   </object>
-  <object id="69" name="wall" x="544" y="478" width="33.3333" height="33.3333"/>
   <object id="70" name="Portal" type="2" x="902.667" y="993.333" width="84" height="53.3333">
    <properties>
     <property name="xd" type="int" value="-1285"/>
@@ -143,8 +138,8 @@
   </object>
   <object id="80" name="chest" type="3" x="725.333" y="296.667" width="61.3333" height="60">
    <properties>
-    <property name="ChestName" value="Chest3"/>
     <property name="Item" value="Sword"/>
+    <property name="chestName" value="Chest3"/>
    </properties>
   </object>
   <object id="181" name="NPC" type="1" x="664" y="509" width="20" height="30">
@@ -189,6 +184,13 @@
     <property name="item" value="Secret Journal"/>
    </properties>
   </object>
+  <object id="197" name="NPC" type="1" x="390" y="814" width="20" height="30">
+   <properties>
+    <property name="Dialogue" value="HALLLOO"/>
+    <property name="Name" value="Stupid Boy"/>
+    <property name="item" value="NULL"/>
+   </properties>
+  </object>
   <object id="200" name="Quest_NPC" type="0" x="1007" y="864" width="20" height="30">
    <properties>
     <property name="Complete" type="bool" value="false"/>
@@ -211,157 +213,9 @@
   </object>
   <object id="213" name="wall" x="0.181818" y="-31.4545" width="1598.91" height="31.6364"/>
   <object id="214" name="wall" x="1600" y="0" width="26" height="1600.67"/>
-  <object id="215" name="wall" x="-1.455" y="1601.18" width="1598.91" height="31.6364"/>
+  <object id="215" name="wall" x="2.545" y="1602.18" width="1598.91" height="31.6364"/>
   <object id="216" name="wall" x="-26.8182" y="-0.971364" width="26" height="1600.67"/>
   <object id="217" name="wall" x="666" y="510" width="20" height="30"/>
   <object id="218" name="wall" x="1009" y="862" width="20" height="30"/>
-  <object id="221" name="wall" x="383" y="1218" width="129" height="122"/>
-  <object id="268" name="enemy" type="1" x="727" y="1332" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="269" name="enemy" type="1" x="726" y="1046" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="876" name="enemy" type="1" x="120" y="167" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="877" name="enemy" type="1" x="120" y="166" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="878" name="enemy" type="1" x="120" y="165" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="879" name="enemy" type="1" x="120" y="165" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="880" name="enemy" type="1" x="120" y="165" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="881" name="enemy" type="1" x="120" y="165" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="882" name="enemy" type="1" x="120" y="165" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="883" name="enemy" type="1" x="120" y="165" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="884" name="enemy" type="1" x="120" y="165" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="885" name="enemy" type="1" x="120" y="165" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="886" name="enemy" type="1" x="120" y="165" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="887" name="enemy" type="1" x="120" y="165" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="888" name="enemy" type="1" x="187" y="206" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="889" name="enemy" type="1" x="188" y="211" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="890" name="enemy" type="1" x="188" y="211" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="891" name="enemy" type="1" x="188" y="211" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="892" name="enemy" type="1" x="188" y="211" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="893" name="enemy" type="1" x="188" y="211" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
-  <object id="894" name="enemy" type="1" x="188" y="211" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="HALLLOO"/>
-    <property name="Name" value="Stupid Boy"/>
-    <property name="item" value="NULL"/>
-   </properties>
-  </object>
  </objectgroup>
 </map>
