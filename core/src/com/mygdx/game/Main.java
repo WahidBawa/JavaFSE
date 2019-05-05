@@ -91,7 +91,8 @@ public class Main extends ApplicationAdapter {
         player.update(batch);
 
 
-        for (Enemy i : wc.getEnemies()) i.update(batch, player);
+        for (Enemy i : wc.getEnemies()) i.update(batch);
+        for (Chest i : wc.getChests()) i.update(batch);
 
 //        topsRenderer.setView(camera);
 //        topsRenderer.render();

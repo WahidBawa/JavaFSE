@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -28,8 +29,8 @@ public class Enemy {
     Random rand = new Random();
 
 
-    public Enemy(float x, float y) {
-        enemy.setPosition(x, y);
+    public Enemy(Rectangle rect) {
+        enemy.setPosition(rect.x, rect.y);
 
         BodyDef bdef = new BodyDef();
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -52,7 +53,7 @@ public class Enemy {
         batch.draw(enemy, body.getPosition().x - enemy.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - enemy.getHeight() * (float) Math.pow(Main.PPM, 2), enemy.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, enemy.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
     }
 
-    public void update(SpriteBatch batch, Player player) { // all data will be updated here (pos, char states, etc)
+    public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
         //enemy.setPosition(  (body.getPosition().x + player.getBody().getPosition().x) *(float)(-5.7) +Main.WIDTH/2 ,  (body.getPosition().y + player.getBody().getPosition().y) * (float) (-5.7) + Main.HEIGHT/2);
 //        Gdx.app.log("#INFO", "" + player.getBody().getPosition().x);
         this.render(batch);

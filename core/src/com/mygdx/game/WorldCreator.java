@@ -13,6 +13,7 @@ public class WorldCreator {
     Body body;
     ArrayList<Body> walls = new ArrayList<Body>();
     ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    ArrayList<Chest> chests = new ArrayList<Chest>();
 
     public WorldCreator(World world, TiledMap map) {
         for (int i = 0; i < map.getLayers().getCount(); i++) {
@@ -23,7 +24,7 @@ public class WorldCreator {
                     FixtureDef def = new FixtureDef();
                     PolygonShape shape = new PolygonShape();
 
-                    bdef.type = (obj.getName().equals("wall") ? BodyDef.BodyType.StaticBody : BodyDef.BodyType.DynamicBody);
+                    bdef.type = (obj.getName().equals("enemy") ? BodyDef.BodyType.DynamicBody : BodyDef.BodyType.StaticBody);
 
                     bdef.position.set(rect.getX() * Main.PPM + rect.getWidth() / 2 * Main.PPM, rect.getY() * Main.PPM + rect.getHeight() / 2 * Main.PPM);
 
@@ -39,7 +40,8 @@ public class WorldCreator {
                 String name = obj.getName();
 
                 if (name.equals("wall")) walls.add(body);
-                else if (name.equals("enemy")) enemies.add(new Enemy(rect.x, rect.y));
+                else if (name.equals("enemy")) enemies.add(new Enemy(rect));
+                else if (name.equals("chest")) chests.add(new Chest(rect));
 
 //                for (Fixture f : body.getFixtureList()){
 //                    f.setUserData(1);
@@ -55,4 +57,5 @@ public class WorldCreator {
     public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
+    public ArrayList<Chest> getChests() { return chests; }
 }
