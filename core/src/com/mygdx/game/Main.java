@@ -19,11 +19,13 @@ public class Main extends ApplicationAdapter {
     SpriteBatch batch;
     public static Player player;
 
-    public static int speed = 10000;
+    public static int speed = 9001;
 
     public static int WIDTH = 1366, HEIGHT = 1024;
 
     public static int MAP_WIDTH, MAP_HEIGHT;
+
+    public final static int TILESIZE = 16;
 
     public static World world;
 
@@ -32,8 +34,6 @@ public class Main extends ApplicationAdapter {
     public static final float PPM = 0.3f;
 
     OrthogonalTiledMapRenderer renderer;
-
-    OrthogonalTiledMapRenderer topsRenderer;
 
     public static OrthographicCamera camera;
 
@@ -58,16 +58,12 @@ public class Main extends ApplicationAdapter {
         TmxMapLoader loader = new TmxMapLoader();
         TiledMap map = loader.load("ASSETS/MAPS/OWO.tmx");
 
-        MAP_WIDTH = (Integer) map.getProperties().get("width") * 16;
-        MAP_HEIGHT = (Integer) map.getProperties().get("height") * 16;
-
-        TiledMap tops = loader.load("ASSETS/MAPS/OLD_MAPS/over0.tmx");
+        MAP_WIDTH = (Integer) map.getProperties().get("width") * TILESIZE;
+        MAP_HEIGHT = (Integer) map.getProperties().get("height") * TILESIZE;
 
         camera = new OrthographicCamera(800f, 600f);
 
         renderer = new OrthogonalTiledMapRenderer(map, PPM);
-
-        topsRenderer = new OrthogonalTiledMapRenderer(tops, PPM);
 
         batch = new SpriteBatch();
 
@@ -85,28 +81,27 @@ public class Main extends ApplicationAdapter {
         camera.zoom = PPM;
 
         world.step(1 / 60f, 6, 2);
+
         Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
+
         renderer.setView(camera);
-        renderer.render();
+        renderer.render(new int[]{0, 1});
 
         batch.setProjectionMatrix(camera.combined);
-        movePlayer();
+
 
         batch.begin();
-        // updating of classes and drawing happens here
-        player.update(batch);
 
-
-        for (Enemy i : wc.getEnemies()) i.update(batch);
-        for (Chest i : wc.getChests()) i.update(batch);
-
-//        topsRenderer.setView(camera);
-//        topsRenderer.render();
+        updateWorldObjects();
 
         batch.end();
+
+        movePlayer();
+
+        renderer.render(new int[]{2});
 
         dbr.render(world, camera.combined);
     }
@@ -143,5 +138,13 @@ public class Main extends ApplicationAdapter {
 
         camera.position.x = player.getX();
         camera.position.y = player.getY();
+    }
+
+    public void updateWorldObjects() {
+        player.update(batch);
+
+        for (Enemy i : wc.getEnemies()) i.update(batch);
+
+        for (Chest i : wc.getChests()) i.update(batch);
     }
 }

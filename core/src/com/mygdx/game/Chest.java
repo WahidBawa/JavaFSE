@@ -12,9 +12,23 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 public class Chest {
     Sprite chest = new Sprite(new Texture("ASSETS/CHESTS/0.png"));
     Body body;
-    public Chest(Rectangle rect){
+
+    public Chest(Rectangle rect) {
         chest.setPosition(rect.x, rect.y);
 
+        createBody();
+    }
+
+    public void render(SpriteBatch batch) {
+        batch.draw(chest, body.getPosition().x - chest.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - chest.getHeight() * (float) Math.pow(Main.PPM, 2), chest.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, chest.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
+
+    }
+
+    public void update(SpriteBatch batch) {
+        this.render(batch);
+    }
+
+    public void createBody() {
         BodyDef bdef = new BodyDef();
         bdef.type = BodyDef.BodyType.StaticBody;
         this.body = Main.world.createBody(bdef);
@@ -30,14 +44,5 @@ public class Chest {
         this.body.getFixtureList().get(0).setUserData("Enemy");
 
         this.body.setTransform(chest.getX() * Main.PPM, chest.getY() * Main.PPM, 0);
-    }
-
-    public void render(SpriteBatch batch){
-        batch.draw(chest, body.getPosition().x - chest.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - chest.getHeight() * (float) Math.pow(Main.PPM, 2), chest.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, chest.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
-
-    }
-
-    public void update(SpriteBatch batch){
-        this.render(batch);
     }
 }

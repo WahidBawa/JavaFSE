@@ -50,18 +50,7 @@ public class Player {
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
         player.setPosition(body.getPosition().x, body.getPosition().y);
 
-
-        if (Main.moving){
-            counter += 1;
-            if (counter > animation_speed){
-                counter = 0;
-                pos += 1;
-                if (pos >= 3){
-                    pos = 0;
-                }
-            }
-        }
-
+        animationCount();
 
         player.set(new Sprite(sprites.get(Main.dir).get(pos)));
 
@@ -88,7 +77,7 @@ public class Player {
         return body;
     }
 
-    public void createBody(){
+    public void createBody() {
         player.setPosition(100, 100);
 
         rect = new Rectangle((int) player.getX(), (int) player.getY(), (int) player.getWidth(), (int) player.getHeight());
@@ -110,13 +99,28 @@ public class Player {
         this.body.setTransform((float) rect.getX() * Main.PPM, (float) rect.getY() * Main.PPM, 0);
     }
 
-    public void loadSprites(){
-        for (String i : new String[]{"Up", "Down", "Left", "Right"}){
+    public void loadSprites() {
+        for (String i : new String[]{"Up", "Down", "Left", "Right"}) {
             tmpSprites = new ArrayList<Texture>();
-            for (int n = 0; n < 3; n++){
+            for (int n = 0; n < 3; n++) {
                 tmpSprites.add(new Texture("ASSETS/SPRITES/" + i + "/" + n + ".png")); // change this to current sprites
             }
             sprites.add(tmpSprites);
+        }
+    }
+
+    public void animationCount() {
+        if (Main.moving) {
+            counter += 1;
+            if (counter > animation_speed) {
+                counter = 0;
+                pos += 1;
+                if (pos >= 3) {
+                    pos = 0;
+                }
+            }
+        } else {
+            pos = 0;
         }
     }
 }

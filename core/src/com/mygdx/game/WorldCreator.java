@@ -57,5 +57,8 @@ public class WorldCreator {
     public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
-    public ArrayList<Chest> getChests() { return chests; }
+
+    public ArrayList<Chest> getChests() {
+        return chests;
+    }
 }

@@ -31,7 +31,19 @@ public class Enemy {
 
     public Enemy(Rectangle rect) {
         enemy.setPosition(rect.x, rect.y);
+        createBody();
+    }
 
+    private void render(SpriteBatch batch) {
+        batch.draw(enemy, body.getPosition().x - enemy.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - enemy.getHeight() * (float) Math.pow(Main.PPM, 2), enemy.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, enemy.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
+    }
+
+    public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
+        this.render(batch);
+
+    }
+
+    public void createBody() {
         BodyDef bdef = new BodyDef();
         bdef.type = BodyDef.BodyType.DynamicBody;
         this.body = Main.world.createBody(bdef);
@@ -47,17 +59,6 @@ public class Enemy {
         this.body.getFixtureList().get(0).setUserData("Enemy");
 
         this.body.setTransform(rand.nextInt(Main.MAP_WIDTH - (int) enemy.getWidth()) * Main.PPM, rand.nextInt(Main.MAP_HEIGHT - (int) enemy.getHeight()) * Main.PPM, 0);
-    }
-
-    private void render(SpriteBatch batch) {
-        batch.draw(enemy, body.getPosition().x - enemy.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - enemy.getHeight() * (float) Math.pow(Main.PPM, 2), enemy.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, enemy.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
-    }
-
-    public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
-        //enemy.setPosition(  (body.getPosition().x + player.getBody().getPosition().x) *(float)(-5.7) +Main.WIDTH/2 ,  (body.getPosition().y + player.getBody().getPosition().y) * (float) (-5.7) + Main.HEIGHT/2);
-//        Gdx.app.log("#INFO", "" + player.getBody().getPosition().x);
-        this.render(batch);
-
     }
 
     public float getX() {
