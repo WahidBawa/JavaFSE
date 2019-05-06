@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -108,7 +107,7 @@ public class Player {
         }
     }
 
-    public void receiveItem(Item item){
+    public void receiveItem(Item item) {
         inventory.add(item);
         stats.put("inventory", inventory);
     }
@@ -133,15 +132,15 @@ public class Player {
         return body;
     }
 
-    public Object get(String key){
+    public Object get(String key) {
         return stats.get(key);
     }
 
-    public ArrayList<Item> getInventory(){
+    public ArrayList<Item> getInventory() {
         return inventory;
     }
 
-    public void use(Item item){
+    public void use(Item item) {
         item.use();
         inventory.remove(item);
 

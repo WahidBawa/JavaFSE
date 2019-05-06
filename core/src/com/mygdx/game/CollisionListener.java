@@ -14,7 +14,7 @@ public class CollisionListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == Chest.class){
+        if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == Chest.class) {
             Main.chestCollide = true;
             objs.add(contact.getFixtureB());
         }
@@ -23,7 +23,7 @@ public class CollisionListener implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
-        if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == Chest.class){
+        if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == Chest.class) {
             Main.chestCollide = false;
             objs.remove(contact.getFixtureB());
         }

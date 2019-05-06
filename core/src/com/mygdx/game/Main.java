@@ -15,9 +15,6 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 
-import javax.lang.model.element.NestingKind;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import static com.badlogic.gdx.Gdx.graphics;
@@ -155,11 +152,11 @@ public class Main extends ApplicationAdapter {
 
 
         // how to implement using items in the future
-        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && player.getInventory().size() > 0){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && player.getInventory().size() > 0) {
             player.use(player.getInventory().get(0));
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             System.out.println();
             System.out.println("HEALTH: " + player.stats.get("health"));
             System.out.println("MANA: " + player.stats.get("mana"));
@@ -168,9 +165,9 @@ public class Main extends ApplicationAdapter {
             System.out.println();
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.I)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             System.out.println();
-            for (Item item : player.getInventory()){
+            for (Item item : player.getInventory()) {
                 System.out.println(item.name);
             }
             System.out.println();

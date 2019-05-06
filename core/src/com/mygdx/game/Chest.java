@@ -56,14 +56,14 @@ public class Chest {
         this.body.setTransform(chest.getX() * Main.PPM, chest.getY() * Main.PPM, 0);
     }
 
-    public void open(){
-        if (!chestOpened){
+    public void open() {
+        if (!chestOpened) {
             String[] split = item.split("//");
             if (split[1].equals("C")) {
                 Main.player.receiveItem(new Consumeable(split[0], split[2], Integer.parseInt(split[3])));
-            }else if (split[1].equals("W")){
+            } else if (split[1].equals("W")) {
                 Main.player.receiveItem(new Weapon(split[0], split[2], Integer.parseInt(split[3])));
-            }else if (split[1].equals("A")){
+            } else if (split[1].equals("A")) {
                 Main.player.receiveItem(new Armour(split[0], split[2], Integer.parseInt(split[3])));
             }
         }
