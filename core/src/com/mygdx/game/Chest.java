@@ -67,7 +67,7 @@ public class Chest {
                 Main.player.receiveItem(new Armour(split[0], split[2], Integer.parseInt(split[3])));
             }
         }
-        
+
         chest.set(new Sprite(new Texture("ASSETS/CHESTS/1.png")));
         chestOpened = true;
     }

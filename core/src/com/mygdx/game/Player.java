@@ -35,10 +35,10 @@ public class Player {
         loadSprites();
 
         stats.put("health", 16);
-        stats.put("strength", 8);
-        stats.put("agility", 6);
-        stats.put("intelligence", 10);
-
+        stats.put("attack", 8);
+        stats.put("speed", 6);
+        stats.put("smarts", 10);
+        stats.put("inventory", inventory);
 
     }
 
@@ -52,7 +52,7 @@ public class Player {
         animationCount();
 
         player.set(new Sprite(sprites.get(Main.dir).get(pos)));
-        System.out.println(inventory);
+        System.out.println(stats.get("inventory"));
         this.render(batch);
     }
 
@@ -106,6 +106,7 @@ public class Player {
 
     public void receiveItem(Item item){
         inventory.add(item);
+        stats.put("inventory", inventory);
     }
 
     public float getX() {
