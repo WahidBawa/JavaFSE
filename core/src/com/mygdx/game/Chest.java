@@ -10,17 +10,15 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Chest {
-    final int OPEN = 1;
-    final int CLOSED = 0;
-    int chestState = CLOSED;
+    boolean chestOpened = false;
 
     Sprite chest = new Sprite(new Texture("ASSETS/CHESTS/0.png"));
     Body body;
     Rectangle rect;
 
-    String name;
+    String name, item;
 
-    public Chest(Rectangle rect, String name) {
+    public Chest(Rectangle rect, String name, String item) {
         chest.setPosition(rect.x, rect.y);
 
         this.rect = rect;
@@ -28,6 +26,7 @@ public class Chest {
         createBody();
 
         this.name = name; // name will be used to differentiate the chest and to tell if it has been opened before
+        this.item = item;
     }
 
     public void render(SpriteBatch batch) {
@@ -58,6 +57,18 @@ public class Chest {
     }
 
     public void open(){
+        if (!chestOpened){
+            String[] split = item.split("//");
+            if (split[1].equals("C")) {
+                Main.player.receiveItem(new Consumeable(split[0], split[2], Integer.parseInt(split[3])));
+            }else if (split[1].equals("W")){
+                Main.player.receiveItem(new Weapon(split[0], split[2], Integer.parseInt(split[3])));
+            }else if (split[1].equals("A")){
+                Main.player.receiveItem(new Armour(split[0], split[2], Integer.parseInt(split[3])));
+            }
+        }
+        
         chest.set(new Sprite(new Texture("ASSETS/CHESTS/1.png")));
+        chestOpened = true;
     }
 }

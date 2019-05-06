@@ -95,25 +95,25 @@
   <object id="41" name="wall" x="1312" y="864" width="64" height="64"/>
   <object id="51" name="chest" type="4" x="544" y="385.333" width="61.3333" height="60">
    <properties>
-    <property name="Item" value="Potion"/>
+    <property name="Item" value="Potion//C//HEALTH//50"/>
     <property name="chestName" value="Chest2"/>
    </properties>
   </object>
   <object id="58" name="chest" type="3" x="641.666" y="386.833" width="61.3333" height="60">
    <properties>
-    <property name="Item" value="Potion // Sword // Potion"/>
+    <property name="Item" value="Sword//W//ATTACK//5"/>
     <property name="chestName" value="Chest3"/>
    </properties>
   </object>
   <object id="60" name="chest" type="1" x="426.333" y="317.5" width="61.3333" height="60">
    <properties>
-    <property name="Item" value="Elixer"/>
+    <property name="Item" value="Elixir//C//MANA//50"/>
     <property name="chestName" value="Chest1"/>
    </properties>
   </object>
   <object id="68" name="chest" type="4" x="544" y="478" width="61.3333" height="60">
    <properties>
-    <property name="Item" value="Potion"/>
+    <property name="Item" value="Potion//C//HEALTH//50"/>
     <property name="chestName" value="Chest5"/>
    </properties>
   </object>
@@ -138,8 +138,8 @@
   </object>
   <object id="80" name="chest" type="3" x="725.333" y="296.667" width="61.3333" height="60">
    <properties>
-    <property name="Item" value="Sword"/>
-    <property name="chestName" value="Chest3"/>
+    <property name="Item" value="Sword//W//ATTACK//5"/>
+    <property name="chestName" value="Chest4"/>
    </properties>
   </object>
   <object id="181" name="NPC" type="1" x="664" y="509" width="20" height="30">

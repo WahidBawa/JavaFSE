@@ -52,7 +52,7 @@ public class Player {
         animationCount();
 
         player.set(new Sprite(sprites.get(Main.dir).get(pos)));
-
+        System.out.println(inventory);
         this.render(batch);
     }
 
@@ -102,6 +102,10 @@ public class Player {
         } else {
             pos = 1;
         }
+    }
+
+    public void receiveItem(Item item){
+        inventory.add(item);
     }
 
     public float getX() {
