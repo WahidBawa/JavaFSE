@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,7 +32,7 @@ public class Main extends ApplicationAdapter {
 
     public static int MAP_WIDTH, MAP_HEIGHT;
 
-    public final static int TILESIZE = 16;
+    public final static int TILESIZE = 32;
 
     public static World world;
 
@@ -53,6 +54,7 @@ public class Main extends ApplicationAdapter {
     public static int dir = DOWN;
 
     public static boolean chestCollide = false;
+    FPSLogger fl = new FPSLogger();
 
     public static ArrayList<Fixture> objs = new ArrayList<Fixture>();
 
@@ -112,8 +114,9 @@ public class Main extends ApplicationAdapter {
 
         renderer.render(new int[]{4});
 
-        dbr.render(world, camera.combined);
+//        dbr.render(world, camera.combined);
 
+//        fl.log();
     }
 
     @Override
@@ -148,6 +151,16 @@ public class Main extends ApplicationAdapter {
                 Chest c = (Chest) i.getUserData();
                 c.open();
             }
+        }
+
+
+        // how to implement using items in the future
+        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && player.getInventory().size() > 0){
+            player.use(player.getInventory().get(0));
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C)){
+            System.out.println(player.stats.get("health"));
         }
 
         player.setX(player.body.getPosition().x);

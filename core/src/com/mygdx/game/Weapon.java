@@ -7,6 +7,6 @@ public class Weapon extends Item {
 
     @Override
     public void use() {
-        System.out.println("THIS IS A WEAPON BITCH");
+        System.out.println("THIS IS A " + name.toUpperCase());
     }
 }

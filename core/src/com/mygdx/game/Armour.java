@@ -7,6 +7,6 @@ public class Armour extends Item{
 
     @Override
     public void use() {
-        System.out.println("THIS IS AN OVERRIDE BITCH");
+        System.out.println("THIS IS A " + name.toUpperCase());
     }
 }

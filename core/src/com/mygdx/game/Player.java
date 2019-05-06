@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -35,6 +36,7 @@ public class Player {
         loadSprites();
 
         stats.put("health", 16);
+        stats.put("mana", 25);
         stats.put("attack", 8);
         stats.put("speed", 6);
         stats.put("smarts", 10);
@@ -52,7 +54,8 @@ public class Player {
         animationCount();
 
         player.set(new Sprite(sprites.get(Main.dir).get(pos)));
-        System.out.println(stats.get("inventory"));
+        stats.put("inventory", inventory);
+//        System.out.println(stats.get("inventory"));
         this.render(batch);
     }
 
@@ -129,4 +132,17 @@ public class Player {
         return body;
     }
 
+    public Object get(String key){
+        return stats.get(key);
+    }
+
+    public ArrayList<Item> getInventory(){
+        return inventory;
+    }
+
+    public void use(Item item){
+        item.use();
+        inventory.remove(item);
+
+    }
 }
