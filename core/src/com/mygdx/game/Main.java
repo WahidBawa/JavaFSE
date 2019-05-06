@@ -108,6 +108,9 @@ public class Main extends ApplicationAdapter {
         batch.end();
 
         movePlayer();
+        for(Enemy enemy : wc.getEnemies()) {
+            enemy.move(player);
+        }
 
         renderer.render(new int[]{4});
 
