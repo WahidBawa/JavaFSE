@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 
 import javax.lang.model.element.NestingKind;
@@ -51,7 +52,9 @@ public class Main extends ApplicationAdapter {
 
     public static int dir = DOWN;
 
-    public static boolean collide = false;
+    public static boolean chestCollide = false;
+
+    public static ArrayList<Fixture> objs = new ArrayList<Fixture>();
 
     Box2DDebugRenderer dbr;
 
@@ -78,7 +81,7 @@ public class Main extends ApplicationAdapter {
 
         dbr = new Box2DDebugRenderer();
 
-        world.setContactListener(new CollisionListener ());
+        world.setContactListener(new CollisionListener());
 
     }
 
@@ -111,7 +114,6 @@ public class Main extends ApplicationAdapter {
 
         dbr.render(world, camera.combined);
 
-        System.out.println(collide);
     }
 
     @Override
@@ -139,6 +141,13 @@ public class Main extends ApplicationAdapter {
         } else {
             player.getBody().applyLinearImpulse(new Vector2(player.getBody().getLinearVelocity().x * -1, player.getBody().getLinearVelocity().y * -1), player.getBody().getWorldCenter(), true);
             moving = false;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && chestCollide) {
+            for (Fixture i : objs) {
+                Chest c = (Chest) i.getUserData();
+                c.open();
+            }
         }
 
         player.setX(player.body.getPosition().x);

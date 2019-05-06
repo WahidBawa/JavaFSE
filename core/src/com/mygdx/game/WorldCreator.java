@@ -19,7 +19,6 @@ public class WorldCreator {
         for (int i = 0; i < map.getLayers().getCount(); i++) {
             for (MapObject obj : map.getLayers().get(i).getObjects().getByType(RectangleMapObject.class)) {
                 Rectangle rect = ((RectangleMapObject) obj).getRectangle();
-                System.out.println(obj.getProperties().get("item"));
                 if (obj.getName().equals("wall")) {
                     BodyDef bdef = new BodyDef();
                     FixtureDef def = new FixtureDef();
@@ -42,11 +41,12 @@ public class WorldCreator {
 
                 if (name.equals("wall")) walls.add(body);
                 else if (name.equals("enemy")) enemies.add(new Enemy(rect));
-                else if (name.equals("chest")) chests.add(new Chest(rect,(String) obj.getProperties().get("chestName")));
+                else if (name.equals("chest"))
+                    chests.add(new Chest(rect, (String) obj.getProperties().get("chestName")));
 
-//                for (Fixture f : body.getFixtureList()){
-//                    f.setUserData(1);
-//                }
+                for (Fixture f : body.getFixtureList()) {
+                    f.setUserData(1);
+                }
             }
         }
     }

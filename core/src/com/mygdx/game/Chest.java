@@ -52,12 +52,12 @@ public class Chest {
 
         this.body.createFixture(fdef);
 
-        this.body.getFixtureList().get(0).setUserData("Chest");
+        this.body.getFixtureList().get(0).setUserData(this);
 
         this.body.setTransform(chest.getX() * Main.PPM, chest.getY() * Main.PPM, 0);
     }
 
     public void open(){
-
+        chest.set(new Sprite(new Texture("ASSETS/CHESTS/1.png")));
     }
 }

@@ -40,8 +40,6 @@ public class Player {
         stats.put("intelligence", 10);
 
 
-        System.out.println(stats);
-
     }
 
     private void render(SpriteBatch batch) {
