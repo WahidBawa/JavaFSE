@@ -52,8 +52,12 @@ public class Chest {
 
         this.body.createFixture(fdef);
 
-        this.body.getFixtureList().get(0).setUserData("Enemy");
+        this.body.getFixtureList().get(0).setUserData("Chest");
 
         this.body.setTransform(chest.getX() * Main.PPM, chest.getY() * Main.PPM, 0);
+    }
+
+    public void open(){
+
     }
 }

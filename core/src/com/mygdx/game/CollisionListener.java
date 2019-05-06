@@ -9,12 +9,16 @@ public class CollisionListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
+        if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData() == "Chest"){
+            Main.collide = true;
+        }else{
+            Main.collide = false;
+        }
     }
 
     @Override
     public void endContact(Contact contact) {
-        Fixture a = contact.getFixtureA();
-        Fixture b = contact.getFixtureB();
+        
     }
 
     @Override

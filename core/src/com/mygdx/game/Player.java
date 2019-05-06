@@ -34,7 +34,7 @@ public class Player {
 
         loadSprites();
 
-
+        stats.put("health", 16);
         stats.put("strength", 8);
         stats.put("agility", 6);
         stats.put("intelligence", 10);
@@ -78,6 +78,7 @@ public class Player {
         this.body.getFixtureList().get(0).setUserData("PLAYER");
 
         this.body.setTransform((float) rect.getX() * Main.PPM, (float) rect.getY() * Main.PPM, 0);
+
     }
 
     public void loadSprites() {
@@ -101,7 +102,7 @@ public class Player {
                 }
             }
         } else {
-            pos = 0;
+            pos = 1;
         }
     }
 

@@ -13,6 +13,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 
+import javax.lang.model.element.NestingKind;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
 import static com.badlogic.gdx.Gdx.graphics;
 
 public class Main extends ApplicationAdapter {
@@ -46,6 +51,8 @@ public class Main extends ApplicationAdapter {
 
     public static int dir = DOWN;
 
+    public static boolean collide = false;
+
     Box2DDebugRenderer dbr;
 
     @Override
@@ -71,7 +78,7 @@ public class Main extends ApplicationAdapter {
 
         dbr = new Box2DDebugRenderer();
 
-        world.setContactListener(new CollisionListener());
+        world.setContactListener(new CollisionListener ());
 
     }
 
@@ -103,6 +110,8 @@ public class Main extends ApplicationAdapter {
         renderer.render(new int[]{4});
 
         dbr.render(world, camera.combined);
+
+        System.out.println(collide);
     }
 
     @Override
