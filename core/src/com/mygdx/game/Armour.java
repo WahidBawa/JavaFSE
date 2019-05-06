@@ -7,6 +7,6 @@ public class Armour extends Item{
 
     @Override
     public void use() {
-        System.out.println("THIS IS A " + name.toUpperCase());
+        Main.player.stats.put("defense", (Integer) Main.player.stats.get("defense") + value);
     }
 }

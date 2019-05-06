@@ -160,7 +160,20 @@ public class Main extends ApplicationAdapter {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)){
-            System.out.println(player.stats.get("health"));
+            System.out.println();
+            System.out.println("HEALTH: " + player.stats.get("health"));
+            System.out.println("MANA: " + player.stats.get("mana"));
+            System.out.println("ATTACK: " + player.stats.get("attack"));
+            System.out.println("DEFENSE: " + player.stats.get("defense"));
+            System.out.println();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.I)){
+            System.out.println();
+            for (Item item : player.getInventory()){
+                System.out.println(item.name);
+            }
+            System.out.println();
         }
 
         player.setX(player.body.getPosition().x);

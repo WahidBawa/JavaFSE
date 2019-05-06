@@ -38,6 +38,7 @@ public class Player {
         stats.put("health", 16);
         stats.put("mana", 25);
         stats.put("attack", 8);
+        stats.put("defense", 11);
         stats.put("speed", 6);
         stats.put("smarts", 10);
         stats.put("inventory", inventory);
