@@ -26,6 +26,7 @@ public class Player {
 
 
     HashMap stats = new HashMap();
+    HashMap<String, Item> equipment = new HashMap<String, Item>();
 
     ArrayList<Item> inventory = new ArrayList<Item>();
 
@@ -54,7 +55,6 @@ public class Player {
         animationCount();
 
         player.set(new Sprite(sprites.get(Main.dir).get(pos)));
-        stats.put("inventory", inventory);
 //        System.out.println(stats.get("inventory"));
         this.render(batch);
     }

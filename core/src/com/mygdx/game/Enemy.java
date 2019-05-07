@@ -61,15 +61,17 @@ public class Enemy {
         this.body.setTransform(rand.nextInt(Main.MAP_WIDTH - (int) enemy.getWidth()) * Main.PPM, rand.nextInt(Main.MAP_HEIGHT - (int) enemy.getHeight()) * Main.PPM, 0);
     }
     public void move(Player player) {
-        if (Math.pow(body.getPosition().x -player.getBody().getPosition().x,2) + Math.pow(body.getPosition().y - player.getBody().getPosition().y,2) < 20000) {
+        if (Math.pow(body.getPosition().x -player.getBody().getPosition().x,2) + Math.pow(body.getPosition().y - player.getBody().getPosition().y,2) < 5000) {
             //body.setTransform(speed, speed, body.getWorldCenter().angle(player.getBody().getWorldCenter()));
-            Gdx.app.log("#INFO", "" + Main.PPM);
+//            Gdx.app.log("#INFO", "" + Main.PPM);
             //enemy.setPosition(enemy.getX() +(enemy.getX() - player.getSprite().getX() / Math.abs(enemy.getX() - player.getSprite().getX())) * speed, enemy.getY() + (enemy.getY() - player.getSprite().getY()/ Math.abs(enemy.getY() - player.getSprite().getY())*speed));
             //enemy.setPosition(enemy.getX() + 10, enemy.getY() + 10);
             //body.setTransform((-10 * (body.getWorldCenter().x - player.getBody().getWorldCenter().x) / Math.abs(body.getWorldCenter().x - player.getBody().getWorldCenter().x)), (-10 * (body.getWorldCenter().y - player.getBody().getWorldCenter().y) / Math.abs(body.getWorldCenter().y - player.getBody().getWorldCenter().y)),0);
             // body.setTransform((-10 * (body.getWorldCenter().x - player.getBody().getWorldCenter().x) / Math.abs(body.getWorldCenter().x - player.getBody().getWorldCenter().x)), 0,0);
             //body.setTransform(-10,-10,0);
-            body.applyLinearImpulse(new Vector2((-10 * (body.getWorldCenter().x - player.getBody().getWorldCenter().x) / Math.abs(body.getWorldCenter().x - player.getBody().getWorldCenter().x)), (-10 * (body.getWorldCenter().y - player.getBody().getWorldCenter().y) / Math.abs(body.getWorldCenter().y - player.getBody().getWorldCenter().y))), body.getWorldCenter(),true);
+            body.applyLinearImpulse(new Vector2((-0.5f * (body.getWorldCenter().x - player.getBody().getWorldCenter().x) / Math.abs(body.getWorldCenter().x - player.getBody().getWorldCenter().x)), (-0.5f * (body.getWorldCenter().y - player.getBody().getWorldCenter().y) / Math.abs(body.getWorldCenter().y - player.getBody().getWorldCenter().y))), body.getWorldCenter(),true);
+        }else{
+            body.applyLinearImpulse(new Vector2((0), (0)), body.getWorldCenter(),true);
 
         }
     }
