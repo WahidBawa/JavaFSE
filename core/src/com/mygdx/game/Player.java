@@ -3,10 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,6 +17,12 @@ public class Player {
     private int counter = 0;
     private int animation_speed = 7;
     private int pos = 0;
+
+    //player stats
+    int health = 100;
+    int mana = 100;
+    int stamina = 100;
+
 
     private ArrayList<ArrayList<Texture>> sprites = new ArrayList<ArrayList<Texture>>();
     private ArrayList<Texture> tmpSprites;
@@ -79,7 +82,9 @@ public class Player {
         this.body.getFixtureList().get(0).setUserData("PLAYER");
 
         this.body.setTransform((float) rect.getX() * Main.PPM, (float) rect.getY() * Main.PPM, 0);
-
+        MassData thiccc = new MassData();
+        thiccc.mass = 90f;//in kg
+        this.body.setMassData(thiccc);
     }
 
     public void loadSprites() {

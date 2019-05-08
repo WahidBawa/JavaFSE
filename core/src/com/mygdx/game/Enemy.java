@@ -14,16 +14,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.*;
 
 import java.awt.*;
 import java.util.Random;
 
 public class Enemy {
-    float speed = 10000;
+    float speed = 6;
     Sprite enemy = new Sprite(new Texture("ASSETS/SPRITES/goose.jpg"));
     Body body;
     Random rand = new Random();
@@ -57,6 +54,9 @@ public class Enemy {
         this.body.createFixture(fdef);
 
         this.body.getFixtureList().get(0).setUserData("Enemy");
+        MassData massOfEnemy = new MassData();
+        massOfEnemy.mass = (float)(6.5+5.5)/2;//took the avrarage mass of a male and female goose to to discriminate against a certain sex
+        this.body.setMassData(massOfEnemy);
 
         this.body.setTransform(rand.nextInt(Main.MAP_WIDTH - (int) enemy.getWidth()) * Main.PPM, rand.nextInt(Main.MAP_HEIGHT - (int) enemy.getHeight()) * Main.PPM, 0);
     }
@@ -69,7 +69,7 @@ public class Enemy {
             //body.setTransform((-10 * (body.getWorldCenter().x - player.getBody().getWorldCenter().x) / Math.abs(body.getWorldCenter().x - player.getBody().getWorldCenter().x)), (-10 * (body.getWorldCenter().y - player.getBody().getWorldCenter().y) / Math.abs(body.getWorldCenter().y - player.getBody().getWorldCenter().y)),0);
             // body.setTransform((-10 * (body.getWorldCenter().x - player.getBody().getWorldCenter().x) / Math.abs(body.getWorldCenter().x - player.getBody().getWorldCenter().x)), 0,0);
             //body.setTransform(-10,-10,0);
-            body.applyLinearImpulse(new Vector2((-0.5f * (body.getWorldCenter().x - player.getBody().getWorldCenter().x) / Math.abs(body.getWorldCenter().x - player.getBody().getWorldCenter().x)), (-0.5f * (body.getWorldCenter().y - player.getBody().getWorldCenter().y) / Math.abs(body.getWorldCenter().y - player.getBody().getWorldCenter().y))), body.getWorldCenter(),true);
+            body.applyLinearImpulse(new Vector2((-speed * body.getMass() *  (body.getWorldCenter().x - player.getBody().getWorldCenter().x) / Math.abs(body.getWorldCenter().x - player.getBody().getWorldCenter().x)), (-speed * body.getMass() * (body.getWorldCenter().y - player.getBody().getWorldCenter().y) / Math.abs(body.getWorldCenter().y - player.getBody().getWorldCenter().y))), body.getWorldCenter(),true);
         }else{
             body.applyLinearImpulse(new Vector2((0), (0)), body.getWorldCenter(),true);
 
