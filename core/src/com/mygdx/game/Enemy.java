@@ -53,10 +53,11 @@ public class Enemy {
 
         this.body.createFixture(fdef);
 
-        this.body.getFixtureList().get(0).setUserData("Enemy");
+        this.body.getFixtureList().get(0).setUserData("ENEMY");
         MassData massOfEnemy = new MassData();
         massOfEnemy.mass = (float)(6.5+5.5)/2;//took the avrarage mass of a male and female goose to to discriminate against a certain sex
         this.body.setMassData(massOfEnemy);
+        this.body.setUserData(this);
 
         this.body.setTransform(rand.nextInt(Main.MAP_WIDTH - (int) enemy.getWidth()) * Main.PPM, rand.nextInt(Main.MAP_HEIGHT - (int) enemy.getHeight()) * Main.PPM, 0);
     }
@@ -74,6 +75,10 @@ public class Enemy {
             body.applyLinearImpulse(new Vector2((0), (0)), body.getWorldCenter(),true);
 
         }
+
+    }
+    public void attack(Player player) {
+        player.setHealth(player.getHealth()-5);
     }
 
     public float getX() {

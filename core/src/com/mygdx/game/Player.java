@@ -80,6 +80,7 @@ public class Player {
         this.body.createFixture(fdef);
 
         this.body.getFixtureList().get(0).setUserData("PLAYER");
+        this.body.getFixtureList().get(0).setUserData("PLAYER");
 
         this.body.setTransform((float) rect.getX() * Main.PPM, (float) rect.getY() * Main.PPM, 0);
         MassData thiccc = new MassData();
@@ -115,6 +116,13 @@ public class Player {
     public void receiveItem(Item item) {
         inventory.add(item);
         stats.put("inventory", inventory);
+    }
+    public void setHealth(int hp) {
+        health = hp;
+    }
+
+    public int getHealth() {
+        return health;
     }
 
     public float getX() {
