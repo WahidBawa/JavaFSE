@@ -57,6 +57,8 @@ public class Main extends ApplicationAdapter {
 
     Box2DDebugRenderer dbr;
 
+    HUD hud;
+
     @Override
     public void create() {
         graphics.setWindowedMode(WIDTH, HEIGHT);
@@ -82,6 +84,7 @@ public class Main extends ApplicationAdapter {
 
         world.setContactListener(new CollisionListener());
 
+        hud = new HUD();
     }
 
     @Override
@@ -113,6 +116,10 @@ public class Main extends ApplicationAdapter {
         }
 
         renderer.render(new int[]{4});
+
+        batch.begin();
+        hud.update(batch);
+        batch.end();
 
 //        dbr.render(world, camera.combined);
 
