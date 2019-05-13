@@ -129,6 +129,7 @@ public class Main extends ApplicationAdapter {
     @Override
     public void dispose() {
         batch.dispose();
+        renderer.dispose();
     }
 
     public void movePlayer() {
