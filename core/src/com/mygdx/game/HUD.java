@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class HUD {
-    Sprite inventory = new Sprite(new Texture("ASSETS/UI/inventoryScreen.png"));
+    Sprite inventory = new Sprite(new Texture("ASSETS/INVENTORY/Inventory.png"));
     public HUD(){
 
     }
