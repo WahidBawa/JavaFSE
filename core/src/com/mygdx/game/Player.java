@@ -87,6 +87,7 @@ public class Player {
         MassData thiccc = new MassData();
         thiccc.mass = 90f;//in kg
         this.body.setMassData(thiccc);
+
     }
 
     public void loadSprites() {

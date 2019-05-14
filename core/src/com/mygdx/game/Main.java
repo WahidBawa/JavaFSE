@@ -138,6 +138,8 @@ public class Main extends ApplicationAdapter {
     }
 
     public void movePlayer() {
+        player.getBody().setLinearVelocity(0,0);
+
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
             player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
             moving = true;
