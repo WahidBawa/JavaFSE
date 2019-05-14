@@ -11,11 +11,10 @@ public class HUD {
     }
 
     public void render(SpriteBatch batch){
-        batch.draw(inventory, 0, 0);
+        batch.draw(inventory, 0, 0, inventory.getWidth() * 0.2f, inventory.getHeight() * 0.2f);
     }
 
     public void update(SpriteBatch batch){
-
 
         render(batch);
     }
