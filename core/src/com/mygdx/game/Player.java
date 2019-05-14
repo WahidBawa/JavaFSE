@@ -59,6 +59,7 @@ public class Player {
 
         player.set(new Sprite(sprites.get(Main.dir).get(pos)));
 //        System.out.println(stats.get("inventory"));
+
         this.render(batch);
     }
 

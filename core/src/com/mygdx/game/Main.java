@@ -59,6 +59,8 @@ public class Main extends ApplicationAdapter {
 
     HUD hud;
 
+    Inventory inventory;
+
     @Override
     public void create() {
         graphics.setWindowedMode(WIDTH, HEIGHT);
@@ -85,6 +87,8 @@ public class Main extends ApplicationAdapter {
         world.setContactListener(new CollisionListener());
 
         hud = new HUD();
+
+        inventory = new Inventory();
     }
 
     @Override
@@ -118,7 +122,8 @@ public class Main extends ApplicationAdapter {
         renderer.render(new int[]{4});
 
         batch.begin();
-        hud.update(batch);
+//        hud.update(batch);
+        inventory.update(batch);
         batch.end();
 
 //        dbr.render(world, camera.combined);
@@ -177,11 +182,12 @@ public class Main extends ApplicationAdapter {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
-            System.out.println();
-            for (Item item : player.getInventory()) {
-                System.out.println(item.name);
-            }
-            System.out.println();
+//            System.out.println();
+//            for (Item item : player.getInventory()) {
+//                System.out.println(item.name);
+//            }
+//            System.out.println();
+            inventory.open();
         }
 
         player.setX(player.body.getPosition().x);
