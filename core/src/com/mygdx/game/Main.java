@@ -40,7 +40,7 @@ public class Main extends ApplicationAdapter {
     OrthogonalTiledMapRenderer renderer;
 
     public static OrthographicCamera camera;
-    public static OrthographicCamera overCamera;
+    public static OrthographicCamera staticCam;
 
     public static boolean moving = false;
 
@@ -60,7 +60,7 @@ public class Main extends ApplicationAdapter {
 
     HUD hud;
 
-    Inventory inventory;
+    static Inventory inventory;
 
     boolean showInventory = false;
 
@@ -79,7 +79,7 @@ public class Main extends ApplicationAdapter {
 
         camera = new OrthographicCamera(800f, 600f);
 
-        overCamera = new OrthographicCamera(WIDTH, HEIGHT);
+        staticCam = new OrthographicCamera(WIDTH, HEIGHT);
 
         renderer = new OrthogonalTiledMapRenderer(map, PPM);
 
@@ -127,7 +127,7 @@ public class Main extends ApplicationAdapter {
         renderer.render(new int[]{4});
 
         if (showInventory){
-            batch.setProjectionMatrix(overCamera.combined);
+            batch.setProjectionMatrix(staticCam.combined);
             batch.begin();
 //        hud.update(batch);
             inventory.update(batch);

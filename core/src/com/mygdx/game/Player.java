@@ -116,8 +116,8 @@ public class Player {
     }
 
     public void receiveItem(Item item) {
-        inventory.add(item);
-        stats.put("inventory", inventory);
+        Main.inventory.addItem(item);
+//        stats.put("inventory", inventory);
     }
     public void setHealth(int hp) {
         health = hp;
