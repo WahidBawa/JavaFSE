@@ -23,7 +23,7 @@ public class Main extends ApplicationAdapter {
     SpriteBatch batch;
     public static Player player;
 
-    public static int speed = 9001;
+    public static int speed = 9001; // speed is over 9000
 
     public static int WIDTH = 1366, HEIGHT = 1024;
 
