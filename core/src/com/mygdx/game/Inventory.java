@@ -11,12 +11,13 @@ public class Inventory {
     Item[][] items = new Item[3][7];
 
     public Inventory(){
-
+//        inventory.setSize(inventory.getWidth() * Main.PPM, inventory.getHeight() * Main.PPM);
     }
 
     public void render(SpriteBatch batch){
 //        batch.draw(inventory, 0, 0, inventory.getWidth() * 0.2f, inventory.getHeight() * 0.2f);
-        batch.draw(inventory, 0, -300, inventory.getWidth() * Main.PPM * 2, inventory.getHeight() * Main.PPM * 2);
+        inventory.setPosition(0, 0);
+        inventory.draw(batch);
     }
 
     public void update(SpriteBatch batch){
@@ -32,6 +33,9 @@ public class Inventory {
                 pos++;
             }
         }
+    }
 
+    public Sprite getSprite() {
+        return inventory;
     }
 }

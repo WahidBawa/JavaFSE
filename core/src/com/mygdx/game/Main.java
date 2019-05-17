@@ -79,7 +79,7 @@ public class Main extends ApplicationAdapter {
 
         camera = new OrthographicCamera(800f, 600f);
 
-        overCamera = new OrthographicCamera(800f, 600f);
+        overCamera = new OrthographicCamera(WIDTH, HEIGHT);
 
         renderer = new OrthogonalTiledMapRenderer(map, PPM);
 
@@ -127,12 +127,15 @@ public class Main extends ApplicationAdapter {
         renderer.render(new int[]{4});
 
         if (showInventory){
-
             batch.setProjectionMatrix(overCamera.combined);
             batch.begin();
 //        hud.update(batch);
             inventory.update(batch);
             batch.end();
+
+            if (Gdx.input.isButtonPressed(0)) {
+                clickedOn(inventory);
+            }
         }
 
 //        dbr.render(world, camera.combined);
@@ -193,11 +196,6 @@ public class Main extends ApplicationAdapter {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
-//            System.out.println();
-//            for (Item item : player.getInventory()) {
-//                System.out.println(item.name);
-//            }
-//            System.out.println();
             inventory.open();
             showInventory = !showInventory;
         }
@@ -215,5 +213,21 @@ public class Main extends ApplicationAdapter {
         for (Enemy i : wc.getEnemies()) i.update(batch);
 
         for (Chest i : wc.getChests()) i.update(batch);
+    }
+
+    public void clickedOn(Inventory inv){
+        float minx = inv.getSprite().getX();
+        float miny = inv.getSprite().getY();
+        float maxx = minx + inv.getSprite().getWidth();
+        float maxy = miny + inv.getSprite().getHeight();
+
+        int mousex = Gdx.input.getX();
+        int mousey = Gdx.input.getY();
+        System.out.println("X: " + mousex +" Y: " + mousey);
+
+        if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
+            System.out.println("Clicked on the sprite.");
+            // Some reset code.
+        }
     }
 }
