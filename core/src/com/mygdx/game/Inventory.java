@@ -15,7 +15,8 @@ public class Inventory {
     }
 
     public void render(SpriteBatch batch){
-        batch.draw(inventory, 0, 0, inventory.getWidth() * 0.2f, inventory.getHeight() * 0.2f);
+//        batch.draw(inventory, 0, 0, inventory.getWidth() * 0.2f, inventory.getHeight() * 0.2f);
+        batch.draw(inventory, 0, -300, inventory.getWidth() * Main.PPM * 2, inventory.getHeight() * Main.PPM * 2);
     }
 
     public void update(SpriteBatch batch){
@@ -31,8 +32,6 @@ public class Inventory {
                 pos++;
             }
         }
-        for (int i = 0; i < 3; i++){
-            System.out.println(items[i].length);
-        }
+
     }
 }

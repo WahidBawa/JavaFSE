@@ -40,6 +40,7 @@ public class Main extends ApplicationAdapter {
     OrthogonalTiledMapRenderer renderer;
 
     public static OrthographicCamera camera;
+    public static OrthographicCamera overCamera;
 
     public static boolean moving = false;
 
@@ -61,6 +62,8 @@ public class Main extends ApplicationAdapter {
 
     Inventory inventory;
 
+    boolean showInventory = false;
+
     @Override
     public void create() {
         graphics.setWindowedMode(WIDTH, HEIGHT);
@@ -75,6 +78,8 @@ public class Main extends ApplicationAdapter {
         MAP_HEIGHT = (Integer) map.getProperties().get("height") * TILESIZE;
 
         camera = new OrthographicCamera(800f, 600f);
+
+        overCamera = new OrthographicCamera(800f, 600f);
 
         renderer = new OrthogonalTiledMapRenderer(map, PPM);
 
@@ -121,10 +126,14 @@ public class Main extends ApplicationAdapter {
 
         renderer.render(new int[]{4});
 
-        batch.begin();
+        if (showInventory){
+
+            batch.setProjectionMatrix(overCamera.combined);
+            batch.begin();
 //        hud.update(batch);
-        inventory.update(batch);
-        batch.end();
+            inventory.update(batch);
+            batch.end();
+        }
 
 //        dbr.render(world, camera.combined);
 
@@ -170,9 +179,9 @@ public class Main extends ApplicationAdapter {
 
 
         // how to implement using items in the future
-        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && player.getInventory().size() > 0) {
-            player.use(player.getInventory().get(0));
-        }
+//        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && player.getInventory().size() > 0) {
+////            player.use(player.getInventory().get(0));
+//        }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             System.out.println();
@@ -190,6 +199,7 @@ public class Main extends ApplicationAdapter {
 //            }
 //            System.out.println();
             inventory.open();
+            showInventory = !showInventory;
         }
 
         player.setX(player.body.getPosition().x);
