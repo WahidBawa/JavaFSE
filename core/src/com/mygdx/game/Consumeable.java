@@ -6,8 +6,8 @@ public class Consumeable extends Item {
     }
 
     @Override
-    public void use() {
+    public void use(Player player) {
         System.out.println("THIS IS A " + name.toUpperCase());
-        Main.player.stats.put((type.equals("HEALTH") ? "health" : "mana"), (Integer) Main.player.stats.get((type.equals("HEALTH") ? "health" : "mana")) + value);
+        player.stats.put((type.equals("HEALTH") ? "health" : "mana"), (Integer) Main.player.stats.get((type.equals("HEALTH") ? "health" : "mana")) + value);
     }
 }

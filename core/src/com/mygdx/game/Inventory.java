@@ -4,13 +4,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Inventory {
     Sprite inventory = new Sprite(new Texture("ASSETS/INVENTORY/Inventory.png"));
     Item[][] items = new Item[3][7];
+    ArrayList<Item> owo = new ArrayList<Item>();
     HashMap inventoryBlocks = new HashMap();
 
     public Inventory(){
@@ -30,17 +31,12 @@ public class Inventory {
     }
 
     public void open(){
-//        int pos = 0;
-//        for (int i = 0; i < Main.player.getInventory().size(); i++){
-//            items[pos][i - pos * 7] = Main.player.getInventory().get(i);
-//            if (i % 7 == 0){
-//                pos++;
-//            }
-//        }
+
     }
 
     public void addItem(Item item){ // will add item to the first empty spot found
         boolean itemAdded = false;
+        owo.add(item); // adds to the arraylist which makes it easier to use items for testing TEST
         HashMap tmp = new HashMap();
 
         if (inventoryBlocks.get(item.name) != null){
@@ -63,8 +59,6 @@ public class Inventory {
 
                         itemAdded = true;
 
-                        System.out.println("ITEM ADDED");
-
                         break;
                     }
                     if (itemAdded) break;
@@ -74,8 +68,24 @@ public class Inventory {
         System.out.println(inventoryBlocks);
     }
 
-    public Item[][] getItems(){
-        return items;
+    public void removeItem(Item item){
+        HashMap t = (HashMap) inventoryBlocks.get(item.name);
+        if ((Integer) t.get("Quantity") > 1){
+            t.put("Quantity", (Integer) t.get("Quantity") - 1);
+        }else if ((Integer) t.get("Quantity") == 1){
+            owo.remove(item);
+            items[(Integer) t.get("Y")][(Integer) t.get("X")] = null;
+            t.remove(item.name);
+            System.out.println(t);
+        }
+
+        inventoryBlocks.put(item.name, t);
+
+        System.out.println(inventoryBlocks);
+    }
+
+    public ArrayList<Item> getItems(){
+        return owo;
     }
 
     public Sprite getSprite() {

@@ -6,8 +6,8 @@ public class Weapon extends Item {
     }
 
     @Override
-    public void use() {
+    public void use(Player player) {
         System.out.println("THIS IS A " + name.toUpperCase());
-        Main.player.stats.put("attack", (Integer) Main.player.stats.get("attack") + value);
+        player.stats.put("attack", (Integer) Main.player.stats.get("attack") + value);
     }
 }

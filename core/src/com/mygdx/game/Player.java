@@ -156,7 +156,8 @@ public class Player {
     }
 
     public void use(Item item) {
-        item.use();
+        item.use(this);
+        Main.inventory.removeItem(item);
         inventory.remove(item);
 
     }

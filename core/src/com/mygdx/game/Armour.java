@@ -6,7 +6,7 @@ public class Armour extends Item {
     }
 
     @Override
-    public void use() {
-        Main.player.stats.put("defense", (Integer) Main.player.stats.get("defense") + value);
+    public void use(Player player) {
+        player.stats.put("defense", (Integer) Main.player.stats.get("defense") + value);
     }
 }

@@ -183,9 +183,9 @@ public class Main extends ApplicationAdapter {
 
 
         // how to implement using items in the future
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && player.getInventory().size() > 0) {
-////            player.use(player.getInventory().get(0));
-//        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && inventory.getItems().size() > 0) {
+            player.use(inventory.getItems().get(0));
+        }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             System.out.println();

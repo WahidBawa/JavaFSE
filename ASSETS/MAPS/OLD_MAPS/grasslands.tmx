@@ -217,7 +217,6 @@
   <object id="216" name="wall" x="-26.8182" y="-0.971364" width="26" height="1600.67"/>
   <object id="217" name="wall" x="666" y="510" width="20" height="30"/>
   <object id="218" name="wall" x="1009" y="862" width="20" height="30"/>
-  <object id="221" name="enemy" x="320.732" y="172.243" width="30" height="35"/>
   <object id="437" name="chest" type="3" x="867.325" y="310.029" width="61.3333" height="60">
    <properties>
     <property name="Item" value="Sword//W//ATTACK//5"/>
@@ -230,9 +229,6 @@
     <property name="chestName" value="1"/>
    </properties>
   </object>
-  <object id="439" name="enemy" x="269.889" y="260.825" width="30" height="35"/>
-  <object id="440" name="enemy" x="256.761" y="242.445" width="30" height="35"/>
-  <object id="441" name="enemy" x="243.632" y="229.316" width="30" height="35"/>
   <object id="442" name="enemy" x="222.626" y="200.434" width="30" height="35"/>
  </objectgroup>
 </map>
