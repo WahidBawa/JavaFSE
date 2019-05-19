@@ -79,7 +79,7 @@ public class Main extends ApplicationAdapter {
 
         camera = new OrthographicCamera(800f, 600f);
 
-        staticCam = new OrthographicCamera(WIDTH, HEIGHT);
+        staticCam = new OrthographicCamera(800f, 600f);
 
         renderer = new OrthogonalTiledMapRenderer(map, PPM);
 
@@ -126,6 +126,7 @@ public class Main extends ApplicationAdapter {
 
         renderer.render(new int[]{4});
 
+        staticCam.update();
         if (showInventory){
             batch.setProjectionMatrix(staticCam.combined);
             batch.begin();
