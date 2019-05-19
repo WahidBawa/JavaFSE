@@ -70,16 +70,15 @@ public class Inventory {
 
     public void removeItem(Item item){
         HashMap t = (HashMap) inventoryBlocks.get(item.name);
+        owo.remove(item);
         if ((Integer) t.get("Quantity") > 1){
             t.put("Quantity", (Integer) t.get("Quantity") - 1);
+            inventoryBlocks.put(item.name, t);
         }else if ((Integer) t.get("Quantity") == 1){
-            owo.remove(item);
             items[(Integer) t.get("Y")][(Integer) t.get("X")] = null;
-            t.remove(item.name);
-            System.out.println(t);
+            inventoryBlocks.remove(item.name);
+//            System.out.println(t);
         }
-
-        inventoryBlocks.put(item.name, t);
 
         System.out.println(inventoryBlocks);
     }
