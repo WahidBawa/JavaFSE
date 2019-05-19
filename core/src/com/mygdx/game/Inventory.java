@@ -43,10 +43,6 @@ public class Inventory {
         boolean itemAdded = false;
         HashMap tmp = new HashMap();
 
-        tmp.put("X", 0);
-        tmp.put("Y", 0);
-        tmp.put("Quantity", 0);
-
         if (inventoryBlocks.get(item.name) != null){
             HashMap t = (HashMap) inventoryBlocks.get(item.name);
             tmp.put("X", t.get("X"));
