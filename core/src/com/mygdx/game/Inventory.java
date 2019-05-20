@@ -30,8 +30,16 @@ public class Inventory {
         render(batch);
     }
 
-    public void open(){
-
+    public void open(SpriteBatch batch){
+        for (int i = 0; i < items.length; i++){
+            for (int n = 0; n < items[i].length; n++){
+                if (items[i][n] != null){
+                    Sprite tmp = items[i][n].getImg();
+                    tmp.setPosition(n * tmp.getWidth(), i * tmp.getHeight());
+                    tmp.draw(batch);
+                }
+            }
+        }
     }
 
     public void addItem(Item item){ // will add item to the first empty spot found

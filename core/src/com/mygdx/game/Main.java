@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -98,7 +99,6 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void render() {
-
         camera.zoom = PPM;
 
         world.step(1 / 60f, 6, 2);
@@ -117,6 +117,10 @@ public class Main extends ApplicationAdapter {
 
         updateWorldObjects();
 
+//        if (inventory.getItems().size() > 0){
+//            inventory.open(batch);
+//        }
+
         batch.end();
 
         movePlayer();
@@ -133,6 +137,7 @@ public class Main extends ApplicationAdapter {
             batch.begin();
 //        hud.update(batch);
             inventory.update(batch);
+            inventory.open(batch);
             batch.end();
 
             if (Gdx.input.isButtonPressed(0)) {
@@ -198,7 +203,6 @@ public class Main extends ApplicationAdapter {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
-            inventory.open();
             showInventory = !showInventory;
         }
 
