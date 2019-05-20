@@ -46,7 +46,7 @@ public class Inventory {
         owo.add(item); // adds to the arraylist which makes it easier to use items for testing TEST
         HashMap tmp = new HashMap();
 
-        if (inventoryBlocks.get(item.name) != null){
+        if (inventoryBlocks.get(item.name) != null && item.stackable){
             HashMap t = (HashMap) inventoryBlocks.get(item.name);
             tmp.put("X", t.get("X"));
             tmp.put("Y", t.get("Y"));

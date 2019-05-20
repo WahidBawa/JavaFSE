@@ -65,10 +65,12 @@ public class Chest {
             HashMap tmp;
             if (Main.consumables.get(name) != null) {
                 tmp = Main.consumables.get(name);
-                Main.player.receiveItem(new Consumable(name, (Integer) tmp.get("stat") == 1 ? "health" : "mana", (Integer) tmp.get("replenishAmount"), (Integer) tmp.get("stackable") == 1));
+//                Main.player.receiveItem(new Consumable(name, (Integer) tmp.get("stat") == 1 ? "health" : "mana", (Integer) tmp.get("replenishAmount"), (Integer) tmp.get("stackable") == 1));
+                Main.player.receiveItem(new Consumable(name, (Integer) tmp.get("stat") == 1 ? "health" : "mana", (Integer) tmp.get("replenishAmount"), true));
             } else if (Main.weapons.get(name) != null) {
                 tmp = Main.weapons.get(name);
-                Main.player.receiveItem(new Weapon(name, null, (Integer) tmp.get("damage"), (Integer) tmp.get("stackable") == 1));
+//                Main.player.receiveItem(new Weapon(name, null, (Integer) tmp.get("damage"), (Integer) tmp.get("stackable") == 1));
+                Main.player.receiveItem(new Weapon(name, null, (Integer) tmp.get("damage"), false));
             }
 //            else if (split[1].equals("A")) {
 //                Main.player.receiveItem(new Armour(split[0], split[2], Integer.parseInt(split[3])));
