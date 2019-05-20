@@ -9,6 +9,8 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
+import java.util.HashMap;
+
 public class Chest {
     boolean chestOpened = false;
 
@@ -59,13 +61,18 @@ public class Chest {
     public void open() {
         if (!chestOpened) {
             String[] split = item.split("//");
-            if (split[1].equals("C")) {
-                Main.player.receiveItem(new Consumeable(split[0], split[2], Integer.parseInt(split[3])));
-            } else if (split[1].equals("W")) {
-                Main.player.receiveItem(new Weapon(split[0], split[2], Integer.parseInt(split[3])));
-            } else if (split[1].equals("A")) {
-                Main.player.receiveItem(new Armour(split[0], split[2], Integer.parseInt(split[3])));
+            String name = split[0];
+            HashMap tmp;
+            if (Main.consumables.get(name) != null) {
+                tmp = Main.consumables.get(name);
+                Main.player.receiveItem(new Consumable(name, (Integer) tmp.get("stat") == 1 ? "health" : "mana", (Integer) tmp.get("replenishAmount"), (Integer) tmp.get("stackable") == 1));
+            } else if (Main.weapons.get(name) != null) {
+                tmp = Main.weapons.get(name);
+                Main.player.receiveItem(new Weapon(name, null, (Integer) tmp.get("damage"), (Integer) tmp.get("stackable") == 1));
             }
+//            else if (split[1].equals("A")) {
+//                Main.player.receiveItem(new Armour(split[0], split[2], Integer.parseInt(split[3])));
+//            }
         }
 
         chest.set(new Sprite(new Texture("ASSETS/CHESTS/1.png")));

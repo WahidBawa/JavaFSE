@@ -16,7 +16,11 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 import static com.badlogic.gdx.Gdx.graphics;
 
@@ -65,6 +69,9 @@ public class Main extends ApplicationAdapter {
 
     boolean showInventory = false;
 
+    public static HashMap<String, HashMap<String, Integer>> weapons;
+    public static HashMap<String, HashMap<String, Integer>> consumables;
+
     @Override
     public void create() {
         graphics.setWindowedMode(WIDTH, HEIGHT);
@@ -95,6 +102,13 @@ public class Main extends ApplicationAdapter {
         hud = new HUD();
 
         inventory = new Inventory();
+
+        try {
+            weapons = loadData("DATA/weapons.dat", true, false, false);
+            consumables = loadData("DATA/consumables.dat", false, false, true);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -236,4 +250,30 @@ public class Main extends ApplicationAdapter {
             // Some reset code.
         }
     }
+
+
+    public HashMap<String, HashMap<String, Integer>> loadData(String filePath, boolean weapon, boolean armour, boolean consumable) throws FileNotFoundException {
+        String[] str;
+        HashMap<String, HashMap<String, Integer>> data = new HashMap<String, HashMap<String, Integer>>();
+        File file = new File(filePath);
+        Scanner text = new Scanner(file);
+        text.nextLine();
+
+        while (text.hasNextLine()){
+            str = text.nextLine().split(",");
+            HashMap<String, Integer> tmp = new HashMap<String, Integer>();
+            if (consumable){
+                tmp.put("stat", Integer.parseInt(str[1]));
+                tmp.put("replenishAmount", Integer.parseInt(str[2]));
+                tmp.put("stackable", Integer.parseInt(str[3]));
+            }else if (weapon){
+                tmp.put("damage", Integer.parseInt(str[1]));
+                tmp.put("stackable", Integer.parseInt(str[2]));
+            }
+
+            data.put(str[0], tmp);
+        }
+        return data;
+    }
+
 }

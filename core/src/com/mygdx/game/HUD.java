@@ -5,13 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class HUD {
-    Sprite inventory = new Sprite(new Texture("ASSETS/INVENTORY/Inventory.png"));
     public HUD(){
 
     }
 
     public void render(SpriteBatch batch){
-        batch.draw(inventory, 0, 0, inventory.getWidth() * 0.2f / -2 , inventory.getHeight() * 0.2f / -2);
     }
 
     public void update(SpriteBatch batch){

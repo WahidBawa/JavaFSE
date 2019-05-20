@@ -7,11 +7,13 @@ public class Item {
     String name, type;
     int value;
     Sprite img;
+    boolean stackable;
 
-    public Item(String name, String type, int value) {
+    public Item(String name, String type, int value, boolean stackable) {
         this.name = name;
         this.type = type;
         this.value = value;
+        this.stackable = stackable;
         img = new Sprite(new Texture("ASSETS/INVENTORY/ITEMS/" + name + ".png"));
     }
 

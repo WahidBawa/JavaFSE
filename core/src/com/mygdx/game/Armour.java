@@ -3,8 +3,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Armour extends Item {
-    public Armour(String name, String type, int value) {
-        super(name, type, value);
+    public Armour(String name, String type, int value, boolean stackable) {
+        super(name, type, value, stackable);
     }
 
     @Override
