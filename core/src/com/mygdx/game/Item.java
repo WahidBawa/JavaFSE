@@ -18,4 +18,8 @@ public class Item {
     public void use(Player player) {
 
     }
+
+    public Sprite getImg(){
+        return img;
+    }
 }

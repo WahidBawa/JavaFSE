@@ -127,6 +127,7 @@ public class Main extends ApplicationAdapter {
         renderer.render(new int[]{4});
 
         staticCam.update();
+
         if (showInventory){
             batch.setProjectionMatrix(staticCam.combined);
             batch.begin();
@@ -139,7 +140,7 @@ public class Main extends ApplicationAdapter {
             }
         }
 
-//        dbr.render(world, camera.combined);
+//        dbr.render(world, staticCam.combined);
 
 //        fl.log();
     }
