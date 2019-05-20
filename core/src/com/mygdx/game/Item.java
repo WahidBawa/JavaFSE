@@ -12,7 +12,7 @@ public class Item {
         this.name = name;
         this.type = type;
         this.value = value;
-//        img = new Sprite(new Texture(name + ".png"));
+        img = new Sprite(new Texture("ASSETS/INVENTORY/ITEMS/" + name + ".png"));
     }
 
     public void use(Player player) {
