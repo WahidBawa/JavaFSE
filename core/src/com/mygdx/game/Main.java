@@ -247,7 +247,7 @@ public class Main extends ApplicationAdapter {
 
         int mousex = Gdx.input.getX();
         int mousey = HEIGHT - Gdx.input.getY();
-//        System.out.println("X: " + mousex +" Y: " + mousey);
+        System.out.println("X: " + mousex +" Y: " + mousey);
 
         if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
             System.out.println("Clicked on the sprite.");

@@ -34,7 +34,7 @@ public class Inventory {
             for (int n = 0; n < items[i].length; n++){
                 if (items[i][n] != null){
                     Sprite tmp = items[i][n].getImg();
-                    tmp.setPosition(n * tmp.getWidth(), i * tmp.getHeight());
+                    tmp.setPosition(30 + n * tmp.getWidth() + 4 * n, 190 - i * tmp.getHeight());
                     tmp.draw(batch);
                 }
             }
