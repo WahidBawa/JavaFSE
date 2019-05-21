@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -14,12 +15,10 @@ public class Inventory {
     HashMap inventoryBlocks = new HashMap();
 
     public Inventory(){
-//        inventory.setSize(inventory.getWidth() * Main.PPM, inventory.getHeight() * Main.PPM);
 
     }
 
     public void render(SpriteBatch batch){
-//        batch.draw(inventory, 0, 0, inventory.getWidth() * 0.2f, inventory.getHeight() * 0.2f);
         inventory.setPosition(0, 0);
         inventory.draw(batch);
     }
@@ -30,12 +29,17 @@ public class Inventory {
     }
 
     public void open(SpriteBatch batch){
+        BitmapFont font = new BitmapFont();
         for (int i = 0; i < items.length; i++){
             for (int n = 0; n < items[i].length; n++){
                 if (items[i][n] != null){
+                    HashMap t = (HashMap) inventoryBlocks.get(items[i][n].name);
                     Sprite tmp = items[i][n].getImg();
-                    tmp.setPosition(30 + n * tmp.getWidth() + 4 * n, 190 - i * tmp.getHeight());
+                    float x = 30 + n * tmp.getWidth() + 4 * n;
+                    float y = 190 - i * tmp.getWidth() - 4 * i;
+                    tmp.setPosition(x, y);
                     tmp.draw(batch);
+                    font.draw(batch, t.get("Quantity") + "", x + 50, y + 10);
                 }
             }
         }
@@ -46,7 +50,7 @@ public class Inventory {
         owo.add(item); // adds to the arraylist which makes it easier to use items for testing TEST
         HashMap tmp = new HashMap();
 
-        if (inventoryBlocks.get(item.name) != null && item.stackable){
+        if (inventoryBlocks.get(item.name) != null){
             HashMap t = (HashMap) inventoryBlocks.get(item.name);
             tmp.put("X", t.get("X"));
             tmp.put("Y", t.get("Y"));
@@ -77,7 +81,6 @@ public class Inventory {
 
     public void removeItem(Item item){
         HashMap t = (HashMap) inventoryBlocks.get(item.name);
-        owo.remove(item);
         if ((Integer) t.get("Quantity") > 1){
             t.put("Quantity", (Integer) t.get("Quantity") - 1);
             inventoryBlocks.put(item.name, t);
@@ -86,6 +89,7 @@ public class Inventory {
             inventoryBlocks.remove(item.name);
 //            System.out.println(t);
         }
+        owo.remove(item);
 
         System.out.println(inventoryBlocks);
     }
