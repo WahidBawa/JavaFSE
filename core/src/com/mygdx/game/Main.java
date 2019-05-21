@@ -153,13 +153,22 @@ public class Main extends ApplicationAdapter {
 
         if (showInventory){
             hud_batch.begin();
-//        hud.update(batch);
             inventory.update(hud_batch);
             inventory.open(hud_batch);
             hud_batch.end();
 
             if (Gdx.input.isButtonPressed(0)) {
                 clickedOn(inventory);
+                if (inventory.getItems().size() > 0){
+                    for (Item[] i : inventory.getItemArray()){
+                        for (Item n : i){
+                            if (n != null){
+
+                                clickedOn(n);
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -241,17 +250,32 @@ public class Main extends ApplicationAdapter {
 
     public void clickedOn(Inventory inv){
         float minx = inv.getSprite().getX();
-        float miny = inv.getSprite().getY();
+        float miny = inv.getSprite().getY() + inv.getSprite().getHeight() - 50;
         float maxx = minx + inv.getSprite().getWidth();
         float maxy = miny + inv.getSprite().getHeight();
 
         int mousex = Gdx.input.getX();
         int mousey = HEIGHT - Gdx.input.getY();
-        System.out.println("X: " + mousex +" Y: " + mousey);
+//        System.out.println("X: " + mousex +" Y: " + mousey);
 
         if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
-            System.out.println("Clicked on the sprite.");
-            // Some reset code.
+            System.out.println("Clicked on the inventory.");
+        }
+    }
+
+    public void clickedOn(Item item){
+        float minx = item.getImg().getX();
+        float miny = item.getImg().getY();
+        float maxx = minx + item.getImg().getWidth();
+        float maxy = miny + item.getImg().getHeight();
+
+        int mousex = Gdx.input.getX();
+        int mousey = HEIGHT - Gdx.input.getY();
+//        System.out.println("X: " + mousex +" Y: " + mousey);
+
+        if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
+            HashMap t = (HashMap) inventory.getInventoryBlocks().get(item.name);
+            System.out.println("Clicked on " + item.name + " with a quantity of " + t.get("Quantity"));
         }
     }
 

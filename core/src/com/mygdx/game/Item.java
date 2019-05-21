@@ -25,8 +25,4 @@ public abstract class Item {
     public Sprite getImg(){
         return img;
     }
-
-    public void setImg(Sprite newImg){
-        img.set(newImg);
-    }
 }

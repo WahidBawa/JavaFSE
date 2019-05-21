@@ -24,7 +24,6 @@ public class Inventory {
     }
 
     public void update(SpriteBatch batch){
-
         render(batch);
     }
 
@@ -37,8 +36,8 @@ public class Inventory {
                     Sprite tmp = items[i][n].getImg();
                     float x = 30 + n * tmp.getWidth() + 4 * n;
                     float y = 190 - i * tmp.getWidth() - 4 * i;
-                    tmp.setPosition(x, y);
-                    tmp.draw(batch);
+                    items[i][n].getImg().setPosition(x, y);
+                    items[i][n].getImg().draw(batch);
                     font.draw(batch, t.get("Quantity") + "", x + 50, y + 10);
                 }
             }
@@ -96,6 +95,14 @@ public class Inventory {
 
     public ArrayList<Item> getItems(){
         return owo;
+    }
+
+    public Item[][] getItemArray(){
+        return items;
+    }
+
+    public HashMap getInventoryBlocks(){
+        return inventoryBlocks;
     }
 
     public Sprite getSprite() {

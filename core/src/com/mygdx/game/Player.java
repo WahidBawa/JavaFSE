@@ -38,14 +38,7 @@ public class Player {
 
         loadSprites();
 
-        stats.put("health", 16);
-        stats.put("mana", 25);
-        stats.put("attack", 8);
-        stats.put("defense", 11);
-        stats.put("speed", 6);
-        stats.put("smarts", 10);
-        stats.put("inventory", inventory);
-
+        loadData();
     }
 
     private void render(SpriteBatch batch) {
@@ -58,7 +51,6 @@ public class Player {
         animationCount();
 
         player.set(new Sprite(sprites.get(Main.dir).get(pos)));
-//        System.out.println(stats.get("inventory"));
 
         this.render(batch);
     }
@@ -98,6 +90,16 @@ public class Player {
             }
             sprites.add(tmpSprites);
         }
+    }
+
+    public void loadData(){
+        stats.put("health", 16);
+        stats.put("mana", 25);
+        stats.put("attack", 8);
+        stats.put("defense", 11);
+        stats.put("speed", 6);
+        stats.put("smarts", 10);
+        stats.put("inventory", inventory);
     }
 
     public void animationCount() {
@@ -145,14 +147,6 @@ public class Player {
 
     public Body getBody() {
         return body;
-    }
-
-    public Object get(String key) {
-        return stats.get(key);
-    }
-
-    public ArrayList<Item> getInventory() {
-        return inventory;
     }
 
     public void use(Item item) {
