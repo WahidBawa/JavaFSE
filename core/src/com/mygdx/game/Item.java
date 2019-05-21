@@ -22,7 +22,7 @@ public abstract class Item {
 
     }
 
-    public Sprite getImg(){
+    public Sprite getImg() {
         return img;
     }
 }

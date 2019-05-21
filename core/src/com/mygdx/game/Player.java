@@ -92,7 +92,7 @@ public class Player {
         }
     }
 
-    public void loadData(){
+    public void loadData() {
         stats.put("health", 16);
         stats.put("mana", 25);
         stats.put("attack", 8);
@@ -121,6 +121,7 @@ public class Player {
         Main.inventory.addItem(item);
 //        stats.put("inventory", inventory);
     }
+
     public void setHealth(int hp) {
         health = hp;
     }

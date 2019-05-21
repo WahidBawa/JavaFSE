@@ -14,24 +14,24 @@ public class Inventory {
     ArrayList<Item> owo = new ArrayList<Item>();
     HashMap inventoryBlocks = new HashMap();
 
-    public Inventory(){
+    public Inventory() {
 
     }
 
-    public void render(SpriteBatch batch){
+    public void render(SpriteBatch batch) {
         inventory.setPosition(0, 0);
         inventory.draw(batch);
     }
 
-    public void update(SpriteBatch batch){
+    public void update(SpriteBatch batch) {
         render(batch);
     }
 
-    public void open(SpriteBatch batch){
+    public void open(SpriteBatch batch) {
         BitmapFont font = new BitmapFont();
-        for (int i = 0; i < items.length; i++){
-            for (int n = 0; n < items[i].length; n++){
-                if (items[i][n] != null){
+        for (int i = 0; i < items.length; i++) {
+            for (int n = 0; n < items[i].length; n++) {
+                if (items[i][n] != null) {
                     HashMap t = (HashMap) inventoryBlocks.get(items[i][n].name);
                     Sprite tmp = items[i][n].getImg();
                     float x = 30 + n * tmp.getWidth() + 4 * n;
@@ -44,21 +44,21 @@ public class Inventory {
         }
     }
 
-    public void addItem(Item item){ // will add item to the first empty spot found
+    public void addItem(Item item) { // will add item to the first empty spot found
         boolean itemAdded = false;
         owo.add(item); // adds to the arraylist which makes it easier to use items for testing TEST
         HashMap tmp = new HashMap();
 
-        if (inventoryBlocks.get(item.name) != null){
+        if (inventoryBlocks.get(item.name) != null) {
             HashMap t = (HashMap) inventoryBlocks.get(item.name);
             tmp.put("X", t.get("X"));
             tmp.put("Y", t.get("Y"));
             tmp.put("Quantity", (Integer) t.get("Quantity") + 1);
             inventoryBlocks.put(item.name, tmp);
-        }else{
-            for (int i = 0; i < items.length; i++){
-                for (int n = 0; n < items[i].length; n++){
-                    if (items[i][n] == null && !itemAdded){
+        } else {
+            for (int i = 0; i < items.length; i++) {
+                for (int n = 0; n < items[i].length; n++) {
+                    if (items[i][n] == null && !itemAdded) {
                         items[i][n] = item;
 
                         tmp.put("X", n);
@@ -78,12 +78,12 @@ public class Inventory {
         System.out.println(inventoryBlocks);
     }
 
-    public void removeItem(Item item){
+    public void removeItem(Item item) {
         HashMap t = (HashMap) inventoryBlocks.get(item.name);
-        if ((Integer) t.get("Quantity") > 1){
+        if ((Integer) t.get("Quantity") > 1) {
             t.put("Quantity", (Integer) t.get("Quantity") - 1);
             inventoryBlocks.put(item.name, t);
-        }else if ((Integer) t.get("Quantity") == 1){
+        } else if ((Integer) t.get("Quantity") == 1) {
             items[(Integer) t.get("Y")][(Integer) t.get("X")] = null;
             inventoryBlocks.remove(item.name);
 //            System.out.println(t);
@@ -93,15 +93,15 @@ public class Inventory {
         System.out.println(inventoryBlocks);
     }
 
-    public ArrayList<Item> getItems(){
+    public ArrayList<Item> getItems() {
         return owo;
     }
 
-    public Item[][] getItemArray(){
+    public Item[][] getItemArray() {
         return items;
     }
 
-    public HashMap getInventoryBlocks(){
+    public HashMap getInventoryBlocks() {
         return inventoryBlocks;
     }
 

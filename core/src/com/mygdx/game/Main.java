@@ -143,7 +143,7 @@ public class Main extends ApplicationAdapter {
         batch.end();
 
         movePlayer();
-        for(Enemy enemy : wc.getEnemies()) {
+        for (Enemy enemy : wc.getEnemies()) {
             enemy.move(player);
         }
 
@@ -151,7 +151,7 @@ public class Main extends ApplicationAdapter {
 
         staticCam.update();
 
-        if (showInventory){
+        if (showInventory) {
             hud_batch.begin();
             inventory.update(hud_batch);
             inventory.open(hud_batch);
@@ -159,10 +159,10 @@ public class Main extends ApplicationAdapter {
 
             if (Gdx.input.isButtonPressed(0)) {
                 clickedOn(inventory);
-                if (inventory.getItems().size() > 0){
-                    for (Item[] i : inventory.getItemArray()){
-                        for (Item n : i){
-                            if (n != null){
+                if (inventory.getItems().size() > 0) {
+                    for (Item[] i : inventory.getItemArray()) {
+                        for (Item n : i) {
+                            if (n != null) {
 
                                 clickedOn(n);
                             }
@@ -184,7 +184,7 @@ public class Main extends ApplicationAdapter {
     }
 
     public void movePlayer() {
-        player.getBody().setLinearVelocity(0,0);
+        player.getBody().setLinearVelocity(0, 0);
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
             player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
@@ -248,7 +248,7 @@ public class Main extends ApplicationAdapter {
         for (Chest i : wc.getChests()) i.update(batch);
     }
 
-    public void clickedOn(Inventory inv){
+    public void clickedOn(Inventory inv) {
         float minx = inv.getSprite().getX();
         float miny = inv.getSprite().getY() + inv.getSprite().getHeight() - 50;
         float maxx = minx + inv.getSprite().getWidth();
@@ -263,7 +263,7 @@ public class Main extends ApplicationAdapter {
         }
     }
 
-    public void clickedOn(Item item){
+    public void clickedOn(Item item) {
         float minx = item.getImg().getX();
         float miny = item.getImg().getY();
         float maxx = minx + item.getImg().getWidth();
@@ -287,14 +287,14 @@ public class Main extends ApplicationAdapter {
         Scanner text = new Scanner(file);
         text.nextLine();
 
-        while (text.hasNextLine()){
+        while (text.hasNextLine()) {
             str = text.nextLine().split(",");
             HashMap<String, Integer> tmp = new HashMap<String, Integer>();
-            if (consumable){
+            if (consumable) {
                 tmp.put("stat", Integer.parseInt(str[1]));
                 tmp.put("replenishAmount", Integer.parseInt(str[2]));
                 tmp.put("stackable", Integer.parseInt(str[3]));
-            }else if (weapon){
+            } else if (weapon) {
                 tmp.put("damage", Integer.parseInt(str[1]));
                 tmp.put("stackable", Integer.parseInt(str[2]));
             }

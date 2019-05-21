@@ -22,8 +22,8 @@ public class CollisionListener implements ContactListener {
             Main.chestCollide = true;
             objs.add(contact.getFixtureB());
         }
-        if (contact.getFixtureA().getUserData() == "PLAYER"  && contact.getFixtureB().getUserData() == "ENEMY") {
-            ((Enemy)contact.getFixtureB().getBody().getUserData()).attack(player);
+        if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData() == "ENEMY") {
+            ((Enemy) contact.getFixtureB().getBody().getUserData()).attack(player);
         }
         Main.objs = objs;
     }
