@@ -26,6 +26,7 @@ import static com.badlogic.gdx.Gdx.graphics;
 
 public class Main extends ApplicationAdapter {
     SpriteBatch batch;
+    SpriteBatch hud_batch;
     public static Player player;
 
     public static int speed = 9001; // speed is over 9000
@@ -87,11 +88,15 @@ public class Main extends ApplicationAdapter {
 
         camera = new OrthographicCamera(800f, 600f);
 
-        staticCam = new OrthographicCamera(800f, 600f);
+        staticCam = new OrthographicCamera(800, 600);
+
+        staticCam.translate(staticCam.viewportWidth / 2, staticCam.viewportHeight / 2);
 
         renderer = new OrthogonalTiledMapRenderer(map, PPM);
 
         batch = new SpriteBatch();
+
+        hud_batch = new SpriteBatch();
 
         wc = new WorldCreator(world, map);
 
@@ -147,19 +152,18 @@ public class Main extends ApplicationAdapter {
         staticCam.update();
 
         if (showInventory){
-            batch.setProjectionMatrix(staticCam.combined);
-            batch.begin();
+            hud_batch.begin();
 //        hud.update(batch);
-            inventory.update(batch);
-            inventory.open(batch);
-            batch.end();
+            inventory.update(hud_batch);
+            inventory.open(hud_batch);
+            hud_batch.end();
 
             if (Gdx.input.isButtonPressed(0)) {
                 clickedOn(inventory);
             }
         }
 
-//        dbr.render(world, staticCam.combined);
+//        dbr.render(world, camera.combined);
 
 //        fl.log();
     }
@@ -242,8 +246,8 @@ public class Main extends ApplicationAdapter {
         float maxy = miny + inv.getSprite().getHeight();
 
         int mousex = Gdx.input.getX();
-        int mousey = Gdx.input.getY();
-        System.out.println("X: " + mousex +" Y: " + mousey);
+        int mousey = HEIGHT - Gdx.input.getY();
+//        System.out.println("X: " + mousex +" Y: " + mousey);
 
         if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
             System.out.println("Clicked on the sprite.");
