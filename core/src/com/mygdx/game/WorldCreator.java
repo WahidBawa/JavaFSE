@@ -24,7 +24,7 @@ public class WorldCreator {
                     FixtureDef def = new FixtureDef();
                     PolygonShape shape = new PolygonShape();
 
-                    bdef.type = (obj.getName().equals("enemy") ? BodyDef.BodyType.DynamicBody : BodyDef.BodyType.StaticBody);
+                    bdef.type = BodyDef.BodyType.StaticBody;
 
                     bdef.position.set(rect.getX() * Main.PPM + rect.getWidth() / 2 * Main.PPM, rect.getY() * Main.PPM + rect.getHeight() / 2 * Main.PPM);
 
@@ -41,8 +41,7 @@ public class WorldCreator {
 
                 if (name.equals("wall")) walls.add(body);
                 else if (name.equals("enemy")) enemies.add(new Enemy(rect));
-                else if (name.equals("chest"))
-                    chests.add(new Chest(rect, (String) obj.getProperties().get("chestName"), (String) obj.getProperties().get("Item")));
+                else if (name.equals("chest")) chests.add(new Chest(rect, (String) obj.getProperties().get("chestName"), (String) obj.getProperties().get("Item")));
 
                 for (Fixture f : body.getFixtureList()) {
                     f.setUserData(1);

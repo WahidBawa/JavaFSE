@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -34,8 +35,14 @@ public class Inventory {
                 if (items[i][n] != null) {
                     HashMap t = (HashMap) inventoryBlocks.get(items[i][n].name);
                     Sprite tmp = items[i][n].getImg();
-                    float x = 30 + n * tmp.getWidth() + 4 * n;
-                    float y = 190 - i * tmp.getWidth() - 4 * i;
+
+                    float x = Gdx.input.getX() - items[i][n].getImg().getWidth() / 2;
+                    float y = Main.HEIGHT - Gdx.input.getY() - items[i][n].getImg().getHeight() / 2;
+
+                    if (!items[i][n].dragged){
+                        x = 30 + n * tmp.getWidth() + 4 * n;
+                        y = 190 - i * tmp.getWidth() - 4 * i;
+                    }
                     items[i][n].getImg().setPosition(x, y);
                     items[i][n].getImg().draw(batch);
                     font.draw(batch, t.get("Quantity") + "", x + 50, y + 10);

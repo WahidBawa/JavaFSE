@@ -6,7 +6,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -136,10 +135,6 @@ public class Main extends ApplicationAdapter {
 
         updateWorldObjects();
 
-//        if (inventory.getItems().size() > 0){
-//            inventory.open(batch);
-//        }
-
         batch.end();
 
         movePlayer();
@@ -159,17 +154,20 @@ public class Main extends ApplicationAdapter {
 
             if (Gdx.input.isButtonPressed(0)) {
                 clickedOn(inventory);
-                if (inventory.getItems().size() > 0) {
-                    for (Item[] i : inventory.getItemArray()) {
-                        for (Item n : i) {
-                            if (n != null) {
-
-                                clickedOn(n);
-                            }
+            }
+            if (inventory.getItems().size() > 0) {
+                for (Item[] i : inventory.getItemArray()) {
+                    for (Item n : i) {
+                        if (n != null) {
+                            clickedOn(n);
                         }
                     }
                 }
             }
+//            if (Gdx.input.isButtonPressed(0) || Gdx.input.isButtonPressed(1)){
+//            }else if (!Gdx.input.isButtonPressed(0)){
+//
+//            }
         }
 
 //        dbr.render(world, camera.combined);
@@ -274,8 +272,27 @@ public class Main extends ApplicationAdapter {
 //        System.out.println("X: " + mousex +" Y: " + mousey);
 
         if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
-            HashMap t = (HashMap) inventory.getInventoryBlocks().get(item.name);
-            System.out.println("Clicked on " + item.name + " with a quantity of " + t.get("Quantity"));
+            if (Gdx.input.isButtonPressed(0)){
+                HashMap t = (HashMap) inventory.getInventoryBlocks().get(item.name);
+                System.out.println("Clicked on " + item.name + " with a quantity of " + t.get("Quantity"));
+                boolean otherDrag = false;
+                for (Item[] i : inventory.getItemArray()){
+                    for (Item n : i){
+                        if (n != null && n.dragged){
+                            otherDrag = true;
+                        }
+                    }
+                }
+
+                if (!otherDrag) item.dragged = true;
+
+            }else if (Gdx.input.isButtonPressed(1)){
+//                player.use(inventory.getItems().get(0));
+                player.use(item);
+                System.out.println("item used");
+            }else{
+                item.dragged = false;
+            }
         }
     }
 
