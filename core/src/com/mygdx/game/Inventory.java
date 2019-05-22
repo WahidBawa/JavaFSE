@@ -16,11 +16,10 @@ public class Inventory {
     HashMap inventoryBlocks = new HashMap();
 
     public Inventory() {
-
+        inventory.setPosition(0, 0);
     }
 
     public void render(SpriteBatch batch) {
-        inventory.setPosition(0, 0);
         inventory.draw(batch);
     }
 
@@ -40,8 +39,8 @@ public class Inventory {
                     float y = Main.HEIGHT - Gdx.input.getY() - items[i][n].getImg().getHeight() / 2;
 
                     if (!items[i][n].dragged){
-                        x = 30 + n * tmp.getWidth() + 4 * n;
-                        y = 190 - i * tmp.getWidth() - 4 * i;
+                        x = (30 + n * tmp.getWidth() + 4 * n) + Main.inventory.getSprite().getX();
+                        y = (190 - i * tmp.getWidth() - 4 * i) + Main.inventory.getSprite().getY();
                     }
                     items[i][n].getImg().setPosition(x, y);
                     items[i][n].getImg().draw(batch);

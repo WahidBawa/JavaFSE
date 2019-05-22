@@ -9,6 +9,7 @@ public abstract class Item {
     Sprite img;
     boolean stackable;
     boolean dragged = false;
+    boolean used = false;
 
     public Item(String name, String type, int value, boolean stackable) {
         this.name = name;

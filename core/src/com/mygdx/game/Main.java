@@ -65,9 +65,12 @@ public class Main extends ApplicationAdapter {
 
     HUD hud;
 
-    static Inventory inventory;
-
+    public static Inventory inventory;
     boolean showInventory = false;
+    boolean invDrag = false;
+    boolean useItem = false;
+    int xDragOffset = 0;
+    int yDragOffset = 0;
 
     public static HashMap<String, HashMap<String, Integer>> weapons;
     public static HashMap<String, HashMap<String, Integer>> consumables;
@@ -86,10 +89,6 @@ public class Main extends ApplicationAdapter {
         MAP_HEIGHT = (Integer) map.getProperties().get("height") * TILESIZE;
 
         camera = new OrthographicCamera(800f, 600f);
-
-        staticCam = new OrthographicCamera(800, 600);
-
-        staticCam.translate(staticCam.viewportWidth / 2, staticCam.viewportHeight / 2);
 
         renderer = new OrthogonalTiledMapRenderer(map, PPM);
 
@@ -144,17 +143,15 @@ public class Main extends ApplicationAdapter {
 
         renderer.render(new int[]{4});
 
-        staticCam.update();
-
         if (showInventory) {
             hud_batch.begin();
             inventory.update(hud_batch);
             inventory.open(hud_batch);
             hud_batch.end();
 
-            if (Gdx.input.isButtonPressed(0)) {
+//            if (Gdx.input.isButtonPressed(0)) {
                 clickedOn(inventory);
-            }
+//            }
             if (inventory.getItems().size() > 0) {
                 for (Item[] i : inventory.getItemArray()) {
                     for (Item n : i) {
@@ -248,16 +245,25 @@ public class Main extends ApplicationAdapter {
 
     public void clickedOn(Inventory inv) {
         float minx = inv.getSprite().getX();
-        float miny = inv.getSprite().getY() + inv.getSprite().getHeight() - 50;
+        float miny = inv.getSprite().getY() + inv.getSprite().getHeight() - 75;
         float maxx = minx + inv.getSprite().getWidth();
         float maxy = miny + inv.getSprite().getHeight();
 
         int mousex = Gdx.input.getX();
         int mousey = HEIGHT - Gdx.input.getY();
 //        System.out.println("X: " + mousex +" Y: " + mousey);
-
-        if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
-            System.out.println("Clicked on the inventory.");
+        if (Gdx.input.isButtonPressed(0)){
+            if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
+                System.out.println("Clicked on the inventory.");
+                if (!invDrag) { // YOU NEED TO USE MOUSE UP TO RESET INV DRAG, SO IMPLEMENT THE INPUT PROCESSOR HOE
+                    xDragOffset = Math.abs(mousex - (int) minx);
+                    yDragOffset = Math.abs(mousey - (int) miny);
+                    invDrag = true;
+                }
+                inventory.getSprite().setPosition(mousex - xDragOffset, mousey - inv.getSprite().getHeight() + 25);
+            }
+        }else{
+            invDrag = false;
         }
     }
 
@@ -286,13 +292,20 @@ public class Main extends ApplicationAdapter {
 
                 if (!otherDrag) item.dragged = true;
 
-            }else if (Gdx.input.isButtonPressed(1)){
-//                player.use(inventory.getItems().get(0));
-                player.use(item);
-                System.out.println("item used");
             }else{
                 item.dragged = false;
             }
+
+            if (Gdx.input.isButtonPressed(1)){item.used = true;} // working on this shit still
+            else {
+                if (item.used){
+                    player.use(item);
+                    System.out.println("item used");
+                }
+            }
+
+        }else{
+            item.used = false;
         }
     }
 
