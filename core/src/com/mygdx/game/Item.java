@@ -16,7 +16,7 @@ public abstract class Item {
         this.type = type;
         this.value = value;
         this.stackable = stackable;
-        img = new Sprite(new Texture("ASSETS/INVENTORY/ITEMS/" + name + ".png"));
+        img = new Sprite(new Texture("ASSETS/UI/INVENTORY/ITEMS/" + name + ".png"));
         img.setSize(60, 60);
     }
 

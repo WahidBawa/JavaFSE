@@ -168,7 +168,7 @@ public class Main extends ApplicationAdapter {
 //            }
         }
 
-        dbr.render(world, camera.combined);
+//        dbr.render(world, camera.combined);
 
 //        fl.log();
     }

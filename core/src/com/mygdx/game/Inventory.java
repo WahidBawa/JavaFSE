@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Inventory {
-    Sprite inventory = new Sprite(new Texture("ASSETS/INVENTORY/Inventory.png"));
+    Sprite inventory = new Sprite(new Texture("ASSETS/UI/INVENTORY/Inventory.png"));
     Item[][] items = new Item[3][7];
     ArrayList<Item> owo = new ArrayList<Item>();
     HashMap inventoryBlocks = new HashMap();
