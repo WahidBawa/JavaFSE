@@ -167,7 +167,7 @@ public class Main extends ApplicationAdapter {
 //            }
         }
 
-//        dbr.render(world, camera.combined);
+        dbr.render(world, camera.combined);
 
 //        fl.log();
     }
@@ -237,6 +237,8 @@ public class Main extends ApplicationAdapter {
 
     public void updateWorldObjects() {
         player.update(batch);
+
+        for (NPC i : wc.getNpcs()) i.update(batch);
 
         for (Enemy i : wc.getEnemies()) i.update(batch);
 

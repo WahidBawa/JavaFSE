@@ -14,6 +14,7 @@ public class WorldCreator {
     ArrayList<Body> walls = new ArrayList<Body>();
     ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     ArrayList<Chest> chests = new ArrayList<Chest>();
+    ArrayList<NPC> npcs = new ArrayList<NPC>();
 
     public WorldCreator(World world, TiledMap map) {
         for (int i = 0; i < map.getLayers().getCount(); i++) {
@@ -42,7 +43,7 @@ public class WorldCreator {
                 if (name.equals("wall")) walls.add(body);
                 else if (name.equals("enemy")) enemies.add(new Enemy(rect));
                 else if (name.equals("chest")) chests.add(new Chest(rect, (String) obj.getProperties().get("chestName"), (String) obj.getProperties().get("Item")));
-//                else if (name.equals("npc"))
+                else if (name.equals("NPC")) npcs.add(new NPC(rect, (String) obj.getProperties().get("Name"), (String) obj.getProperties().get("Dialogue"), (String) obj.getProperties().get("Item")));
 
                 for (Fixture f : body.getFixtureList()) {
                     f.setUserData(1);
@@ -61,5 +62,9 @@ public class WorldCreator {
 
     public ArrayList<Chest> getChests() {
         return chests;
+    }
+
+    public ArrayList<NPC> getNpcs() {
+        return npcs;
     }
 }

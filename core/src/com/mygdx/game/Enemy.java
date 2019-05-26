@@ -22,13 +22,14 @@ import java.util.Random;
 public class Enemy {
     float speed = 6;
 //    Sprite enemy = new Sprite(new Texture("ASSETS/SPRITES/goose.jpg"));
-    Sprite enemy = new Sprite(new Texture("ASSETS/ENEMIES/purple_bird/DOWN/1.png"));
+    Sprite enemy = new Sprite(new Texture("ASSETS/SPRITES/ENEMIES/purple_bird/DOWN/1.png"));
     Body body;
     Random rand = new Random();
 
 
     public Enemy(Rectangle rect) {
         enemy.setPosition(rect.x, rect.y);
+        enemy.setSize(enemy.getWidth() * 2, enemy.getHeight() * 2);
         createBody();
     }
 
