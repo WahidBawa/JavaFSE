@@ -83,6 +83,7 @@ public class Enemy {
 
     public void attack(Player player) {
         player.setHealth(player.getHealth() - 5);
+        System.out.println(player.health);
     }
 
     public float getX() {

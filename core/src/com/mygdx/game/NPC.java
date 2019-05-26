@@ -47,7 +47,11 @@ public class NPC {
 
         this.body.createFixture(def);
 
-        this.body.getFixtureList().get(0).setUserData("NPC");
+        this.body.getFixtureList().get(0).setUserData(this);
 
+    }
+
+    public void talk(){
+        System.out.println(dialogue);
     }
 }

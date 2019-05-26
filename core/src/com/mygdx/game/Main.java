@@ -57,6 +57,7 @@ public class Main extends ApplicationAdapter {
     public static int dir = DOWN;
 
     public static boolean chestCollide = false;
+    public static boolean npcCollide = false;
     FPSLogger fl = new FPSLogger();
 
     public static ArrayList<Fixture> objs = new ArrayList<Fixture>();
@@ -202,13 +203,18 @@ public class Main extends ApplicationAdapter {
             moving = false;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && chestCollide) {
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide)) {
             for (Fixture i : objs) {
-                Chest c = (Chest) i.getUserData();
-                c.open();
+                if (i.getUserData().getClass() == Chest.class){
+                    Chest c = (Chest) i.getUserData();
+                    c.open();
+                }
+                if (i.getUserData().getClass() == NPC.class){
+                    NPC npc = (NPC) i.getUserData();
+                    npc.talk();
+                }
             }
         }
-
 
         // how to implement using items in the future
         if (Gdx.input.isKeyJustPressed(Input.Keys.X) && inventory.getItems().size() > 0) {
