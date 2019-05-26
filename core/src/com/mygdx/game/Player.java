@@ -73,7 +73,6 @@ public class Player {
         this.body.createFixture(fdef);
 
         this.body.getFixtureList().get(0).setUserData("PLAYER");
-        this.body.getFixtureList().get(0).setUserData("PLAYER");
 
         this.body.setTransform((float) rect.getX() * Main.PPM, (float) rect.getY() * Main.PPM, 0);
         MassData thiccc = new MassData();

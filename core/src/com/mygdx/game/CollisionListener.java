@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ public class CollisionListener implements ContactListener {
         if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData() == "ENEMY") {
             ((Enemy) contact.getFixtureB().getBody().getUserData()).attack(player);
         }
+
         Main.objs = objs;
     }
 

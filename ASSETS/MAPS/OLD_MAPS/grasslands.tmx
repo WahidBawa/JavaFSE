@@ -184,7 +184,7 @@
     <property name="item" value="Secret Journal"/>
    </properties>
   </object>
-  <object id="197" name="NPC" type="1" x="390" y="814" width="20" height="30">
+  <object id="197" name="NPC" type="1" x="295.6" y="966" width="20" height="30">
    <properties>
     <property name="Dialogue" value="HALLLOO"/>
     <property name="Name" value="Stupid Boy"/>
