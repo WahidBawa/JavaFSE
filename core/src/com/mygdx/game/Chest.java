@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -13,10 +15,14 @@ import java.util.HashMap;
 
 public class Chest {
     boolean chestOpened = false;
+    boolean textFinished = false;
 
     Sprite chest = new Sprite(new Texture("ASSETS/CHESTS/0.png"));
     Body body;
     Rectangle rect;
+
+    BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
+
 
     String name, item;
 
@@ -59,17 +65,15 @@ public class Chest {
     }
 
     public void open() {
+        String[] split = item.split("//");
+        String name = split[0];
+        HashMap tmp;
         if (!chestOpened) {
-            String[] split = item.split("//");
-            String name = split[0];
-            HashMap tmp;
             if (Main.consumables.get(name) != null) {
                 tmp = Main.consumables.get(name);
-//                Main.player.receiveItem(new Consumable(name, (Integer) tmp.get("stat") == 1 ? "health" : "mana", (Integer) tmp.get("replenishAmount"), (Integer) tmp.get("stackable") == 1));
                 Main.player.receiveItem(new Consumable(name, (Integer) tmp.get("stat") == 1 ? "health" : "mana", (Integer) tmp.get("replenishAmount"), true));
             } else if (Main.weapons.get(name) != null) {
                 tmp = Main.weapons.get(name);
-//                Main.player.receiveItem(new Weapon(name, null, (Integer) tmp.get("damage"), (Integer) tmp.get("stackable") == 1));
                 Main.player.receiveItem(new Weapon(name, null, (Integer) tmp.get("damage"), false));
             }
 //            else if (split[1].equals("A")) {
@@ -79,5 +83,6 @@ public class Chest {
 
         chest.set(new Sprite(new Texture("ASSETS/CHESTS/1.png")));
         chestOpened = true;
+        textFinished = chestOpened;
     }
 }

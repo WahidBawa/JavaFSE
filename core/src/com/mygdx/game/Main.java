@@ -74,12 +74,14 @@ public class Main extends ApplicationAdapter {
     int xDragOffset = 0;
     int yDragOffset = 0;
 
-    public static boolean talking = false;
+    public static boolean displayText = false;
+    public static String type = null;
 
     public static HashMap<String, HashMap<String, Integer>> weapons;
     public static HashMap<String, HashMap<String, Integer>> consumables;
 
     NPC currNpc;
+    Chest currChest;
 
     @Override
     public void create() {
@@ -142,7 +144,7 @@ public class Main extends ApplicationAdapter {
 
         batch.end();
 
-        if (!talking){
+        if (!displayText) {
             movePlayer();
             for (Enemy enemy : wc.getEnemies()) {
                 enemy.move(player);
@@ -151,7 +153,7 @@ public class Main extends ApplicationAdapter {
 
         renderer.render(new int[]{4});
 
-        if (showInventory && !talking) {
+        if (showInventory && !displayText) {
             hud_batch.begin();
             inventory.update(hud_batch);
             inventory.open(hud_batch);
@@ -174,13 +176,17 @@ public class Main extends ApplicationAdapter {
 //
 //            }
         }
-        if (talking) {
-            System.out.println("TALKING");
+        if (displayText) {
             hud_batch.begin();
-            currNpc.talk(hud_batch);
+            if (type.equals("npc")) {
+                currNpc.talk(hud_batch);
+            } else if (type.equals("chest")) {
+                currChest.open();
+            }
             hud_batch.end();
+
             if (Gdx.input.isKeyPressed(Input.Keys.X)) {
-                talking = false;
+                displayText = false;
             }
         }
 
@@ -222,12 +228,16 @@ public class Main extends ApplicationAdapter {
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide)) {
             for (Fixture i : objs) {
                 if (i.getUserData().getClass() == Chest.class) {
-                    Chest c = (Chest) i.getUserData();
-                    c.open();
+                    currChest = (Chest) i.getUserData();
+                    if (!currChest.textFinished){
+                        type = "chest";
+                        displayText = true;
+                    }
                 }
                 if (i.getUserData().getClass() == NPC.class) {
                     currNpc = (NPC) i.getUserData();
-                    talking = true;
+                    type = "npc";
+                    displayText = true;
                 }
             }
         }
