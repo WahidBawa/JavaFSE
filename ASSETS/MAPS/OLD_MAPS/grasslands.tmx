@@ -144,16 +144,9 @@
   </object>
   <object id="181" name="NPC" type="1" x="228" y="1115" width="20" height="30">
    <properties>
-    <property name="Dialogue" value="Well, Hello There.//Guud Afternuun.//My name is Mrs.Lozo!//I am the teacher infamous for not teaching but just doing//it is a common trait of the people back in serbia#Here is some Physics Homework and Failing Grade"/>
+    <property name="Dialogue" value="Well, Hello There.//Guud Afternuun.//My name is Mrs.Lozo!//I am the teacher infamous for not teaching but just doing//it is a common trait of the people back in serbia#Here is some Potion to keep you alive in class"/>
     <property name="Name" value="Village Child Lozo"/>
-    <property name="item" value="Physics Homework // Failing Grade"/>
-   </properties>
-  </object>
-  <object id="194" name="NPC" type="2" x="931" y="157" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="Shhhh... Nobody knows about this spot # Here take this, if I give you this you have to keep my secret! // This is a book of legends! # Never show anybody this piece of godliness. // This is the Guide To Do Collision Tutorial."/>
-    <property name="Name" value="Hidden Boy"/>
-    <property name="item" value="Guide To Do Collision // Computer // Brain"/>
+    <property name="item" value="Potion"/>
    </properties>
   </object>
   <object id="195" name="Quest_NPC" type="2" x="248" y="781" width="20" height="30">

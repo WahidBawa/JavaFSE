@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class NPC {
     Body body;
@@ -80,6 +81,13 @@ public class NPC {
     public void talk(SpriteBatch batch) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if (dialoguePage == allText.size() - 1 && pageLine == allText.get(dialoguePage).size() - 1) {
+                HashMap tmp = (Main.weapons.get(item) != null ? Main.weapons.get(item) : Main.consumables.get(item));
+                if (Main.consumables.get(item) != null) {
+                    Main.player.receiveItem(new Consumable(item, (Integer) tmp.get("stat") == 1 ? "health" : "mana", (Integer) tmp.get("replenishAmount"), true));
+                } else if (Main.weapons.get(item) != null) {
+                    Main.player.receiveItem(new Weapon(item, null, (Integer) tmp.get("damage"), false));
+                }
+
                 textFinished = true;
             }
             if (!textFinished) {
