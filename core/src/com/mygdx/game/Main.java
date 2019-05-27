@@ -223,7 +223,7 @@ public class Main extends ApplicationAdapter {
             moving = false;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide) && !moving) {
             for (Fixture i : objs) {
                 if (i.getUserData().getClass() == Chest.class) {
                     currChest = (Chest) i.getUserData();
