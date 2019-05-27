@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -9,12 +11,14 @@ import com.badlogic.gdx.physics.box2d.*;
 public class NPC {
     Body body;
     Sprite npc = new Sprite(new Texture("ASSETS/SPRITES/NPC/0/DOWN.png"));
+    Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box1.png"));
     String name, dialogue, item;
     public NPC(Rectangle rect, String name, String dialogue, String item){
         this.name = name;
         this.dialogue = dialogue;
         this.item = item;
-        System.out.println("UEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+        textBox.setPosition(0, 0);
+        textBox.setSize(Main.WIDTH, textBox.getHeight());
         npc.setPosition(rect.getX(), rect.getY());
         npc.setSize(npc.getWidth() * 2, npc.getHeight() * 2);
         createBody();
@@ -51,7 +55,8 @@ public class NPC {
 
     }
 
-    public void talk(){
-        System.out.println(dialogue);
+    public void talk(SpriteBatch batch){
+//        System.out.println(dialogue);
+        textBox.draw(batch);
     }
 }

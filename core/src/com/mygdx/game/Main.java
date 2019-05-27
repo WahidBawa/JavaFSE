@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -73,8 +74,12 @@ public class Main extends ApplicationAdapter {
     int xDragOffset = 0;
     int yDragOffset = 0;
 
+    public static boolean talking = false;
+
     public static HashMap<String, HashMap<String, Integer>> weapons;
     public static HashMap<String, HashMap<String, Integer>> consumables;
+
+    NPC currNpc;
 
     @Override
     public void create() {
@@ -137,21 +142,23 @@ public class Main extends ApplicationAdapter {
 
         batch.end();
 
-        movePlayer();
-        for (Enemy enemy : wc.getEnemies()) {
-            enemy.move(player);
+        if (!talking){
+            movePlayer();
+            for (Enemy enemy : wc.getEnemies()) {
+                enemy.move(player);
+            }
         }
 
         renderer.render(new int[]{4});
 
-        if (showInventory) {
+        if (showInventory && !talking) {
             hud_batch.begin();
             inventory.update(hud_batch);
             inventory.open(hud_batch);
             hud_batch.end();
 
 //            if (Gdx.input.isButtonPressed(0)) {
-                clickedOn(inventory);
+            clickedOn(inventory);
 //            }
             if (inventory.getItems().size() > 0) {
                 for (Item[] i : inventory.getItemArray()) {
@@ -166,6 +173,15 @@ public class Main extends ApplicationAdapter {
 //            }else if (!Gdx.input.isButtonPressed(0)){
 //
 //            }
+        }
+        if (talking) {
+            System.out.println("TALKING");
+            hud_batch.begin();
+            currNpc.talk(hud_batch);
+            hud_batch.end();
+            if (Gdx.input.isKeyPressed(Input.Keys.X)) {
+                talking = false;
+            }
         }
 
 //        dbr.render(world, camera.combined);
@@ -205,13 +221,13 @@ public class Main extends ApplicationAdapter {
 
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide)) {
             for (Fixture i : objs) {
-                if (i.getUserData().getClass() == Chest.class){
+                if (i.getUserData().getClass() == Chest.class) {
                     Chest c = (Chest) i.getUserData();
                     c.open();
                 }
-                if (i.getUserData().getClass() == NPC.class){
-                    NPC npc = (NPC) i.getUserData();
-                    npc.talk();
+                if (i.getUserData().getClass() == NPC.class) {
+                    currNpc = (NPC) i.getUserData();
+                    talking = true;
                 }
             }
         }
@@ -260,7 +276,7 @@ public class Main extends ApplicationAdapter {
         int mousex = Gdx.input.getX();
         int mousey = HEIGHT - Gdx.input.getY();
 //        System.out.println("X: " + mousex +" Y: " + mousey);
-        if (Gdx.input.isButtonPressed(0)){
+        if (Gdx.input.isButtonPressed(0)) {
             if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
                 System.out.println("Clicked on the inventory.");
                 if (!invDrag) { // YOU NEED TO USE MOUSE UP TO RESET INV DRAG, SO IMPLEMENT THE INPUT PROCESSOR HOE
@@ -270,7 +286,7 @@ public class Main extends ApplicationAdapter {
                 }
                 inventory.getSprite().setPosition(mousex - xDragOffset, mousey - inv.getSprite().getHeight() + 25);
             }
-        }else{
+        } else {
             invDrag = false;
         }
     }
@@ -286,13 +302,13 @@ public class Main extends ApplicationAdapter {
 //        System.out.println("X: " + mousex +" Y: " + mousey);
 
         if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
-            if (Gdx.input.isButtonPressed(0)){
+            if (Gdx.input.isButtonPressed(0)) {
                 HashMap t = (HashMap) inventory.getInventoryBlocks().get(item.name);
                 System.out.println("Clicked on " + item.name + " with a quantity of " + t.get("Quantity"));
                 boolean otherDrag = false;
-                for (Item[] i : inventory.getItemArray()){
-                    for (Item n : i){
-                        if (n != null && n.dragged){
+                for (Item[] i : inventory.getItemArray()) {
+                    for (Item n : i) {
+                        if (n != null && n.dragged) {
                             otherDrag = true;
                         }
                     }
@@ -300,19 +316,21 @@ public class Main extends ApplicationAdapter {
 
                 if (!otherDrag) item.dragged = true;
 
-            }else{
+            } else {
                 item.dragged = false;
             }
 
-            if (Gdx.input.isButtonPressed(1)){item.used = true;} // working on this shit still
+            if (Gdx.input.isButtonPressed(1)) {
+                item.used = true;
+            } // working on this shit still
             else {
-                if (item.used){
+                if (item.used) {
                     player.use(item);
                     System.out.println("item used");
                 }
             }
 
-        }else{
+        } else {
             item.used = false;
         }
     }
