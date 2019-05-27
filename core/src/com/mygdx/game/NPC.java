@@ -62,8 +62,11 @@ public class NPC {
     public void talk(SpriteBatch batch){
 //        System.out.println(dialogue);
         textBox.draw(batch);
-        font.draw(batch, name, 10, 180 + font.getCapHeight());
         font.setColor(Color.RED);
+        font.draw(batch, name, 10, 180 + font.getCapHeight());
+        font.setColor(Color.WHITE);
+        font.draw(batch, dialogue, 112, 140 + font.getCapHeight());
+
         System.out.println("X: " + Gdx.input.getX() + " Y: " + (Main.HEIGHT - Gdx.input.getY()));
 
 //        font.dispose();
