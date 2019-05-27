@@ -181,12 +181,13 @@ public class Main extends ApplicationAdapter {
             if (type.equals("npc")) {
                 currNpc.talk(hud_batch);
             } else if (type.equals("chest")) {
-                currChest.open();
+                currChest.open(hud_batch);
             }
             hud_batch.end();
 
             if (Gdx.input.isKeyPressed(Input.Keys.X)) {
                 displayText = false;
+                if (currChest != null) currChest.textFinished = true;
             }
         }
 

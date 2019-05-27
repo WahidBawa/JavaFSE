@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -22,6 +23,7 @@ public class Chest {
     Rectangle rect;
 
     BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
+    Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box2.png"));
 
 
     String name, item;
@@ -64,16 +66,16 @@ public class Chest {
         this.body.setTransform(chest.getX() * Main.PPM, chest.getY() * Main.PPM, 0);
     }
 
-    public void open() {
+    public void open(SpriteBatch batch) {
         String[] split = item.split("//");
         String name = split[0];
-        HashMap tmp;
+        HashMap tmp = (Main.weapons.get(name) != null ? Main.weapons.get(name) : Main.consumables.get(name));
         if (!chestOpened) {
             if (Main.consumables.get(name) != null) {
-                tmp = Main.consumables.get(name);
+//                tmp = Main.consumables.get(name);
                 Main.player.receiveItem(new Consumable(name, (Integer) tmp.get("stat") == 1 ? "health" : "mana", (Integer) tmp.get("replenishAmount"), true));
             } else if (Main.weapons.get(name) != null) {
-                tmp = Main.weapons.get(name);
+//                tmp = Main.weapons.get(name);
                 Main.player.receiveItem(new Weapon(name, null, (Integer) tmp.get("damage"), false));
             }
 //            else if (split[1].equals("A")) {
@@ -83,6 +85,11 @@ public class Chest {
 
         chest.set(new Sprite(new Texture("ASSETS/CHESTS/1.png")));
         chestOpened = true;
-        textFinished = chestOpened;
+
+        textBox.draw(batch);
+        font.setColor(Color.RED);
+        font.draw(batch, "Chest", 10, 180 + font.getCapHeight());
+        font.setColor(Color.WHITE);
+        font.draw(batch, "You received " + name + " from chest!!", 112, 140 + font.getCapHeight());
     }
 }
