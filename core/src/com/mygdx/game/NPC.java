@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class NPC {
     Body body;
@@ -20,6 +21,8 @@ public class NPC {
     BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
     ArrayList<ArrayList<String>> allText = new ArrayList<ArrayList<String>>();
 
+    boolean textFinished = false;
+
     public NPC(Rectangle rect, String name, String dialogue, String item) {
         this.name = name;
         this.dialogue = dialogue;
@@ -28,11 +31,9 @@ public class NPC {
         String[] pages = dialogue.split("#");
         for (String i : pages) {
             ArrayList<String> lines = new ArrayList<String>();
-            for (String n : i.split("//")) lines.add(n);
+            lines.addAll(Arrays.asList(i.split("//")));
             allText.add(lines);
         }
-
-        System.out.println(allText);
 
         textBox.setPosition(0, 0);
         textBox.setSize(Main.WIDTH, textBox.getHeight());

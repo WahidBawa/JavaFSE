@@ -14,6 +14,7 @@ public class Inventory {
     Item[][] items = new Item[3][7];
     ArrayList<Item> allItems = new ArrayList<Item>();
     HashMap inventoryBlocks = new HashMap();
+    BitmapFont font = new BitmapFont();
 
     public Inventory() {
         inventory.setPosition(0, 0);
@@ -28,7 +29,6 @@ public class Inventory {
     }
 
     public void open(SpriteBatch batch) {
-        BitmapFont font = new BitmapFont();
         for (int i = 0; i < items.length; i++) {
             for (int n = 0; n < items[i].length; n++) {
                 if (items[i][n] != null) {

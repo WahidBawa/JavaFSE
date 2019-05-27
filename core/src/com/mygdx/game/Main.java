@@ -179,8 +179,12 @@ public class Main extends ApplicationAdapter {
             hud_batch.end();
 
             if (Gdx.input.isKeyPressed(Input.Keys.X)) {
-                displayText = false;
-                if (currChest != null) currChest.textFinished = true;
+                if (type.equals("npc") && currNpc.textFinished){
+                    displayText = false;
+                }else if (type.equals("chest")){
+                    currChest.textFinished = true;
+                    displayText = false;
+                }
             }
         }
 
