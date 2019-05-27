@@ -39,8 +39,6 @@ public class NPC {
         dialoguePage = 0;
         pageLine = -1;
 
-        System.out.println(allText);
-
         textBox.setPosition(0, 0);
         textBox.setSize(Main.WIDTH, textBox.getHeight());
         npc.setPosition(rect.getX(), rect.getY());
@@ -91,7 +89,6 @@ public class NPC {
                     pageLine = 0;
                     dialoguePage++;
                 }
-                System.out.println(pageLine);
             }
         }
 //        String currLine = allText.get(dialoguePage).get(pageLine);

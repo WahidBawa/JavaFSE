@@ -26,6 +26,7 @@ public class Chest {
 
     boolean chestOpened = false;
     boolean textFinished = false;
+    boolean go = false;
 
     String name, item;
 
@@ -82,9 +83,10 @@ public class Chest {
             chestOpened = true;
         }
 
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-//            textFinished = true;
-//        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+            if (go) textFinished = true;
+            go = true;
+        }
 
         textBox.draw(batch);
         font.setColor(Color.RED);

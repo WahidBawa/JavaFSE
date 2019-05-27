@@ -179,10 +179,10 @@ public class Main extends ApplicationAdapter {
             }
             hud_batch.end();
 
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 if (type.equals("npc") && currNpc.textFinished){
                     displayText = false;
-                }else if (type.equals("chest")){
+                }else if (type.equals("chest") && currChest.textFinished){
                     displayText = false;
                 }
             }
@@ -227,7 +227,7 @@ public class Main extends ApplicationAdapter {
             for (Fixture i : objs) {
                 if (i.getUserData().getClass() == Chest.class) {
                     currChest = (Chest) i.getUserData();
-                    if (!currChest.textFinished) {
+                    if (!currChest.chestOpened) {
                         type = "chest";
                         displayText = true;
                     }

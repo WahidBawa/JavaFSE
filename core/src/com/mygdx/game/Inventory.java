@@ -81,7 +81,6 @@ public class Inventory {
                 }
             }
         }
-        System.out.println(inventoryBlocks);
     }
 
     public void removeItem(Item item) {
@@ -95,8 +94,6 @@ public class Inventory {
 //            System.out.println(t);
         }
         allItems.remove(item);
-
-        System.out.println(inventoryBlocks);
     }
 
     public ArrayList<Item> getItems() {
