@@ -2,7 +2,9 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -11,8 +13,10 @@ import com.badlogic.gdx.physics.box2d.*;
 public class NPC {
     Body body;
     Sprite npc = new Sprite(new Texture("ASSETS/SPRITES/NPC/0/DOWN.png"));
-    Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box1.png"));
+    Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box2.png"));
     String name, dialogue, item;
+    BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
+
     public NPC(Rectangle rect, String name, String dialogue, String item){
         this.name = name;
         this.dialogue = dialogue;
@@ -58,5 +62,10 @@ public class NPC {
     public void talk(SpriteBatch batch){
 //        System.out.println(dialogue);
         textBox.draw(batch);
+        font.draw(batch, name, 10, 180 + font.getCapHeight());
+        font.setColor(Color.RED);
+        System.out.println("X: " + Gdx.input.getX() + " Y: " + (Main.HEIGHT - Gdx.input.getY()));
+
+//        font.dispose();
     }
 }
