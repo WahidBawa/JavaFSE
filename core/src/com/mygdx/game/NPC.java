@@ -20,6 +20,7 @@ public class NPC {
     Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box2.png"));
     BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
     ArrayList<ArrayList<String>> allText = new ArrayList<ArrayList<String>>();
+    int dialoguePage, pageLine;
 
     boolean textFinished = false;
 
@@ -34,6 +35,11 @@ public class NPC {
             lines.addAll(Arrays.asList(i.split("//")));
             allText.add(lines);
         }
+
+        dialoguePage = 0;
+        pageLine = -1;
+
+        System.out.println(allText);
 
         textBox.setPosition(0, 0);
         textBox.setSize(Main.WIDTH, textBox.getHeight());
@@ -74,12 +80,35 @@ public class NPC {
     }
 
     public void talk(SpriteBatch batch) {
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            if (dialoguePage == allText.size() - 1 && pageLine == allText.get(dialoguePage).size() - 1){
+                textFinished = true;
+            }
+            if (!textFinished){
+                pageLine++;
+                if (pageLine == allText.get(dialoguePage).size()) {
+                    pageLine = 0;
+                    dialoguePage++;
+                }
+                System.out.println(pageLine);
+            }
+        }
+//        String currLine = allText.get(dialoguePage).get(pageLine);
+
         textBox.draw(batch);
         font.setColor(Color.RED);
         font.draw(batch, name, 10, 180 + font.getCapHeight());
         font.setColor(Color.WHITE);
-        font.draw(batch, dialogue, 112, 140 + font.getCapHeight());
-
+        for (int i = 0; i < pageLine + 1; i++) {
+            font.draw(batch, allText.get(dialoguePage).get(i), 112, (140 - font.getCapHeight() * i) + font.getCapHeight());
+        }
 //        System.out.println("X: " + Gdx.input.getX() + " Y: " + (Main.HEIGHT - Gdx.input.getY()));
+    }
+
+    public void resetTalk(){
+        dialoguePage = 0;
+        pageLine = -1;
+        textFinished = false;
     }
 }

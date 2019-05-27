@@ -57,6 +57,7 @@ public class Main extends ApplicationAdapter {
 
     public static boolean chestCollide = false;
     public static boolean npcCollide = false;
+    public static boolean interactable = true;
 
     public static ArrayList<Fixture> objs = new ArrayList<Fixture>();
 
@@ -178,7 +179,7 @@ public class Main extends ApplicationAdapter {
             }
             hud_batch.end();
 
-            if (Gdx.input.isKeyPressed(Input.Keys.X)) {
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 if (type.equals("npc") && currNpc.textFinished){
                     displayText = false;
                 }else if (type.equals("chest")){
@@ -232,10 +233,12 @@ public class Main extends ApplicationAdapter {
                         displayText = true;
                     }
                 }
-                if (i.getUserData().getClass() == NPC.class) {
+                if (i.getUserData().getClass() == NPC.class && interactable) {
                     currNpc = (NPC) i.getUserData();
                     type = "npc";
+                    currNpc.resetTalk();
                     displayText = true;
+                    interactable = false;
                 }
             }
         }

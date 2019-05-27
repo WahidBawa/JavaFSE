@@ -142,7 +142,7 @@
     <property name="chestName" value="Chest4"/>
    </properties>
   </object>
-  <object id="181" name="NPC" type="1" x="664" y="509" width="20" height="30">
+  <object id="181" name="NPC" type="1" x="228" y="1115" width="20" height="30">
    <properties>
     <property name="Dialogue" value="Well, Hello There.//Guud Afternuun.//My name is Mrs.Lozo!#Here is some Physics Homework and Failing Grade"/>
     <property name="Name" value="Village Child Lozo"/>
