@@ -78,12 +78,11 @@ public class NPC {
     }
 
     public void talk(SpriteBatch batch) {
-
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            if (dialoguePage == allText.size() - 1 && pageLine == allText.get(dialoguePage).size() - 1){
+            if (dialoguePage == allText.size() - 1 && pageLine == allText.get(dialoguePage).size() - 1) {
                 textFinished = true;
             }
-            if (!textFinished){
+            if (!textFinished) {
                 pageLine++;
                 if (pageLine == allText.get(dialoguePage).size()) {
                     pageLine = 0;
@@ -91,8 +90,6 @@ public class NPC {
                 }
             }
         }
-//        String currLine = allText.get(dialoguePage).get(pageLine);
-
         textBox.draw(batch);
         font.setColor(Color.RED);
         font.draw(batch, name, 10, 180 + font.getCapHeight());
@@ -100,10 +97,9 @@ public class NPC {
         for (int i = 0; i < pageLine + 1; i++) {
             font.draw(batch, allText.get(dialoguePage).get(i), 106 + 26 * i, (140 - font.getCapHeight() * i) + font.getCapHeight() - 8 * i);
         }
-//        System.out.println("X: " + Gdx.input.getX() + " Y: " + (Main.HEIGHT - Gdx.input.getY()));
     }
 
-    public void resetTalk(){
+    public void resetTalk() {
         dialoguePage = 0;
         pageLine = -1;
         textFinished = false;
