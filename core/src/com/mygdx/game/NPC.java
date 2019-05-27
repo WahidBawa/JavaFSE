@@ -10,17 +10,30 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 
+import java.util.ArrayList;
+
 public class NPC {
     Body body;
     Sprite npc = new Sprite(new Texture("ASSETS/SPRITES/NPC/0/DOWN.png"));
     String name, dialogue, item;
     Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box2.png"));
     BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
+    ArrayList<ArrayList<String>> allText = new ArrayList<ArrayList<String>>();
 
     public NPC(Rectangle rect, String name, String dialogue, String item) {
         this.name = name;
         this.dialogue = dialogue;
         this.item = item;
+
+        String[] pages = dialogue.split("#");
+        for (String i : pages) {
+            ArrayList<String> lines = new ArrayList<String>();
+            for (String n : i.split("//")) lines.add(n);
+            allText.add(lines);
+        }
+
+        System.out.println(allText);
+
         textBox.setPosition(0, 0);
         textBox.setSize(Main.WIDTH, textBox.getHeight());
         npc.setPosition(rect.getX(), rect.getY());
