@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Inventory {
     Sprite inventory = new Sprite(new Texture("ASSETS/UI/INVENTORY/Inventory.png"));
     Item[][] items = new Item[3][7];
-    ArrayList<Item> owo = new ArrayList<Item>();
+    ArrayList<Item> allItems = new ArrayList<Item>();
     HashMap inventoryBlocks = new HashMap();
 
     public Inventory() {
@@ -38,7 +38,7 @@ public class Inventory {
                     float x = Gdx.input.getX() - items[i][n].getImg().getWidth() / 2;
                     float y = Main.HEIGHT - Gdx.input.getY() - items[i][n].getImg().getHeight() / 2;
 
-                    if (!items[i][n].dragged){
+                    if (!items[i][n].dragged) {
                         x = (30 + n * tmp.getWidth() + 4 * n) + Main.inventory.getSprite().getX();
                         y = (190 - i * tmp.getWidth() - 4 * i) + Main.inventory.getSprite().getY();
                     }
@@ -52,7 +52,7 @@ public class Inventory {
 
     public void addItem(Item item) { // will add item to the first empty spot found
         boolean itemAdded = false;
-        owo.add(item); // adds to the arraylist which makes it easier to use items for testing TEST
+        allItems.add(item); // adds to the arraylist which makes it easier to use items for testing TEST
         HashMap tmp = new HashMap();
 
         if (inventoryBlocks.get(item.name) != null) {
@@ -94,13 +94,13 @@ public class Inventory {
             inventoryBlocks.remove(item.name);
 //            System.out.println(t);
         }
-        owo.remove(item);
+        allItems.remove(item);
 
         System.out.println(inventoryBlocks);
     }
 
     public ArrayList<Item> getItems() {
-        return owo;
+        return allItems;
     }
 
     public Item[][] getItemArray() {

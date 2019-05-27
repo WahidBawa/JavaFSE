@@ -17,7 +17,7 @@ public class NPC {
     Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box2.png"));
     BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
 
-    public NPC(Rectangle rect, String name, String dialogue, String item){
+    public NPC(Rectangle rect, String name, String dialogue, String item) {
         this.name = name;
         this.dialogue = dialogue;
         this.item = item;
@@ -28,12 +28,12 @@ public class NPC {
         createBody();
     }
 
-    public void render(SpriteBatch batch){
+    public void render(SpriteBatch batch) {
         batch.draw(npc, body.getPosition().x - npc.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - npc.getHeight() * (float) Math.pow(Main.PPM, 2), npc.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, npc.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
 
     }
 
-    public void update(SpriteBatch batch){
+    public void update(SpriteBatch batch) {
 
         render(batch);
     }
@@ -59,16 +59,13 @@ public class NPC {
 
     }
 
-    public void talk(SpriteBatch batch){
-//        System.out.println(dialogue);
+    public void talk(SpriteBatch batch) {
         textBox.draw(batch);
         font.setColor(Color.RED);
         font.draw(batch, name, 10, 180 + font.getCapHeight());
         font.setColor(Color.WHITE);
         font.draw(batch, dialogue, 112, 140 + font.getCapHeight());
 
-        System.out.println("X: " + Gdx.input.getX() + " Y: " + (Main.HEIGHT - Gdx.input.getY()));
-
-//        font.dispose();
+//        System.out.println("X: " + Gdx.input.getX() + " Y: " + (Main.HEIGHT - Gdx.input.getY()));
     }
 }

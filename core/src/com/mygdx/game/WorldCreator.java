@@ -42,8 +42,10 @@ public class WorldCreator {
 
                 if (name.equals("wall")) walls.add(body);
                 else if (name.equals("enemy")) enemies.add(new Enemy(rect));
-                else if (name.equals("chest")) chests.add(new Chest(rect, (String) obj.getProperties().get("chestName"), (String) obj.getProperties().get("Item")));
-                else if (name.equals("NPC")) npcs.add(new NPC(rect, (String) obj.getProperties().get("Name"), (String) obj.getProperties().get("Dialogue"), (String) obj.getProperties().get("Item")));
+                else if (name.equals("chest"))
+                    chests.add(new Chest(rect, (String) obj.getProperties().get("chestName"), (String) obj.getProperties().get("Item")));
+                else if (name.equals("NPC"))
+                    npcs.add(new NPC(rect, (String) obj.getProperties().get("Name"), (String) obj.getProperties().get("Dialogue"), (String) obj.getProperties().get("Item")));
 
                 for (Fixture f : body.getFixtureList()) {
                     f.setUserData(1);

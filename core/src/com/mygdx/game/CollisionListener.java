@@ -20,7 +20,7 @@ public class CollisionListener implements ContactListener {
         if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == Chest.class) {
             Main.chestCollide = true;
             objs.add(contact.getFixtureB());
-        }else if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == NPC.class){
+        } else if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == NPC.class) {
             Main.npcCollide = true;
             objs.add(contact.getFixtureB());
         }
@@ -36,7 +36,7 @@ public class CollisionListener implements ContactListener {
         if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == Chest.class) {
             Main.chestCollide = false;
             objs.remove(contact.getFixtureB());
-        }else if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == NPC.class) {
+        } else if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == NPC.class) {
             Main.npcCollide = false;
             objs.remove(contact.getFixtureB());
         }

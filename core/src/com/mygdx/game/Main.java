@@ -32,21 +32,19 @@ public class Main extends ApplicationAdapter {
     public static int speed = 9001; // speed is over 9000
 
     public static int WIDTH = 1366, HEIGHT = 1024;
-
     public static int MAP_WIDTH, MAP_HEIGHT;
-
     public final static int TILESIZE = 32;
 
-    public static World world;
 
+    public static World world;
     public static WorldCreator wc;
 
     public static final float PPM = 0.3f;
 
+
     OrthogonalTiledMapRenderer renderer;
 
     public static OrthographicCamera camera;
-    public static OrthographicCamera staticCam;
 
     public static boolean moving = false;
 
@@ -54,41 +52,41 @@ public class Main extends ApplicationAdapter {
     public static final int DOWN = 1;
     public static final int LEFT = 2;
     public static final int RIGHT = 3;
-
     public static int dir = DOWN;
+
 
     public static boolean chestCollide = false;
     public static boolean npcCollide = false;
-    FPSLogger fl = new FPSLogger();
 
     public static ArrayList<Fixture> objs = new ArrayList<Fixture>();
 
     Box2DDebugRenderer dbr;
+    FPSLogger fl = new FPSLogger();
 
-    HUD hud;
+    HUD hud; // this will be used in the future for putting stats like health bar on the screen
 
     public static Inventory inventory;
-    boolean showInventory = false;
-    boolean invDrag = false;
-    boolean useItem = false;
-    int xDragOffset = 0;
-    int yDragOffset = 0;
+    private boolean showInventory = false;
+    private boolean invDrag = false;
+    private int xDragOffset = 0;
+    private int yDragOffset = 0;
 
     public static boolean displayText = false;
-    public static String type = null;
+    public String type = null;
 
     public static HashMap<String, HashMap<String, Integer>> weapons;
     public static HashMap<String, HashMap<String, Integer>> consumables;
 
-    NPC currNpc;
-    Chest currChest;
+    private NPC currNpc;
+    private Chest currChest;
 
     @Override
     public void create() {
         graphics.setWindowedMode(WIDTH, HEIGHT);
-        world = new World(new Vector2(0, 0), true);
-        player = new Player();
 
+        world = new World(new Vector2(0, 0), true);
+
+        player = new Player();
 
         TmxMapLoader loader = new TmxMapLoader();
         TiledMap map = loader.load("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
@@ -159,9 +157,7 @@ public class Main extends ApplicationAdapter {
             inventory.open(hud_batch);
             hud_batch.end();
 
-//            if (Gdx.input.isButtonPressed(0)) {
             clickedOn(inventory);
-//            }
             if (inventory.getItems().size() > 0) {
                 for (Item[] i : inventory.getItemArray()) {
                     for (Item n : i) {
@@ -171,11 +167,8 @@ public class Main extends ApplicationAdapter {
                     }
                 }
             }
-//            if (Gdx.input.isButtonPressed(0) || Gdx.input.isButtonPressed(1)){
-//            }else if (!Gdx.input.isButtonPressed(0)){
-//
-//            }
         }
+
         if (displayText) {
             hud_batch.begin();
             if (type.equals("npc")) {
@@ -191,8 +184,8 @@ public class Main extends ApplicationAdapter {
             }
         }
 
+        //DEBUGGER AND FPS
 //        dbr.render(world, camera.combined);
-
 //        fl.log();
     }
 
@@ -230,7 +223,7 @@ public class Main extends ApplicationAdapter {
             for (Fixture i : objs) {
                 if (i.getUserData().getClass() == Chest.class) {
                     currChest = (Chest) i.getUserData();
-                    if (!currChest.textFinished){
+                    if (!currChest.textFinished) {
                         type = "chest";
                         displayText = true;
                     }
@@ -241,11 +234,6 @@ public class Main extends ApplicationAdapter {
                     displayText = true;
                 }
             }
-        }
-
-        // how to implement using items in the future
-        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && inventory.getItems().size() > 0) {
-            player.use(inventory.getItems().get(0));
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
@@ -289,7 +277,6 @@ public class Main extends ApplicationAdapter {
 //        System.out.println("X: " + mousex +" Y: " + mousey);
         if (Gdx.input.isButtonPressed(0)) {
             if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
-                System.out.println("Clicked on the inventory.");
                 if (!invDrag) { // YOU NEED TO USE MOUSE UP TO RESET INV DRAG, SO IMPLEMENT THE INPUT PROCESSOR HOE
                     xDragOffset = Math.abs(mousex - (int) minx);
                     yDragOffset = Math.abs(mousey - (int) miny);
@@ -310,7 +297,6 @@ public class Main extends ApplicationAdapter {
 
         int mousex = Gdx.input.getX();
         int mousey = HEIGHT - Gdx.input.getY();
-//        System.out.println("X: " + mousex +" Y: " + mousey);
 
         if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
             if (Gdx.input.isButtonPressed(0)) {

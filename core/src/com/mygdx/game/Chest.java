@@ -15,8 +15,6 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import java.util.HashMap;
 
 public class Chest {
-    boolean chestOpened = false;
-    boolean textFinished = false;
 
     Sprite chest = new Sprite(new Texture("ASSETS/CHESTS/0.png"));
     Body body;
@@ -25,6 +23,8 @@ public class Chest {
     BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
     Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box2.png"));
 
+    boolean chestOpened = false;
+    boolean textFinished = false;
 
     String name, item;
 
@@ -70,21 +70,16 @@ public class Chest {
         String[] split = item.split("//");
         String name = split[0];
         HashMap tmp = (Main.weapons.get(name) != null ? Main.weapons.get(name) : Main.consumables.get(name));
+
         if (!chestOpened) {
             if (Main.consumables.get(name) != null) {
-//                tmp = Main.consumables.get(name);
                 Main.player.receiveItem(new Consumable(name, (Integer) tmp.get("stat") == 1 ? "health" : "mana", (Integer) tmp.get("replenishAmount"), true));
             } else if (Main.weapons.get(name) != null) {
-//                tmp = Main.weapons.get(name);
                 Main.player.receiveItem(new Weapon(name, null, (Integer) tmp.get("damage"), false));
             }
-//            else if (split[1].equals("A")) {
-//                Main.player.receiveItem(new Armour(split[0], split[2], Integer.parseInt(split[3])));
-//            }
+            chest.set(new Sprite(new Texture("ASSETS/CHESTS/1.png")));
+            chestOpened = true;
         }
-
-        chest.set(new Sprite(new Texture("ASSETS/CHESTS/1.png")));
-        chestOpened = true;
 
         textBox.draw(batch);
         font.setColor(Color.RED);
