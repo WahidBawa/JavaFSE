@@ -183,7 +183,6 @@ public class Main extends ApplicationAdapter {
                 if (type.equals("npc") && currNpc.textFinished){
                     displayText = false;
                 }else if (type.equals("chest")){
-                    currChest.textFinished = true;
                     displayText = false;
                 }
             }

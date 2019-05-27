@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -81,10 +82,15 @@ public class Chest {
             chestOpened = true;
         }
 
+//        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+//            textFinished = true;
+//        }
+
         textBox.draw(batch);
         font.setColor(Color.RED);
         font.draw(batch, "Chest", 10, 180 + font.getCapHeight());
         font.setColor(Color.WHITE);
         font.draw(batch, "You received " + name + " from chest!!", 112, 140 + font.getCapHeight());
+
     }
 }

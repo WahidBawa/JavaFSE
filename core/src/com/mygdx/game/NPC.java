@@ -101,7 +101,7 @@ public class NPC {
         font.draw(batch, name, 10, 180 + font.getCapHeight());
         font.setColor(Color.WHITE);
         for (int i = 0; i < pageLine + 1; i++) {
-            font.draw(batch, allText.get(dialoguePage).get(i), 112, (140 - font.getCapHeight() * i) + font.getCapHeight());
+            font.draw(batch, allText.get(dialoguePage).get(i), 106 + 26 * i, (140 - font.getCapHeight() * i) + font.getCapHeight() - 8 * i);
         }
 //        System.out.println("X: " + Gdx.input.getX() + " Y: " + (Main.HEIGHT - Gdx.input.getY()));
     }

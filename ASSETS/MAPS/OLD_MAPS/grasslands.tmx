@@ -144,7 +144,7 @@
   </object>
   <object id="181" name="NPC" type="1" x="228" y="1115" width="20" height="30">
    <properties>
-    <property name="Dialogue" value="Well, Hello There.//Guud Afternuun.//My name is Mrs.Lozo!#Here is some Physics Homework and Failing Grade"/>
+    <property name="Dialogue" value="Well, Hello There.//Guud Afternuun.//My name is Mrs.Lozo!//I am the teacher infamous for not teaching but just doing//it is a common trait of the people back in serbia#Here is some Physics Homework and Failing Grade"/>
     <property name="Name" value="Village Child Lozo"/>
     <property name="item" value="Physics Homework // Failing Grade"/>
    </properties>
