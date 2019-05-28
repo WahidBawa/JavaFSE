@@ -111,7 +111,7 @@
     <property name="chestName" value="Chest1"/>
    </properties>
   </object>
-  <object id="68" name="chest" type="4" x="544" y="478" width="61.3333" height="60">
+  <object id="68" name="chest" type="4" x="338.667" y="717.333" width="61.3333" height="60">
    <properties>
     <property name="Item" value="Potion//C//HEALTH//50"/>
     <property name="chestName" value="Chest5"/>
@@ -144,7 +144,7 @@
   </object>
   <object id="181" name="NPC" type="1" x="228" y="1115" width="20" height="30">
    <properties>
-    <property name="Dialogue" value="Well, Hello There.//Guud Afternuun.//My name is Mrs.Lozo!//I am the teacher infamous for not teaching but just doing//it is a common trait of the people back in serbia#Here is some Potion to keep you alive in class"/>
+    <property name="Dialogue" value="Well, Hello There.//Guud Afternuun.//My name is Mrs.Lozo!//I am the teacher infamous for not teaching but just doing//it is a common trait of the people back in serbia#Here is some Potion to keep you alive in class#yeeeeeeeeeeeeeeeeeeeeeeeeeeet"/>
     <property name="Name" value="Village Child Lozo"/>
     <property name="item" value="Potion"/>
    </properties>

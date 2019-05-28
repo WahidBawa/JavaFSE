@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="32" tileheight="32" infinite="0" nextobjectid="33">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="32" tileheight="32" infinite="0" nextobjectid="33">
  <tileset firstgid="1" name="revolution_snow" tilewidth="32" tileheight="32" tilecount="154" columns="11">
   <image source="revolution_snow.png" trans="a349a4" width="352" height="448"/>
  </tileset>
@@ -89,15 +89,13 @@
   </object>
   <object id="16" name="wall" x="-23" y="-12" width="30" height="132"/>
   <object id="18" name="wall" x="746" y="-12" width="15" height="132"/>
-  <object id="21" name="chest" type="1" x="64.3333" y="124" width="61.3333" height="60">
+  <object id="21" name="chest" type="1" x="47.0515" y="304.225" width="61.3333" height="60">
    <properties>
     <property name="ChestName" value="kjsbdka sdc ksd cl.km skj kjbakskjblJBASCKN LKBCLKJNKCJB KJDBXCKJB ADLK.JBC KND XCLKJZS DKJ CLKJSBDKJVB KDZBXVKJNZKDXCBCKLLBDHLBCKSDKHBSBDCKJBXCLKJBDKLJBCLKJXBCL KJABCLVKJBLKJBVZLKJBV"/>
     <property name="Item" value="Wool Armour"/>
    </properties>
   </object>
-  <object id="22" name="wall" x="65.6673" y="125.5" width="33.3333" height="36"/>
-  <object id="23" name="wall" x="21.6674" y="4.5" width="33.3333" height="36"/>
-  <object id="24" name="chest" type="1" x="20.3334" y="3" width="61.3333" height="60">
+  <object id="24" name="chest" type="1" x="659.761" y="19.0474" width="61.3333" height="60">
    <properties>
     <property name="ChestName" value="asdsdlansdkjnknkjnsakjndkjanskjdnkjansdkmnakjsndf;lkcan;lsdkn;lkna;wjee dclkn ;oLK ;LJ sdkjnc.jasndc"/>
     <property name="Item" value="Wood Sword"/>

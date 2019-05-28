@@ -15,6 +15,7 @@ public class WorldCreator {
     ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     ArrayList<Chest> chests = new ArrayList<Chest>();
     ArrayList<NPC> npcs = new ArrayList<NPC>();
+    ArrayList<Body> toBeDestroyed = new ArrayList<Body>();
 
     public WorldCreator(World world, TiledMap map) {
         for (int i = 0; i < map.getLayers().getCount(); i++) {
@@ -68,5 +69,13 @@ public class WorldCreator {
 
     public ArrayList<NPC> getNpcs() {
         return npcs;
+    }
+
+    public ArrayList<Body> getToBeDestroyed(){
+        for (Body i : walls) toBeDestroyed.add(i);
+        for (Enemy i : enemies) toBeDestroyed.add(i.getBody());
+        for (Chest i : chests) toBeDestroyed.add(i.getBody());
+        for (NPC i : npcs) toBeDestroyed.add(i.getBody());
+        return toBeDestroyed;
     }
 }

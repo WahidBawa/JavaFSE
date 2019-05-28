@@ -112,4 +112,8 @@ public class NPC {
         pageLine = -1;
         textFinished = false;
     }
+
+    public Body getBody(){
+        return body;
+    }
 }

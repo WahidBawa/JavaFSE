@@ -95,4 +95,8 @@ public class Chest {
         font.draw(batch, "You received " + name + " from chest!!", 112, 140 + font.getCapHeight());
 
     }
+
+    public Body getBody(){
+        return body;
+    }
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
@@ -81,6 +82,8 @@ public class Main extends ApplicationAdapter {
     private NPC currNpc;
     private Chest currChest;
 
+    private ArrayList<Body> bodiesToDestroy = new ArrayList<Body>();
+
     @Override
     public void create() {
         graphics.setWindowedMode(WIDTH, HEIGHT);
@@ -89,21 +92,14 @@ public class Main extends ApplicationAdapter {
 
         player = new Player();
 
-        TmxMapLoader loader = new TmxMapLoader();
-        TiledMap map = loader.load("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
-
-        MAP_WIDTH = (Integer) map.getProperties().get("width") * TILESIZE;
-        MAP_HEIGHT = (Integer) map.getProperties().get("height") * TILESIZE;
-
-        camera = new OrthographicCamera(800f, 600f);
-
-        renderer = new OrthogonalTiledMapRenderer(map, PPM);
+        createWorld("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
+//        createWorld("ASSETS/MAPS/OLD_MAPS/snow_place.tmx");
 
         batch = new SpriteBatch();
 
         hud_batch = new SpriteBatch();
 
-        wc = new WorldCreator(world, map);
+        camera = new OrthographicCamera(800f, 600f);
 
         dbr = new Box2DDebugRenderer();
 
@@ -126,6 +122,10 @@ public class Main extends ApplicationAdapter {
         camera.zoom = PPM;
 
         world.step(1 / 60f, 6, 2);
+        for (int i = 0; i < bodiesToDestroy.size(); i++){
+            world.destroyBody(bodiesToDestroy.get(i));
+            bodiesToDestroy.remove(i);
+        }
 
         Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -133,7 +133,8 @@ public class Main extends ApplicationAdapter {
         camera.update();
 
         renderer.setView(camera);
-        renderer.render(new int[]{0, 1, 2, 3});
+//        renderer.render(new int[]{0, 1, 2, 3});
+        renderer.render();
 
         batch.setProjectionMatrix(camera.combined);
 
@@ -150,7 +151,7 @@ public class Main extends ApplicationAdapter {
             }
         }
 
-        renderer.render(new int[]{4});
+//        renderer.render(new int[]{4});
 
         if (showInventory && !displayText) {
             hud_batch.begin();
@@ -180,16 +181,16 @@ public class Main extends ApplicationAdapter {
             hud_batch.end();
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                if (type.equals("npc") && currNpc.textFinished){
+                if (type.equals("npc") && currNpc.textFinished) {
                     displayText = false;
-                }else if (type.equals("chest") && currChest.textFinished){
+                } else if (type.equals("chest") && currChest.textFinished) {
                     displayText = false;
                 }
             }
         }
 
         //DEBUGGER AND FPS
-//        dbr.render(world, camera.combined);
+        dbr.render(world, camera.combined);
 //        fl.log();
     }
 
@@ -254,6 +255,9 @@ public class Main extends ApplicationAdapter {
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             showInventory = !showInventory;
         }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) createWorld("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) createWorld("ASSETS/MAPS/OLD_MAPS/snow_place.tmx");
 
         player.setX(player.body.getPosition().x);
         player.setY(player.body.getPosition().y);
@@ -361,6 +365,23 @@ public class Main extends ApplicationAdapter {
             data.put(str[0], tmp);
         }
         return data;
+    }
+
+    public void createWorld(String dir) {
+        TmxMapLoader loader = new TmxMapLoader();
+        TiledMap map = loader.load(dir);
+
+        MAP_WIDTH = (Integer) map.getProperties().get("width") * TILESIZE;
+        MAP_HEIGHT = (Integer) map.getProperties().get("height") * TILESIZE;
+
+        renderer = new OrthogonalTiledMapRenderer(map, PPM);
+
+        if (wc != null) {
+            bodiesToDestroy = wc.getToBeDestroyed();
+        }
+
+        wc = new WorldCreator(world, map);
+
     }
 
 }
