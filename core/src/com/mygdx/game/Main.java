@@ -86,6 +86,8 @@ public class Main extends ApplicationAdapter {
 
     private ArrayList<Body> bodiesToDestroy = new ArrayList<Body>();
 
+    boolean destroyed = true;
+
     @Override
     public void create() {
         graphics.setWindowedMode(WIDTH, HEIGHT);
@@ -123,10 +125,15 @@ public class Main extends ApplicationAdapter {
     public void render() {
         camera.zoom = PPM;
         System.out.println(bodiesToDestroy.size());
-        world.step(1 / 60f, 6, 2);
-        for (int i = 0; i < bodiesToDestroy.size(); i++){
-            world.destroyBody(bodiesToDestroy.get(i));
-            bodiesToDestroy.remove(i);
+
+        if (!destroyed){
+            for (Body i : bodiesToDestroy){
+                world.destroyBody(i);
+                destroyed = true;
+//            bodiesToDestroy.remove(i);
+            }
+        }else{
+            world.step(1 / 60f, 6, 2);
         }
 
         Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
@@ -266,8 +273,8 @@ public class Main extends ApplicationAdapter {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) createWorld("1");
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) createWorld("4");
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) createWorld("2");
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) createWorld("2");
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) createWorld("3");
 
         player.setX(player.body.getPosition().x);
         player.setY(player.body.getPosition().y);
@@ -400,6 +407,7 @@ public class Main extends ApplicationAdapter {
 
         if (wc != null) {
             bodiesToDestroy = wc.getToBeDestroyed();
+            destroyed = false;
         }
 
         wc = new WorldCreator(world, map);
