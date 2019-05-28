@@ -19,19 +19,25 @@ public class Portal {
 
     public void createBody() {
         BodyDef bdef = new BodyDef();
-        bdef.type = BodyDef.BodyType.StaticBody;
-        this.body = Main.world.createBody(bdef);
-        FixtureDef fdef = new FixtureDef();
+        FixtureDef def = new FixtureDef();
         PolygonShape shape = new PolygonShape();
 
-        fdef.shape = shape;
+        bdef.type = BodyDef.BodyType.StaticBody;
 
-        shape.setAsBox(rect.getWidth() * (float) Math.pow(Main.PPM, 2), rect.getHeight() * (float) Math.pow(Main.PPM, 2));
+        bdef.position.set(rect.getX() * Main.PPM + rect.getWidth() / 2 * Main.PPM, rect.getY() * Main.PPM + rect.getHeight() / 2 * Main.PPM);
 
-        this.body.createFixture(fdef);
+        body = Main.world.createBody(bdef);
+
+        shape.setAsBox(rect.getWidth() / 2 * Main.PPM, rect.getHeight() / 2 * Main.PPM);
+
+        def.shape = shape;
+
+        this.body.createFixture(def);
 
         this.body.getFixtureList().get(0).setUserData(this);
+    }
 
-        this.body.setTransform(rect.getX() * Main.PPM, rect.getY() * Main.PPM, 0);
+    public Body getBody() {
+        return body;
     }
 }

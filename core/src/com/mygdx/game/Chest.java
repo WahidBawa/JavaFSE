@@ -52,20 +52,22 @@ public class Chest {
 
     public void createBody() {
         BodyDef bdef = new BodyDef();
-        bdef.type = BodyDef.BodyType.StaticBody;
-        this.body = Main.world.createBody(bdef);
-        FixtureDef fdef = new FixtureDef();
+        FixtureDef def = new FixtureDef();
         PolygonShape shape = new PolygonShape();
 
-        fdef.shape = shape;
+        bdef.type = BodyDef.BodyType.StaticBody;
+
+        bdef.position.set(rect.getX() * Main.PPM + rect.getWidth() / 2 * Main.PPM, rect.getY() * Main.PPM + rect.getHeight() / 2 * Main.PPM);
+
+        body = Main.world.createBody(bdef);
 
         shape.setAsBox(chest.getWidth() * (float) Math.pow(Main.PPM, 2), chest.getHeight() * (float) Math.pow(Main.PPM, 2));
 
-        this.body.createFixture(fdef);
+        def.shape = shape;
+
+        this.body.createFixture(def);
 
         this.body.getFixtureList().get(0).setUserData(this);
-
-        this.body.setTransform(chest.getX() * Main.PPM, chest.getY() * Main.PPM, 0);
     }
 
     public void open(SpriteBatch batch) {

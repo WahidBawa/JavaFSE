@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="493">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="494">
  <tileset firstgid="1" name="Revolution_Grasslands" tilewidth="32" tileheight="32" tilecount="190" columns="10">
   <image source="revolution_grasslands.png" trans="a349a4" width="320" height="608"/>
   <tile id="5">
@@ -111,7 +111,7 @@
     <property name="chestName" value="Chest1"/>
    </properties>
   </object>
-  <object id="68" name="chest" type="4" x="338.667" y="717.333" width="61.3333" height="60">
+  <object id="68" name="chest" type="4" x="-0.0961541" y="1541.18" width="61.3333" height="60">
    <properties>
     <property name="Item" value="Potion//C//HEALTH//50"/>
     <property name="chestName" value="Chest5"/>
@@ -198,7 +198,7 @@
     <property name="item" value="Secret Journal"/>
    </properties>
   </object>
-  <object id="212" name="Portal" type="4" x="-2.66667" y="-27.6666" width="36" height="53.3333">
+  <object id="212" name="Portal" type="4" x="-0.036543" y="1.75905" width="32.0707" height="31.9005">
    <properties>
     <property name="xd" type="int" value="130"/>
     <property name="yd" type="int" value="280"/>
@@ -221,7 +221,7 @@
     <property name="chestName" value="1"/>
    </properties>
   </object>
-  <object id="442" name="enemy" x="222.626" y="200.434" width="30" height="35"/>
+  <object id="442" name="enemy" x="195.237" y="190.343" width="30" height="35"/>
   <object id="489" name="chest" type="3" x="900.533" y="504.4" width="61.3333" height="60">
    <properties>
     <property name="Item" value="Sword//W//ATTACK//5"/>

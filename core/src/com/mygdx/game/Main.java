@@ -191,7 +191,7 @@ public class Main extends ApplicationAdapter {
         }
 
         //DEBUGGER AND FPS
-//        dbr.render(world, camera.combined);
+        dbr.render(world, camera.combined);
 //        fl.log();
     }
 

@@ -11,11 +11,12 @@ import java.util.ArrayList;
 
 public class WorldCreator {
     Body body;
-    ArrayList<Body> walls = new ArrayList<Body>();
-    ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-    ArrayList<Chest> chests = new ArrayList<Chest>();
-    ArrayList<NPC> npcs = new ArrayList<NPC>();
-    ArrayList<Body> toBeDestroyed = new ArrayList<Body>();
+    private ArrayList<Body> walls = new ArrayList<Body>();
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    private ArrayList<Chest> chests = new ArrayList<Chest>();
+    private ArrayList<NPC> npcs = new ArrayList<NPC>();
+    private ArrayList<Portal> portals = new ArrayList<Portal>();
+    private ArrayList<Body> toBeDestroyed = new ArrayList<Body>();
 
     public WorldCreator(World world, TiledMap map) {
         for (int i = 0; i < map.getLayers().getCount(); i++) {
@@ -41,12 +42,19 @@ public class WorldCreator {
 
                 String name = obj.getName();
 
-                if (name.equals("wall")) walls.add(body);
-                else if (name.equals("enemy")) enemies.add(new Enemy(rect));
-                else if (name.equals("chest"))
+                if (name.equals("wall")) {
+                    walls.add(body);
+                }else if (name.equals("enemy")){
+                    enemies.add(new Enemy(rect));
+                }
+                else if (name.equals("chest")){
                     chests.add(new Chest(rect, (String) obj.getProperties().get("chestName"), (String) obj.getProperties().get("Item")));
-                else if (name.equals("NPC"))
+                }
+                else if (name.equals("NPC")){
                     npcs.add(new NPC(rect, (String) obj.getProperties().get("Name"), (String) obj.getProperties().get("Dialogue"), (String) obj.getProperties().get("item")));
+                }else if (name.equals("Portal")){
+                    portals.add(new Portal(rect, (String) obj.getProperties().get("type")));
+                }
 
                 for (Fixture f : body.getFixtureList()) {
                     f.setUserData(1);
@@ -71,11 +79,16 @@ public class WorldCreator {
         return npcs;
     }
 
-    public ArrayList<Body> getToBeDestroyed(){
+    public ArrayList<Portal> getPortals() {
+        return portals;
+    }
+
+    public ArrayList<Body> getToBeDestroyed() {
         for (Body i : walls) toBeDestroyed.add(i);
         for (Enemy i : enemies) toBeDestroyed.add(i.getBody());
         for (Chest i : chests) toBeDestroyed.add(i.getBody());
         for (NPC i : npcs) toBeDestroyed.add(i.getBody());
+        for (Portal i : portals) toBeDestroyed.add(i.getBody());
         return toBeDestroyed;
     }
 }
