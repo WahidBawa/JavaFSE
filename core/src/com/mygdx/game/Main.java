@@ -76,8 +76,8 @@ public class Main extends ApplicationAdapter {
     public static boolean displayText = false;
     public String type = null;
 
-    public static HashMap<String, HashMap<String, Integer>> weapons;
-    public static HashMap<String, HashMap<String, Integer>> consumables;
+    public static HashMap<String, HashMap<String, Integer>> weapons = new HashMap<String, HashMap<String, Integer>>();
+    public static HashMap<String, HashMap<String, Integer>> consumables = new HashMap<String, HashMap<String, Integer>>();
 
     private NPC currNpc;
     private Chest currChest;
@@ -110,8 +110,7 @@ public class Main extends ApplicationAdapter {
         inventory = new Inventory();
 
         try {
-            weapons = loadData("DATA/weapons.dat", true, false, false);
-            consumables = loadData("DATA/consumables.dat", false, false, true);
+            loadData();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -190,7 +189,7 @@ public class Main extends ApplicationAdapter {
         }
 
         //DEBUGGER AND FPS
-        dbr.render(world, camera.combined);
+//        dbr.render(world, camera.combined);
 //        fl.log();
     }
 
@@ -343,28 +342,33 @@ public class Main extends ApplicationAdapter {
     }
 
 
-    public HashMap<String, HashMap<String, Integer>> loadData(String filePath, boolean weapon, boolean armour, boolean consumable) throws FileNotFoundException {
-        String[] str;
-        HashMap<String, HashMap<String, Integer>> data = new HashMap<String, HashMap<String, Integer>>();
-        File file = new File(filePath);
-        Scanner text = new Scanner(file);
-        text.nextLine();
-
-        while (text.hasNextLine()) {
-            str = text.nextLine().split(",");
-            HashMap<String, Integer> tmp = new HashMap<String, Integer>();
-            if (consumable) {
-                tmp.put("stat", Integer.parseInt(str[1]));
-                tmp.put("replenishAmount", Integer.parseInt(str[2]));
-                tmp.put("stackable", Integer.parseInt(str[3]));
-            } else if (weapon) {
-                tmp.put("damage", Integer.parseInt(str[1]));
-                tmp.put("stackable", Integer.parseInt(str[2]));
+    public void loadData() throws FileNotFoundException {
+        //"maps.dat"
+        String[] dats = {"weapons.dat", "consumables.dat"};
+        for (int i = 0; i < dats.length; i++){ // this is for loading all the inventory data
+            String[] str;
+            HashMap<String, HashMap<String, Integer>> data = new HashMap<String, HashMap<String, Integer>>();
+            File file = new File("DATA/" + dats[i]);
+            Scanner text = new Scanner(file);
+            text.nextLine();
+            while (text.hasNextLine()) {
+                str = text.nextLine().split(",");
+                HashMap<String, Integer> tmp = new HashMap<String, Integer>();
+                if (i == 1) {
+                    tmp.put("stat", Integer.parseInt(str[1]));
+                    tmp.put("replenishAmount", Integer.parseInt(str[2]));
+                    tmp.put("stackable", Integer.parseInt(str[3]));
+                    consumables.put(str[0], tmp);
+                } else if (i == 0) {
+                    tmp.put("damage", Integer.parseInt(str[1]));
+                    tmp.put("stackable", Integer.parseInt(str[2]));
+                    weapons.put(str[0], tmp);
+                }
             }
-
-            data.put(str[0], tmp);
         }
-        return data;
+
+        // this is for other stuff now
+
     }
 
     public void createWorld(String dir) {
