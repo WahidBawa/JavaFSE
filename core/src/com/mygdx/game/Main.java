@@ -17,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 
+import javax.sound.sampled.Port;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -244,6 +245,13 @@ public class Main extends ApplicationAdapter {
             }
         }
 
+        for (Fixture i : objs){
+            if (i.getUserData().getClass() == Portal.class){
+                Portal p = (Portal) i.getUserData();
+                createWorld(p.getType());
+            }
+        }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             System.out.println();
             System.out.println("HEALTH: " + player.stats.get("health"));
@@ -259,6 +267,7 @@ public class Main extends ApplicationAdapter {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) createWorld("1");
         if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) createWorld("4");
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) createWorld("2");
 
         player.setX(player.body.getPosition().x);
         player.setY(player.body.getPosition().y);

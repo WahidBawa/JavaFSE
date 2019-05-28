@@ -40,4 +40,8 @@ public class Portal {
     public Body getBody() {
         return body;
     }
+
+    public String getType() {
+        return type;
+    }
 }

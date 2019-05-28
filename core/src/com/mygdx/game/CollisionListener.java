@@ -16,15 +16,19 @@ public class CollisionListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == Chest.class) {
-            Main.chestCollide = true;
-            objs.add(contact.getFixtureB());
-        } else if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == NPC.class) {
-            Main.npcCollide = true;
-            objs.add(contact.getFixtureB());
-        }
-        if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData() == "ENEMY") {
-            ((Enemy) contact.getFixtureB().getBody().getUserData()).attack(player);
+        if (contact.getFixtureA().getUserData() == "PLAYER"){
+            if (contact.getFixtureB().getUserData().getClass() == Chest.class) {
+                Main.chestCollide = true;
+                objs.add(contact.getFixtureB());
+            } else if (contact.getFixtureB().getUserData().getClass() == NPC.class) {
+                Main.npcCollide = true;
+                objs.add(contact.getFixtureB());
+            }else if (contact.getFixtureB().getUserData().getClass() == Portal.class){
+                objs.add(contact.getFixtureB());
+            }
+            if (contact.getFixtureB().getUserData() == "ENEMY") {
+                ((Enemy) contact.getFixtureB().getBody().getUserData()).attack(player);
+            }
         }
 
         Main.objs = objs;
@@ -33,12 +37,16 @@ public class CollisionListener implements ContactListener {
     @Override
     public void endContact(Contact contact) {
         Main.interactable = true;
-        if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == Chest.class) {
-            Main.chestCollide = false;
-            objs.remove(contact.getFixtureB());
-        } else if (contact.getFixtureA().getUserData() == "PLAYER" && contact.getFixtureB().getUserData().getClass() == NPC.class) {
-            Main.npcCollide = false;
-            objs.remove(contact.getFixtureB());
+        if (contact.getFixtureA().getUserData() == "PLAYER"){
+            if (contact.getFixtureB().getUserData().getClass() == Chest.class) {
+                Main.chestCollide = false;
+                objs.remove(contact.getFixtureB());
+            } else if (contact.getFixtureB().getUserData().getClass() == NPC.class) {
+                Main.npcCollide = false;
+                objs.remove(contact.getFixtureB());
+            }else if (contact.getFixtureB().getUserData().getClass() == Portal.class){
+                objs.remove(contact.getFixtureB());
+            }
         }
         Main.objs = objs;
 
