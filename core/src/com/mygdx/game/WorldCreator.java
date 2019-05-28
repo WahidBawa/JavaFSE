@@ -84,6 +84,7 @@ public class WorldCreator {
     }
 
     public ArrayList<Body> getToBeDestroyed() {
+        toBeDestroyed = new ArrayList<Body>();
         for (Body i : walls) toBeDestroyed.add(i);
         for (Enemy i : enemies) toBeDestroyed.add(i.getBody());
         for (Chest i : chests) toBeDestroyed.add(i.getBody());

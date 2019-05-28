@@ -100,7 +100,7 @@ public class Main extends ApplicationAdapter {
 
         player = new Player();
 
-        createWorld("1");
+        createWorld("3");
 //        createWorld("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
 //        createWorld("ASSETS/MAPS/OLD_MAPS/snow_place.tmx");
 
@@ -122,7 +122,7 @@ public class Main extends ApplicationAdapter {
     @Override
     public void render() {
         camera.zoom = PPM;
-
+        System.out.println(bodiesToDestroy.size());
         world.step(1 / 60f, 6, 2);
         for (int i = 0; i < bodiesToDestroy.size(); i++){
             world.destroyBody(bodiesToDestroy.get(i));
