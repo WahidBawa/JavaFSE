@@ -78,6 +78,7 @@ public class Main extends ApplicationAdapter {
 
     public static HashMap<String, HashMap<String, Integer>> weapons = new HashMap<String, HashMap<String, Integer>>();
     public static HashMap<String, HashMap<String, Integer>> consumables = new HashMap<String, HashMap<String, Integer>>();
+    public static HashMap<String, String> maps = new HashMap<String, String>();
 
     private NPC currNpc;
     private Chest currChest;
@@ -88,11 +89,18 @@ public class Main extends ApplicationAdapter {
     public void create() {
         graphics.setWindowedMode(WIDTH, HEIGHT);
 
+        try {
+            loadData();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         world = new World(new Vector2(0, 0), true);
 
         player = new Player();
 
-        createWorld("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
+        createWorld("1");
+//        createWorld("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
 //        createWorld("ASSETS/MAPS/OLD_MAPS/snow_place.tmx");
 
         batch = new SpriteBatch();
@@ -108,12 +116,6 @@ public class Main extends ApplicationAdapter {
         hud = new HUD();
 
         inventory = new Inventory();
-
-        try {
-            loadData();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -255,8 +257,8 @@ public class Main extends ApplicationAdapter {
             showInventory = !showInventory;
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) createWorld("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) createWorld("ASSETS/MAPS/OLD_MAPS/snow_place.tmx");
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) createWorld("1");
+        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) createWorld("4");
 
         player.setX(player.body.getPosition().x);
         player.setY(player.body.getPosition().y);
@@ -347,7 +349,6 @@ public class Main extends ApplicationAdapter {
         String[] dats = {"weapons.dat", "consumables.dat"};
         for (int i = 0; i < dats.length; i++){ // this is for loading all the inventory data
             String[] str;
-            HashMap<String, HashMap<String, Integer>> data = new HashMap<String, HashMap<String, Integer>>();
             File file = new File("DATA/" + dats[i]);
             Scanner text = new Scanner(file);
             text.nextLine();
@@ -368,12 +369,20 @@ public class Main extends ApplicationAdapter {
         }
 
         // this is for other stuff now
-
+        Scanner mapsData = new Scanner(new File("DATA/maps.dat"));
+        String[] split;
+        String line;
+        mapsData.nextLine();
+        while(mapsData.hasNextLine()){
+            line = mapsData.nextLine();
+            split = line.split(",");
+            maps.put(split[0], split[1]);
+        }
     }
 
-    public void createWorld(String dir) {
+    public void createWorld(String type) {
         TmxMapLoader loader = new TmxMapLoader();
-        TiledMap map = loader.load(dir);
+        TiledMap map = loader.load(maps.get(type));
 
         MAP_WIDTH = (Integer) map.getProperties().get("width") * TILESIZE;
         MAP_HEIGHT = (Integer) map.getProperties().get("height") * TILESIZE;
