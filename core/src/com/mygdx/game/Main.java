@@ -124,7 +124,6 @@ public class Main extends ApplicationAdapter {
     @Override
     public void render() {
         camera.zoom = PPM;
-        System.out.println(bodiesToDestroy.size());
 
         if (!destroyed){
             for (Body i : bodiesToDestroy){

@@ -88,7 +88,7 @@
   <object id="34" name="wall" x="352" y="224" width="96" height="64"/>
   <object id="35" name="wall" x="576" y="320" width="32" height="32"/>
   <object id="36" name="wall" x="928" y="224" width="32" height="32"/>
-  <object id="37" name="wall" x="1088" y="864" width="128" height="128"/>
+  <object id="37" name="wall" x="1074.67" y="844" width="155.333" height="158"/>
   <object id="38" name="wall" x="704" y="960" width="64" height="64"/>
   <object id="39" name="wall" x="1216" y="1120" width="64" height="64"/>
   <object id="40" name="wall" x="1312" y="1024" width="64" height="64"/>
@@ -115,12 +115,6 @@
    <properties>
     <property name="Item" value="Potion//C//HEALTH//50"/>
     <property name="chestName" value="Chest5"/>
-   </properties>
-  </object>
-  <object id="70" name="Portal" type="2" x="902.667" y="993.333" width="84" height="53.3333">
-   <properties>
-    <property name="xd" type="int" value="-1285"/>
-    <property name="yd" type="int" value="-495"/>
    </properties>
   </object>
   <object id="74" name="wall" x="1314.67" y="1244" width="128" height="128"/>
