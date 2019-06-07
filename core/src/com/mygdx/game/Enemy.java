@@ -97,7 +97,7 @@ public class Enemy {
                 seen = true;
                 Main.PPM = 0.3f;
             }
-            //time.delay(10000);
+
 
             player.unLock();
             this.unLock();
