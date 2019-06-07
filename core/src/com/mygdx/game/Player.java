@@ -18,7 +18,7 @@ public class Player {
     private int counter = 0;
     private int animation_speed = 7;
     private int pos = 0;
-
+    public boolean frozen = false;
     //player stats
     int health = 100;
     int mana = 100;
@@ -91,6 +91,14 @@ public class Player {
             sprites.add(tmpSprites);
         }
     }
+    public void lock() {
+
+        frozen = true;
+
+    }
+    public void unLock() {
+        frozen = false;
+    }
 
     public void loadData() {
         stats.put("health", 16);
@@ -121,6 +129,7 @@ public class Player {
         Main.inventory.addItem(item);
 //        stats.put("inventory", inventory);
     }
+
 
     public void setHealth(int hp) {
         health = hp;

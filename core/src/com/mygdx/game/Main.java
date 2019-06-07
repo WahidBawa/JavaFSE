@@ -41,10 +41,10 @@ public class Main extends ApplicationAdapter {
     public static World world;
     public static WorldCreator wc;
 
-    public static final float PPM = 0.3f;
+    public static float PPM = 0.3f;
 
 
-    OrthogonalTiledMapRenderer renderer;
+    public static OrthogonalTiledMapRenderer renderer;
 
     public static OrthographicCamera camera;
 
@@ -123,6 +123,7 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void render() {
+
         camera.zoom = PPM;
 
         if (!destroyed){
@@ -155,7 +156,7 @@ public class Main extends ApplicationAdapter {
         if (!displayText) {
             movePlayer();
             for (Enemy enemy : wc.getEnemies()) {
-                enemy.move(player);
+                enemy.encounter(player);
             }
         }
 
@@ -208,28 +209,32 @@ public class Main extends ApplicationAdapter {
         renderer.dispose();
     }
 
+
+
     public void movePlayer() {
         player.getBody().setLinearVelocity(0, 0);
+        if (!player.frozen) {
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
-            player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
-            moving = true;
-            dir = LEFT;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
-            player.getBody().applyLinearImpulse(new Vector2(speed * 2, 0), player.getBody().getWorldCenter(), true);
-            moving = true;
-            dir = RIGHT;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
-            player.getBody().applyLinearImpulse(new Vector2(0, -speed * 2), player.getBody().getWorldCenter(), true);
-            moving = true;
-            dir = DOWN;
-        } else if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
-            player.getBody().applyLinearImpulse(new Vector2(0, speed * 2), player.getBody().getWorldCenter(), true);
-            moving = true;
-            dir = UP;
-        } else {
-            player.getBody().applyLinearImpulse(new Vector2(player.getBody().getLinearVelocity().x * -1, player.getBody().getLinearVelocity().y * -1), player.getBody().getWorldCenter(), true);
-            moving = false;
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
+                player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
+                moving = true;
+                dir = LEFT;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+                player.getBody().applyLinearImpulse(new Vector2(speed * 2, 0), player.getBody().getWorldCenter(), true);
+                moving = true;
+                dir = RIGHT;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
+                player.getBody().applyLinearImpulse(new Vector2(0, -speed * 2), player.getBody().getWorldCenter(), true);
+                moving = true;
+                dir = DOWN;
+            } else if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
+                player.getBody().applyLinearImpulse(new Vector2(0, speed * 2), player.getBody().getWorldCenter(), true);
+                moving = true;
+                dir = UP;
+            } else {
+                player.getBody().applyLinearImpulse(new Vector2(player.getBody().getLinearVelocity().x * -1, player.getBody().getLinearVelocity().y * -1), player.getBody().getWorldCenter(), true);
+                moving = false;
+            }
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide) && !moving) {
