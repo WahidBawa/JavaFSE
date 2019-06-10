@@ -57,7 +57,6 @@ public class WorldCreator {
 
 //                if (body != null){
                 for (Fixture f : body.getFixtureList()) {
-                    System.out.println(body);
                     f.setUserData(1);
                 }
 //                }

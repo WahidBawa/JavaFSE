@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.FPSLogger;
@@ -26,7 +27,7 @@ import java.util.Scanner;
 
 import static com.badlogic.gdx.Gdx.graphics;
 
-public class Main extends ApplicationAdapter {
+public class Main extends Game {
     SpriteBatch batch;
     SpriteBatch hud_batch;
     public static Player player;
