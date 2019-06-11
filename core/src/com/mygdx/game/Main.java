@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.FPSLogger;
@@ -11,14 +10,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 
-import javax.sound.sampled.Port;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -27,7 +24,7 @@ import java.util.Scanner;
 
 import static com.badlogic.gdx.Gdx.graphics;
 
-public class Main extends Game {
+public class Main extends ApplicationAdapter {
     SpriteBatch batch;
     SpriteBatch hud_batch;
     public static Player player;
@@ -103,9 +100,7 @@ public class Main extends Game {
 
         player = new Player();
 
-        createWorld("3");
-//        createWorld("ASSETS/MAPS/OLD_MAPS/grasslands.tmx");
-//        createWorld("ASSETS/MAPS/OLD_MAPS/snow_place.tmx");
+        createWorld("1");
 
         batch = new SpriteBatch();
 
@@ -168,17 +163,6 @@ public class Main extends Game {
             inventory.update(hud_batch);
             inventory.open(hud_batch);
             hud_batch.end();
-
-            clickedOn(inventory);
-            if (inventory.getItems().size() > 0) {
-                for (Item[] i : inventory.getItemArray()) {
-                    for (Item n : i) {
-                        if (n != null) {
-                            clickedOn(n);
-                        }
-                    }
-                }
-            }
         }
 
         if (displayText) {
@@ -297,73 +281,6 @@ public class Main extends Game {
 
         for (Chest i : wc.getChests()) i.update(batch);
     }
-
-    public void clickedOn(Inventory inv) {
-        float minx = inv.getSprite().getX();
-        float miny = inv.getSprite().getY() + inv.getSprite().getHeight() - 75;
-        float maxx = minx + inv.getSprite().getWidth();
-        float maxy = miny + inv.getSprite().getHeight();
-
-        int mousex = Gdx.input.getX();
-        int mousey = HEIGHT - Gdx.input.getY();
-//        System.out.println("X: " + mousex +" Y: " + mousey);
-        if (Gdx.input.isButtonPressed(0)) {
-            if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
-                if (!invDrag) { // YOU NEED TO USE MOUSE UP TO RESET INV DRAG, SO IMPLEMENT THE INPUT PROCESSOR HOE
-                    xDragOffset = Math.abs(mousex - (int) minx);
-                    yDragOffset = Math.abs(mousey - (int) miny);
-                    invDrag = true;
-                }
-                inventory.getSprite().setPosition(mousex - xDragOffset, mousey - inv.getSprite().getHeight() + 25);
-            }
-        } else {
-            invDrag = false;
-        }
-    }
-
-    public void clickedOn(Item item) {
-        float minx = item.getImg().getX();
-        float miny = item.getImg().getY();
-        float maxx = minx + item.getImg().getWidth();
-        float maxy = miny + item.getImg().getHeight();
-
-        int mousex = Gdx.input.getX();
-        int mousey = HEIGHT - Gdx.input.getY();
-
-        if ((mousex >= minx && mousex <= maxx) && (mousey >= miny && mousey <= maxy)) {
-            if (Gdx.input.isButtonPressed(0)) {
-                HashMap t = (HashMap) inventory.getInventoryBlocks().get(item.name);
-                System.out.println("Clicked on " + item.name + " with a quantity of " + t.get("Quantity"));
-                boolean otherDrag = false;
-                for (Item[] i : inventory.getItemArray()) {
-                    for (Item n : i) {
-                        if (n != null && n.dragged) {
-                            otherDrag = true;
-                        }
-                    }
-                }
-
-                if (!otherDrag) item.dragged = true;
-
-            } else {
-                item.dragged = false;
-            }
-
-            if (Gdx.input.isButtonPressed(1)) {
-                item.used = true;
-            } // working on this shit still
-            else {
-                if (item.used) {
-                    player.use(item);
-                    System.out.println("item used");
-                }
-            }
-
-        } else {
-            item.used = false;
-        }
-    }
-
 
     public void loadData() throws FileNotFoundException {
         //"maps.dat"
