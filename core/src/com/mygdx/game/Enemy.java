@@ -103,7 +103,7 @@ public class Enemy {
             this.unLock();
         }
         if (seen) {
-            move(player);
+            //move(player);
         }
      }
     public void move(Player player) {
