@@ -17,7 +17,7 @@ public class Inventory {
     BitmapFont font = new BitmapFont();
 
     public Inventory() {
-        inventory.setPosition(0, 0);
+        inventory.setPosition(Main.WIDTH / 2 - inventory.getWidth() / 2, Main.HEIGHT / 2 - inventory.getHeight() / 2);
     }
 
     public void render(SpriteBatch batch) {
@@ -29,6 +29,7 @@ public class Inventory {
     }
 
     public void open(SpriteBatch batch) {
+
         for (int i = 0; i < items.length; i++) {
             for (int n = 0; n < items[i].length; n++) {
                 if (items[i][n] != null) {

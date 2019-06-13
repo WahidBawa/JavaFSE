@@ -271,6 +271,8 @@ public class Main extends ApplicationAdapter {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             showInventory = !showInventory;
+            if (showInventory) player.lock();
+            else player.unLock();
         }
 
 //        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) createWorld("1");
