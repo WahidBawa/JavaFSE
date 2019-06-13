@@ -23,6 +23,8 @@ public class Inventory {
 
     public Inventory() {
         inventory.setPosition(Main.WIDTH / 2 - inventory.getWidth() / 2, Main.HEIGHT / 2 - inventory.getHeight() / 2);
+        hover.setSize(5, 5);
+        selected.setSize(50, 50);
     }
 
     public void render(SpriteBatch batch) {
@@ -45,8 +47,8 @@ public class Inventory {
                     HashMap t = (HashMap) inventoryBlocks.get(items[i][n].name);
                     Sprite tmp = items[i][n].getImg();
 
-                    float x = (30 + n * tmp.getWidth() + 4 * n) + Main.inventory.getSprite().getX();
-                    float y = (190 - i * tmp.getWidth() - 4 * i) + Main.inventory.getSprite().getY();
+                    float x = (30 + n * tmp.getWidth() + 4 * n) + inventory.getX();
+                    float y = (190 - i * tmp.getWidth() - 4 * i) + inventory.getY();
 
                     items[i][n].getImg().setPosition(x, y);
                     items[i][n].getImg().draw(batch);
@@ -54,8 +56,10 @@ public class Inventory {
                 }
             }
         }
-
-
+        hover.setSize(1, 1);
+        batch.draw(hover, hover_x * hover.getWidth() + inventory.getWidth(), hover_y * hover.getHeight() + inventory.getHeight());
+        System.out.println("X: " + Gdx.input.getX() + " Y: " + Gdx.input.getY());
+//        batch.draw(hover, 0, 0);
     }
 
     public void addItem(Item item) { // will add item to the first empty spot found
