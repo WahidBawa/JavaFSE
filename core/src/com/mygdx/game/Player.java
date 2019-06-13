@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player {
-    Sprite player = new Sprite(new Texture("ASSETS/SPRITES/PLAYER/1.png"));
+    Sprite player = new Sprite(new Texture("ASSETS/SPRITES/PLAYER/Sans/1.png"));
     Body body;
     Rectangle rect;
 
@@ -43,7 +43,7 @@ public class Player {
     }
 
     private void render(SpriteBatch batch) {
-        batch.draw(player, body.getPosition().x - player.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - player.getHeight() * (float) Math.pow(Main.PPM, 2), player.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, player.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
+        batch.draw(player, body.getPosition().x - player.getWidth() / 4 * (float) Math.pow(Main.PPM, 2), body.getPosition().y - player.getHeight() / 4 * (float) Math.pow(Main.PPM, 2), player.getWidth() * (float) Math.pow(Main.PPM, 2) / 2, player.getHeight() * (float) Math.pow(Main.PPM, 2) / 2);
     }
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
@@ -69,7 +69,7 @@ public class Player {
 
         fdef.shape = shape;
 
-        shape.setAsBox(rect.width * (float) Math.pow(Main.PPM, 2), rect.height * (float) Math.pow(Main.PPM, 2));
+        shape.setAsBox(rect.width * (float) Math.pow(Main.PPM, 2) / 4, rect.height * (float) Math.pow(Main.PPM, 2) / 4);
 
         this.body.createFixture(fdef);
 
@@ -85,9 +85,10 @@ public class Player {
     public void loadSprites() {
         for (String i : new String[]{"Up", "Down", "Left", "Right"}) {
             tmpSprites = new ArrayList<Texture>();
-            for (int n = 0; n < 3; n++) {
-//                tmpSprites.add(new Texture("ASSETS/SPRITES/PLAYER/Sans/" + i + "/" + n + ".png")); // change this to current sprites
-                tmpSprites.add(new Texture("ASSETS/SPRITES/PLAYER/" + i + "/" + n + ".png")); // change this to current sprites
+
+            for (int n = 0; n < 4; n++) {
+                tmpSprites.add(new Texture("ASSETS/SPRITES/PLAYER/Sans/" + i + "/" + n + ".png")); // change this to current sprites
+//                tmpSprites.add(new Texture("ASSETS/SPRITES/PLAYER/" + i + "/" + n + ".png")); // change this to current sprites
             }
             sprites.add(tmpSprites);
         }
@@ -117,7 +118,7 @@ public class Player {
             if (counter > animation_speed) {
                 counter = 0;
                 pos += 1;
-                if (pos >= 3) {
+                if (pos >= 4) {
                     pos = 0;
                 }
             }
