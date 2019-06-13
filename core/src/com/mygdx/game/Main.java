@@ -141,7 +141,7 @@ public class Main extends ApplicationAdapter {
         Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (!displayText) {
+        if (!displayText && !player.isFrozen()) {
             movePlayer();
         }
 
@@ -157,7 +157,7 @@ public class Main extends ApplicationAdapter {
 
         batch.end();
 
-        if (!displayText) {
+        if (!displayText && !player.isFrozen()) {
             for (Enemy enemy : wc.getEnemies()) {
                 enemy.encounter(player);
             }

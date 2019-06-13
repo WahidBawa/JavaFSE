@@ -20,10 +20,12 @@ public class Inventory {
     int selected_x, selected_y;
     Sprite hover = new Sprite(new Texture("ASSETS/UI/INVENTORY/Hover.png"));
     int hover_x, hover_y;
+    boolean selectedItem = false;
 
     public Inventory() {
-        hover_x = 1;
-        hover_y = 0;
+        hover_x = hover_y = 0;
+        selected_x = selected_y = 0;
+
         inventory.setPosition(Main.WIDTH / 2 - inventory.getWidth() / 2, Main.HEIGHT / 2 - inventory.getHeight() / 2);
     }
 
@@ -54,12 +56,14 @@ public class Inventory {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
             //do stuff
+            selectedItem = true;
+            selected_x = hover_x;
+            selected_y = hover_y;
         }
         render(batch);
     }
 
     public void open(SpriteBatch batch) {
-        selected_x = selected_y = 0;
         for (int i = 0; i < items.length; i++) {
             for (int n = 0; n < items[i].length; n++) {
                 if (items[i][n] != null) {
@@ -76,6 +80,7 @@ public class Inventory {
             }
         }
         batch.draw(hover, 30 + (hover_x * 60 + inventory.getX() + 4 * hover_x), 187 + (hover_y * -60 + inventory.getY() - 4 * hover_y), 60, 60);
+        if (selectedItem) batch.draw(selected, 30 + (selected_x * 60 + inventory.getX() + 4 * selected_x), 187 + (selected_y * -60 + inventory.getY() - 4 * selected_y), 60, 60);
 //        System.out.println("X: " + Gdx.input.getX() + " Y: " + Gdx.input.getY());
 //        batch.draw(hover, 0, 0);
     }

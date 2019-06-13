@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player {
-    Sprite player = new Sprite(new Texture("ASSETS/SPRITES/PLAYER/SANS/1.png"));
+    Sprite player = new Sprite(new Texture("ASSETS/SPRITES/PLAYER/Sans/1.png"));
     Body body;
     Rectangle rect;
 
@@ -85,6 +85,7 @@ public class Player {
     public void loadSprites() {
         for (String i : new String[]{"Up", "Down", "Left", "Right"}) {
             tmpSprites = new ArrayList<Texture>();
+
             for (int n = 0; n < 4; n++) {
                 tmpSprites.add(new Texture("ASSETS/SPRITES/PLAYER/Sans/" + i + "/" + n + ".png")); // change this to current sprites
 //                tmpSprites.add(new Texture("ASSETS/SPRITES/PLAYER/" + i + "/" + n + ".png")); // change this to current sprites
@@ -158,6 +159,10 @@ public class Player {
 
     public Body getBody() {
         return body;
+    }
+
+    public boolean isFrozen() {
+        return frozen;
     }
 
     public void use(Item item) {
