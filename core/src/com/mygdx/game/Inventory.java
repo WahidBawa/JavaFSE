@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,6 +16,10 @@ public class Inventory {
     ArrayList<Item> allItems = new ArrayList<Item>();
     HashMap inventoryBlocks = new HashMap();
     BitmapFont font = new BitmapFont();
+    Sprite selected = new Sprite(new Texture("ASSETS/UI/INVENTORY/Selected.png"));
+    int selected_x, selected_y;
+    Sprite hover = new Sprite(new Texture("ASSETS/UI/INVENTORY/Hover.png"));
+    int hover_x, hover_y;
 
     public Inventory() {
         inventory.setPosition(Main.WIDTH / 2 - inventory.getWidth() / 2, Main.HEIGHT / 2 - inventory.getHeight() / 2);
@@ -25,30 +30,32 @@ public class Inventory {
     }
 
     public void update(SpriteBatch batch) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+
+        }
         render(batch);
     }
 
     public void open(SpriteBatch batch) {
-
+        hover_x = hover_y = 0;
+        selected_x = selected_y = 0;
         for (int i = 0; i < items.length; i++) {
             for (int n = 0; n < items[i].length; n++) {
                 if (items[i][n] != null) {
                     HashMap t = (HashMap) inventoryBlocks.get(items[i][n].name);
                     Sprite tmp = items[i][n].getImg();
 
-                    float x = Gdx.input.getX() - items[i][n].getImg().getWidth() / 2;
-                    float y = Main.HEIGHT - Gdx.input.getY() - items[i][n].getImg().getHeight() / 2;
+                    float x = (30 + n * tmp.getWidth() + 4 * n) + Main.inventory.getSprite().getX();
+                    float y = (190 - i * tmp.getWidth() - 4 * i) + Main.inventory.getSprite().getY();
 
-                    if (!items[i][n].dragged) {
-                        x = (30 + n * tmp.getWidth() + 4 * n) + Main.inventory.getSprite().getX();
-                        y = (190 - i * tmp.getWidth() - 4 * i) + Main.inventory.getSprite().getY();
-                    }
                     items[i][n].getImg().setPosition(x, y);
                     items[i][n].getImg().draw(batch);
                     font.draw(batch, t.get("Quantity") + "", x + 50, y + 10);
                 }
             }
         }
+
+
     }
 
     public void addItem(Item item) { // will add item to the first empty spot found

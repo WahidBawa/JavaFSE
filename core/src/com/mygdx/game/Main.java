@@ -275,10 +275,6 @@ public class Main extends ApplicationAdapter {
             else player.unLock();
         }
 
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) createWorld("1");
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) createWorld("2");
-//        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) createWorld("3");
-
         player.setX(player.body.getPosition().x);
         player.setY(player.body.getPosition().y);
 
