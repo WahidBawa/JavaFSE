@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="32" tileheight="32" infinite="0" nextobjectid="34">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="34">
  <tileset firstgid="1" name="revolution_snow" tilewidth="32" tileheight="32" tilecount="154" columns="11">
   <image source="revolution_snow.png" trans="a349a4" width="352" height="448"/>
  </tileset>
  <tileset firstgid="155" source="water.tsx"/>
- <layer name="Tile Layer 1" width="30" height="17">
+ <layer id="1" name="Tile Layer 1" width="30" height="17">
   <data encoding="csv">
 57,57,57,57,57,57,57,57,57,2,57,57,57,57,57,57,57,57,57,7,57,57,57,57,57,57,57,57,57,57,
 57,9,57,57,57,9,57,57,57,2,57,57,57,57,57,57,57,57,57,57,57,57,7,57,57,57,57,57,57,57,
@@ -25,7 +25,7 @@
 57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57,57
 </data>
  </layer>
- <layer name="stumps" width="30" height="17">
+ <layer id="2" name="stumps" width="30" height="17">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -46,7 +46,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="cliff" width="30" height="17">
+ <layer id="3" name="cliff" width="30" height="17">
   <data encoding="csv">
 45,46,46,46,46,46,46,46,3221225543,3221225542,46,46,46,46,46,46,46,46,46,46,46,46,46,47,114,115,116,114,115,113,
 56,57,57,57,57,57,57,57,3221225532,3221225531,57,57,57,57,57,57,57,57,57,57,57,57,57,58,122,123,124,122,123,124,
@@ -67,7 +67,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="walss">
+ <objectgroup id="4" name="walss">
   <object id="2" name="wall" x="128" y="192" width="32" height="32"/>
   <object id="3" name="wall" x="32" y="192" width="32" height="32"/>
   <object id="4" name="wall" x="415.727" y="192.273" width="32" height="32"/>
@@ -83,8 +83,8 @@
   <object id="14" name="wall" x="318" y="-29" width="448" height="32"/>
   <object id="15" name="Portal" type="1" x="260.667" y="-64" width="54.6667" height="53.3333">
    <properties>
-    <property name="xd" type="int" value="395"/>
-    <property name="yd" type="int" value="265"/>
+    <property name="xd" type="int" value="4"/>
+    <property name="yd" type="int" value="464"/>
    </properties>
   </object>
   <object id="16" name="wall" x="-23" y="-12" width="30" height="132"/>
@@ -106,6 +106,11 @@
     <property name="yd" type="int" value="-275"/>
    </properties>
   </object>
-  <object id="33" name="Portal" type="3" x="939" y="278" width="25" height="92"/>
+  <object id="33" name="Portal" type="3" x="939" y="278" width="25" height="92">
+   <properties>
+    <property name="xd" type="int" value="113"/>
+    <property name="yd" type="int" value="234"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

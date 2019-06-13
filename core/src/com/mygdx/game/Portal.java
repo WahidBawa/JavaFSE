@@ -10,9 +10,12 @@ public class Portal {
     Body body;
     Rectangle rect;
     String type;
-    public Portal(Rectangle rect, String type){
+    float newX, newY;
+    public Portal(Rectangle rect, String type, int newX, int newY){
         this.rect = rect;
         this.type = type;
+        this.newX = newX;
+        this.newY = newY;
         createBody();
     }
 
@@ -43,5 +46,13 @@ public class Portal {
 
     public String getType() {
         return type;
+    }
+
+    public float getNewX() {
+        return newX;
+    }
+
+    public float getNewY() {
+        return newY;
     }
 }

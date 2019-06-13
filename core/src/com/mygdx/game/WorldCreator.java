@@ -52,7 +52,7 @@ public class WorldCreator {
                 } else if (name.equals("NPC")) {
                     npcs.add(new NPC(rect, (String) obj.getProperties().get("Name"), (String) obj.getProperties().get("Dialogue"), (String) obj.getProperties().get("item")));
                 } else if (name.equals("Portal")) {
-                    portals.add(new Portal(rect, (String) obj.getProperties().get("type")));
+                    portals.add(new Portal(rect, (String) obj.getProperties().get("type"), (Integer) obj.getProperties().get("xd"), (Integer) obj.getProperties().get("yd")));
                 }
 
 //                if (body != null){

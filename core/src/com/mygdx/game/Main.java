@@ -121,7 +121,7 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void render() {
-
+        System.out.println(player.getX() + " " + player.getY());
         camera.zoom = PPM;
 
         if (!destroyed){
@@ -246,7 +246,7 @@ public class Main extends ApplicationAdapter {
         for (Fixture i : objs){
             if (i.getUserData().getClass() == Portal.class){
                 Portal p = (Portal) i.getUserData();
-                createWorld(p.getType());
+                createWorld(p.getType(), p.getNewX(), p.getNewY());
             }
         }
 
@@ -263,9 +263,9 @@ public class Main extends ApplicationAdapter {
             showInventory = !showInventory;
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) createWorld("1");
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) createWorld("2");
-        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) createWorld("3");
+//        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) createWorld("1");
+//        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) createWorld("2");
+//        if (Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) createWorld("3");
 
         player.setX(player.body.getPosition().x);
         player.setY(player.body.getPosition().y);
@@ -318,6 +318,31 @@ public class Main extends ApplicationAdapter {
             split = line.split(",");
             maps.put(split[0], split[1]);
         }
+    }
+
+    public void createWorld(String type, float x, float y) {
+        TmxMapLoader loader = new TmxMapLoader();
+        TiledMap map = loader.load(maps.get(type));
+
+        MAP_WIDTH = (Integer) map.getProperties().get("width") * TILESIZE;
+        MAP_HEIGHT = (Integer) map.getProperties().get("height") * TILESIZE;
+
+        renderer = new OrthogonalTiledMapRenderer(map, PPM);
+
+        if (wc != null) {
+            bodiesToDestroy = wc.getToBeDestroyed();
+            destroyed = false;
+        }
+
+        wc = new WorldCreator(world, map);
+
+        player.getBody().setTransform(x, y, 0);
+        player.setX(player.body.getPosition().x);
+        player.setY(player.body.getPosition().y);
+
+        camera.position.x = player.getX();
+        camera.position.y = player.getY();
+
     }
 
     public void createWorld(String type) {
