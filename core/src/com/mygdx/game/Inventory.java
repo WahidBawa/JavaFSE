@@ -22,9 +22,9 @@ public class Inventory {
     int hover_x, hover_y;
 
     public Inventory() {
+        hover_x = 1;
+        hover_y = 0;
         inventory.setPosition(Main.WIDTH / 2 - inventory.getWidth() / 2, Main.HEIGHT / 2 - inventory.getHeight() / 2);
-        hover.setSize(5, 5);
-        selected.setSize(50, 50);
     }
 
     public void render(SpriteBatch batch) {
@@ -32,14 +32,33 @@ public class Inventory {
     }
 
     public void update(SpriteBatch batch) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+            hover_x += 1;
+            hover_x = hover_x % 7;
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+            hover_x -= 1;
+            if (hover_x < 0) {
+                hover_x = 6;
+            }
+        }
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
+            hover_y += 1;
+            hover_y = hover_y % 3;
+        } else if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            hover_y -= 1;
+            if (hover_y < 0) {
+                hover_y = 2;
+            }
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+            //do stuff
         }
         render(batch);
     }
 
     public void open(SpriteBatch batch) {
-        hover_x = hover_y = 0;
         selected_x = selected_y = 0;
         for (int i = 0; i < items.length; i++) {
             for (int n = 0; n < items[i].length; n++) {
@@ -56,9 +75,8 @@ public class Inventory {
                 }
             }
         }
-        hover.setSize(1, 1);
-        batch.draw(hover, hover_x * hover.getWidth() + inventory.getWidth(), hover_y * hover.getHeight() + inventory.getHeight());
-        System.out.println("X: " + Gdx.input.getX() + " Y: " + Gdx.input.getY());
+        batch.draw(hover, 30 + (hover_x * 60 + inventory.getX() + 4 * hover_x), 187 + (hover_y * -60 + inventory.getY() - 4 * hover_y), 60, 60);
+//        System.out.println("X: " + Gdx.input.getX() + " Y: " + Gdx.input.getY());
 //        batch.draw(hover, 0, 0);
     }
 
