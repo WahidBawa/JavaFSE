@@ -141,7 +141,9 @@ public class Main extends ApplicationAdapter {
         Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        camera.update();
+        if (!displayText && !player.isFrozen()) {
+            movePlayer();
+        }
 
         renderer.setView(camera);
 //        renderer.render(new int[]{0, 1, 2, 3});
@@ -156,7 +158,6 @@ public class Main extends ApplicationAdapter {
         batch.end();
 
         if (!displayText && !player.isFrozen()) {
-            movePlayer();
             for (Enemy enemy : wc.getEnemies()) {
                 enemy.encounter(player);
             }
@@ -280,6 +281,7 @@ public class Main extends ApplicationAdapter {
 
         camera.position.x = player.getX();
         camera.position.y = player.getY();
+        camera.update();
     }
 
     public void updateWorldObjects() {
