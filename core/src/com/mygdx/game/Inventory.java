@@ -14,7 +14,7 @@ public class Inventory {
     Sprite inventory = new Sprite(new Texture("ASSETS/UI/INVENTORY/Inventory.png"));
     Item[][] items = new Item[3][7];
     ArrayList<Item> allItems = new ArrayList<Item>();
-    HashMap inventoryBlocks = new HashMap();
+    HashMap<String, HashMap<String, Integer>> inventoryBlocks = new HashMap<String, HashMap<String, Integer>>();
     BitmapFont font = new BitmapFont();
     Sprite selected = new Sprite(new Texture("ASSETS/UI/INVENTORY/Selected.png"));
     int selected_x, selected_y;
@@ -56,10 +56,17 @@ public class Inventory {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
             //do stuff
-            if (items[hover_y][hover_x] != null){
+            if (items[hover_y][hover_x] != null && !selectedItem){
                 selectedItem = true;
                 selected_x = hover_x;
                 selected_y = hover_y;
+            }
+            if (items[hover_y][hover_x] == null && selectedItem){
+                selectedItem = false;
+                inventoryBlocks.get(items[selected_y][selected_x].name).put("X", hover_x);
+                inventoryBlocks.get(items[selected_y][selected_x].name).put("Y", hover_y);
+                items[hover_y][hover_x] = items[selected_y][selected_x];
+                items[selected_y][selected_x] = null;
             }
         }
         render(batch);
@@ -69,11 +76,14 @@ public class Inventory {
         for (int i = 0; i < items.length; i++) {
             for (int n = 0; n < items[i].length; n++) {
                 if (items[i][n] != null) {
-                    HashMap t = (HashMap) inventoryBlocks.get(items[i][n].name);
+                    HashMap t = inventoryBlocks.get(items[i][n].name);
                     Sprite tmp = items[i][n].getImg();
 
-                    float x = (30 + n * tmp.getWidth() + 4 * n) + inventory.getX();
-                    float y = (190 - i * tmp.getWidth() - 4 * i) + inventory.getY();
+                    int posX = (Integer) t.get("X");
+                    int posY = (Integer) t.get("Y");
+
+                    float x = (30 + posX * tmp.getWidth() + 4 * posX) + inventory.getX();
+                    float y = (190 - posY * tmp.getWidth() - 4 * posY) + inventory.getY();
 
                     items[i][n].getImg().setPosition(x, y);
                     items[i][n].getImg().draw(batch);
@@ -83,8 +93,6 @@ public class Inventory {
         }
         batch.draw(hover, 30 + (hover_x * 60 + inventory.getX() + 4 * hover_x), 187 + (hover_y * -60 + inventory.getY() - 4 * hover_y), 60, 60);
         if (selectedItem) batch.draw(selected, 30 + (selected_x * 60 + inventory.getX() + 4 * selected_x), 187 + (selected_y * -60 + inventory.getY() - 4 * selected_y), 60, 60);
-//        System.out.println("X: " + Gdx.input.getX() + " Y: " + Gdx.input.getY());
-//        batch.draw(hover, 0, 0);
     }
 
     public void addItem(Item item) { // will add item to the first empty spot found
@@ -93,7 +101,7 @@ public class Inventory {
         HashMap tmp = new HashMap();
 
         if (inventoryBlocks.get(item.name) != null) {
-            HashMap t = (HashMap) inventoryBlocks.get(item.name);
+            HashMap t = inventoryBlocks.get(item.name);
             tmp.put("X", t.get("X"));
             tmp.put("Y", t.get("Y"));
             tmp.put("Quantity", (Integer) t.get("Quantity") + 1);
@@ -121,14 +129,13 @@ public class Inventory {
     }
 
     public void removeItem(Item item) {
-        HashMap t = (HashMap) inventoryBlocks.get(item.name);
+        HashMap t = inventoryBlocks.get(item.name);
         if ((Integer) t.get("Quantity") > 1) {
             t.put("Quantity", (Integer) t.get("Quantity") - 1);
             inventoryBlocks.put(item.name, t);
         } else if ((Integer) t.get("Quantity") == 1) {
             items[(Integer) t.get("Y")][(Integer) t.get("X")] = null;
             inventoryBlocks.remove(item.name);
-//            System.out.println(t);
         }
         allItems.remove(item);
     }
