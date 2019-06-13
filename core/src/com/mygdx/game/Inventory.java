@@ -56,9 +56,11 @@ public class Inventory {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
             //do stuff
-            selectedItem = true;
-            selected_x = hover_x;
-            selected_y = hover_y;
+            if (items[hover_y][hover_x] != null){
+                selectedItem = true;
+                selected_x = hover_x;
+                selected_y = hover_y;
+            }
         }
         render(batch);
     }

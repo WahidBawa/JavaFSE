@@ -141,7 +141,7 @@ public class Main extends ApplicationAdapter {
         Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (!displayText && !player.isFrozen()) {
+        if (!displayText) {
             movePlayer();
         }
 
@@ -210,8 +210,8 @@ public class Main extends ApplicationAdapter {
 
 
     public void movePlayer() {
-        player.getBody().setLinearVelocity(0, 0);
-        if (!player.frozen) {
+        if (!player.isFrozen()){
+            player.getBody().setLinearVelocity(0, 0);
 
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
                 player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
@@ -233,55 +233,62 @@ public class Main extends ApplicationAdapter {
                 player.getBody().applyLinearImpulse(new Vector2(player.getBody().getLinearVelocity().x * -1, player.getBody().getLinearVelocity().y * -1), player.getBody().getWorldCenter(), true);
                 moving = false;
             }
-        }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide) && !moving) {
-            for (Fixture i : objs) {
-                if (i.getUserData().getClass() == Chest.class) {
-                    currChest = (Chest) i.getUserData();
-                    if (!currChest.chestOpened) {
-                        type = "chest";
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide) && !moving) {
+                for (Fixture i : objs) {
+                    if (i.getUserData().getClass() == Chest.class) {
+                        currChest = (Chest) i.getUserData();
+                        if (!currChest.chestOpened) {
+                            type = "chest";
+                            displayText = true;
+                        }
+                    }
+                    if (i.getUserData().getClass() == NPC.class && interactable) {
+                        currNpc = (NPC) i.getUserData();
+                        type = "npc";
+                        currNpc.resetTalk();
                         displayText = true;
+                        interactable = false;
                     }
                 }
-                if (i.getUserData().getClass() == NPC.class && interactable) {
-                    currNpc = (NPC) i.getUserData();
-                    type = "npc";
-                    currNpc.resetTalk();
-                    displayText = true;
-                    interactable = false;
+            }
+
+            for (Fixture i : objs) {
+                if (i.getUserData().getClass() == Portal.class) {
+                    Portal p = (Portal) i.getUserData();
+                    createWorld(p.getType(), p.getNewX(), p.getNewY());
                 }
             }
-        }
 
-        for (Fixture i : objs) {
-            if (i.getUserData().getClass() == Portal.class) {
-                Portal p = (Portal) i.getUserData();
-                createWorld(p.getType(), p.getNewX(), p.getNewY());
+            if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+                System.out.println();
+                System.out.println("HEALTH: " + player.stats.get("health"));
+                System.out.println("MANA: " + player.stats.get("mana"));
+                System.out.println("ATTACK: " + player.stats.get("attack"));
+                System.out.println("DEFENSE: " + player.stats.get("defense"));
+                System.out.println();
             }
-        }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            System.out.println();
-            System.out.println("HEALTH: " + player.stats.get("health"));
-            System.out.println("MANA: " + player.stats.get("mana"));
-            System.out.println("ATTACK: " + player.stats.get("attack"));
-            System.out.println("DEFENSE: " + player.stats.get("defense"));
-            System.out.println();
-        }
 
+            player.setX(player.body.getPosition().x);
+            player.setY(player.body.getPosition().y);
+
+            camera.position.x = player.getX();
+            camera.position.y = player.getY();
+            camera.update();
+
+        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             showInventory = !showInventory;
-            if (showInventory) player.lock();
-            else player.unLock();
+            if (showInventory) {
+                player.lock();
+                System.out.println("OPENING INVENTORY");
+            }
+            else {
+                player.unLock();
+                System.out.println("CLOSING INVENTORY");
+            }
         }
-
-        player.setX(player.body.getPosition().x);
-        player.setY(player.body.getPosition().y);
-
-        camera.position.x = player.getX();
-        camera.position.y = player.getY();
-        camera.update();
     }
 
     public void updateWorldObjects() {

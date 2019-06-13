@@ -174,6 +174,5 @@ public class Player {
         item.use(this);
         Main.inventory.removeItem(item);
         inventory.remove(item);
-
     }
 }
