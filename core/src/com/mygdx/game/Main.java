@@ -25,6 +25,7 @@ import java.util.Scanner;
 import static com.badlogic.gdx.Gdx.graphics;
 
 public class Main extends ApplicationAdapter {
+
     SpriteBatch batch;
     SpriteBatch hud_batch;
     public static Player player;
@@ -88,6 +89,7 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void create() {
+        Gdx.input.setInputProcessor(new Click());
         graphics.setWindowedMode(WIDTH, HEIGHT);
 
         try {

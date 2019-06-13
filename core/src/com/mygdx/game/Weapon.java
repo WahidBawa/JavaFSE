@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-public class Weapon extends Item {
+public class  Weapon extends Item {
     public Weapon(String name, String type, int value, boolean stackable) {
         super(name, type, value, stackable);
     }

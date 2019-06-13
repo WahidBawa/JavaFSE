@@ -29,7 +29,13 @@ public class CollisionListener implements ContactListener {
             if (contact.getFixtureB().getUserData() == "ENEMY") {
                 ((Enemy) contact.getFixtureB().getBody().getUserData()).attack(player);
             }
+
+        } else if (contact.getFixtureA().getUserData() == "ENEMY") {
+            if (contact.getFixtureB().getUserData() == "CLICK") {
+                System.out.println("CLICKKKKKKK");
+            }
         }
+
 
         Main.objs = objs;
     }

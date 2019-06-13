@@ -86,7 +86,7 @@ public class Player {
         for (String i : new String[]{"Up", "Down", "Left", "Right"}) {
             tmpSprites = new ArrayList<Texture>();
             for (int n = 0; n < 3; n++) {
-                tmpSprites.add(new Texture("ASSETS/SPRITES/PLAYER/" + i + "/" + n + ".png")); // change this to current sprites
+                tmpSprites.add(new Texture("ASSETS/SPRITES/PLAYER/Sans/" + i + "/" + n + ".png")); // change this to current sprites
             }
             sprites.add(tmpSprites);
         }
