@@ -89,9 +89,11 @@ public class Main extends ApplicationAdapter {
 
     boolean destroyed = true;
 
+    Click click = new Click();
+
     @Override
     public void create() {
-        Gdx.input.setInputProcessor(new Click());
+        Gdx.input.setInputProcessor(click);
         graphics.setWindowedMode(WIDTH, HEIGHT);
 
         try {
@@ -123,18 +125,18 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void render() {
-        System.out.println(player.getX() + " " + player.getY());
+//        System.out.println(player.getX() + " " + player.getY());
         camera.zoom = PPM;
 
-        if (!destroyed){
-            for (Body i : bodiesToDestroy){
+        if (!destroyed) {
+            for (Body i : bodiesToDestroy) {
                 world.destroyBody(i);
-                destroyed = true;
-//            bodiesToDestroy.remove(i);
             }
-        }else{
+            destroyed = true;
+        } else {
             world.step(1 / 60f, 6, 2);
         }
+
 
         Gdx.gl.glClearColor(0.5f, 0.7f, 0.9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -195,7 +197,7 @@ public class Main extends ApplicationAdapter {
         Gdx.gl.glLineWidth(4);
         debugRenderer.setProjectionMatrix(camera.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
-        debugRenderer.setColor(new Color(0,0,0,1));
+        debugRenderer.setColor(new Color(0, 0, 0, 1));
 //        fl.log();
     }
 
@@ -204,7 +206,6 @@ public class Main extends ApplicationAdapter {
         batch.dispose();
         renderer.dispose();
     }
-
 
 
     public void movePlayer() {
@@ -252,8 +253,8 @@ public class Main extends ApplicationAdapter {
             }
         }
 
-        for (Fixture i : objs){
-            if (i.getUserData().getClass() == Portal.class){
+        for (Fixture i : objs) {
+            if (i.getUserData().getClass() == Portal.class) {
                 Portal p = (Portal) i.getUserData();
                 createWorld(p.getType(), p.getNewX(), p.getNewY());
             }
@@ -296,7 +297,7 @@ public class Main extends ApplicationAdapter {
     public void loadData() throws FileNotFoundException {
         //"maps.dat"
         String[] dats = {"weapons.dat", "consumables.dat"};
-        for (int i = 0; i < dats.length; i++){ // this is for loading all the inventory data
+        for (int i = 0; i < dats.length; i++) { // this is for loading all the inventory data
             String[] str;
             File file = new File("DATA/" + dats[i]);
             Scanner text = new Scanner(file);
@@ -322,7 +323,7 @@ public class Main extends ApplicationAdapter {
         String[] split;
         String line;
         mapsData.nextLine();
-        while(mapsData.hasNextLine()){
+        while (mapsData.hasNextLine()) {
             line = mapsData.nextLine();
             split = line.split(",");
             maps.put(split[0], split[1]);
