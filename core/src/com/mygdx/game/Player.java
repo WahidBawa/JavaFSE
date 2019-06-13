@@ -35,6 +35,8 @@ public class Player {
     ArrayList<Item> inventory = new ArrayList<Item>();
 
     public Player() {
+        player.setSize(player.getWidth() / (float) 1.5, player.getHeight() / (float) 1.5);
+
         createBody();
 
         loadSprites();
@@ -52,6 +54,7 @@ public class Player {
         animationCount();
 
         player.set(new Sprite(sprites.get(Main.dir).get(pos)));
+        player.setSize(player.getWidth() / (float) 1.5, player.getHeight() / (float) 1.5);
 
         this.render(batch);
     }
@@ -93,11 +96,13 @@ public class Player {
             sprites.add(tmpSprites);
         }
     }
+
     public void lock() {
 
         frozen = true;
 
     }
+
     public void unLock() {
         frozen = false;
     }
