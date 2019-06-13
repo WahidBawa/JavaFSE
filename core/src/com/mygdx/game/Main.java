@@ -155,7 +155,7 @@ public class Main extends ApplicationAdapter {
 
         batch.end();
 
-        if (!displayText) {
+        if (!displayText && !player.isFrozen()) {
             movePlayer();
             for (Enemy enemy : wc.getEnemies()) {
                 enemy.encounter(player);
