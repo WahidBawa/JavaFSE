@@ -21,6 +21,7 @@ public class Inventory {
     Sprite hover = new Sprite(new Texture("ASSETS/UI/INVENTORY/Hover.png"));
     int hover_x, hover_y;
     boolean selectedItem = false;
+    boolean changed = false;
 
     public Inventory() {
         hover_x = hover_y = 0;
@@ -56,18 +57,40 @@ public class Inventory {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
             //do stuff
-            if (items[hover_y][hover_x] != null && !selectedItem){
+            if (selectedItem){
+                if (items[hover_y][hover_x] == null){
+                    selectedItem = false;
+                    inventoryBlocks.get(items[selected_y][selected_x].name).put("X", hover_x);
+                    inventoryBlocks.get(items[selected_y][selected_x].name).put("Y", hover_y);
+                    items[hover_y][hover_x] = items[selected_y][selected_x];
+                    items[selected_y][selected_x] = null;
+                } else if (items[hover_y][hover_x] != null){
+
+                    selectedItem = false;
+                    Item selectedItem = items[selected_y][selected_x];
+                    Item hoverItem = items[hover_y][hover_x];
+
+                    inventoryBlocks.get(selectedItem.name).put("X", hover_x);
+                    inventoryBlocks.get(selectedItem.name).put("Y", hover_y);
+
+                    inventoryBlocks.get(hoverItem.name).put("X", selected_x);
+                    inventoryBlocks.get(hoverItem.name).put("Y", selected_y);
+
+                    items[hover_y][hover_x] = selectedItem;
+                    items[selected_y][selected_x] = hoverItem;
+                }
+                changed = true;
+            }
+            if (items[hover_y][hover_x] != null && !selectedItem && !changed){
                 selectedItem = true;
                 selected_x = hover_x;
                 selected_y = hover_y;
             }
-            if (items[hover_y][hover_x] == null && selectedItem){
-                selectedItem = false;
-                inventoryBlocks.get(items[selected_y][selected_x].name).put("X", hover_x);
-                inventoryBlocks.get(items[selected_y][selected_x].name).put("Y", hover_y);
-                items[hover_y][hover_x] = items[selected_y][selected_x];
-                items[selected_y][selected_x] = null;
-            }
+            changed = false;
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.X)){
+            Main.player.use(items[hover_y][hover_x]);
         }
         render(batch);
     }
