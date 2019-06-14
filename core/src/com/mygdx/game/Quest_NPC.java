@@ -84,12 +84,12 @@ public class Quest_NPC {
     }
 
     public void talk(SpriteBatch batch) {
-        String[] pages = allDialogues[questStage].split("#");
-        for (String i : pages) {
-            ArrayList<String> lines = new ArrayList<String>();
-            lines.addAll(Arrays.asList(i.split("//")));
-            allText.add(lines);
-        }
+//        String[] pages = allDialogues[questStage].split("#");
+//        for (String i : pages) {
+//            ArrayList<String> lines = new ArrayList<String>();
+//            lines.addAll(Arrays.asList(i.split("//")));
+//            allText.add(lines);
+//        }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if (dialoguePage == allText.size() - 1 && pageLine == allText.get(dialoguePage).size() - 1) {
@@ -99,7 +99,7 @@ public class Quest_NPC {
                 } else if (Main.weapons.get(item) != null) {
                     Main.player.receiveItem(new Weapon(item, null, (Integer) tmp.get("damage"), false));
                 }
-
+                System.out.println("large oof");
                 textFinished = true;
             }
             if (!textFinished) {

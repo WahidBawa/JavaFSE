@@ -182,7 +182,7 @@ public class Main extends ApplicationAdapter {
                 currQuest_NPC.talk(hud_batch);
             }
             hud_batch.end();
-
+//            if (currQuest_NPC != null) System.out.println(currQuest_NPC.textFinished);
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 if (type.equals("npc") && currNpc.textFinished) {
                     displayText = false;
@@ -190,6 +190,7 @@ public class Main extends ApplicationAdapter {
                     displayText = false;
                 } else if (type.equals("quest_npc") && currQuest_NPC.textFinished){
                     displayText = false;
+                    System.out.println("oofffffffff");
                 }
             }
         }
