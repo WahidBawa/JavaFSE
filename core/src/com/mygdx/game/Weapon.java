@@ -11,7 +11,7 @@ public class  Weapon extends Item {
     public void use(Player player) {
         System.out.println("THIS IS A " + name.toUpperCase());
         player.stats.put("Attack", (Integer) Main.player.stats.get("Attack") + value);
-        player.setWeapon(this);
+        //player.setWeapon(this);
     }
 
     @Override

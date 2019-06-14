@@ -1,39 +1,37 @@
 package com.mygdx.game;
-
+//this class using inputprocessor touchdown, a method that is called by libgdx when a button is clicked down
+//this is used to click on the Enemys on the world witch are seen on screen, using collision to do damage to the Enemys
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 
-import java.util.ArrayList;
+
 
 public class Click implements InputProcessor {
 
-    public boolean keyPressed;
-    Body body;
+    //class fields
+    Body body;//the body that will represent the mouse click and collid with the enemys.
     BodyDef bodyDef = new BodyDef();
     FixtureDef fdef = new FixtureDef();
-    Vector3 clickPos;
+    Vector3 clickPos;//the position of the mouse;
 
-    public void leftClickEnemy(float x, float y) {
-        for (Enemy enemy : Main.wc.getEnemies()) {
-            bodyDef.position.set(x,y);
-            BodyDef bdef = new BodyDef();
-            bdef.type = BodyDef.BodyType.KinematicBody;
-            body = Main.world.createBody(bodyDef);
-            //body.setUserData();
-            PolygonShape shape = new PolygonShape();
-            fdef.shape = shape;
-            shape.setAsBox(1, 1);
-            body.createFixture(fdef);
-            body.getFixtureList().get(0).setUserData("CLICK");
-            //System.out.println("thicc");
-            MassData massOfCLick = new MassData();
-            massOfCLick.mass = (float) (1);//took the avrarage mass of a male and female goose to to discriminate against a certain sex
-            body.setMassData(massOfCLick);
+    public void leftClickEnemy(float x, float y) {//this method takes in the x and y of the mouse and creates body at the that point
 
-            //Main.world.destroyBody(body);
-        }
+        bodyDef.position.set(x,y);
+        BodyDef bdef = new BodyDef();
+        bdef.type = BodyDef.BodyType.KinematicBody;//the body should move and so it is made to be a kinematicBody
+        body = Main.world.createBody(bodyDef);
+        PolygonShape shape = new PolygonShape();
+        fdef.shape = shape;
+        shape.setAsBox(1, 1);//small box
+        body.createFixture(fdef);
+        body.getFixtureList().get(0).setUserData("CLICK");//collision data i "CLICK" so we identify this body as a mouse click
+        MassData massOfCLick = new MassData();
+        massOfCLick.mass = (float) (1);
+        body.setMassData(massOfCLick);
+
+
     }
     //
     /**
@@ -47,7 +45,7 @@ public class Click implements InputProcessor {
         switch (keycode)
         {
             case Input.Keys.SPACE:
-                System.out.println("boi");
+
                 break;
 
         }
@@ -87,13 +85,12 @@ public class Click implements InputProcessor {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        switch (button)
+        switch (button)//goes trough different cases of the button parameters
         {
-            case Input.Buttons.LEFT:
-                System.out.println("x:" + Main.camera.unproject(new Vector3(screenX, screenY, 0) ) );
-                clickPos = Main.camera.unproject(new Vector3(screenX, screenY, 0));
-                leftClickEnemy(clickPos.x, clickPos.y);
-                break;
+            case Input.Buttons.LEFT://in the case that the button variable is the left mouse button
+                clickPos = Main.camera.unproject(new Vector3(screenX, screenY, 0));//get the pos of the mouse in a vector3
+                leftClickEnemy(clickPos.x, clickPos.y);//creates body at the x and y of that vector3
+                break;//end of task
 
         }
         return true;
