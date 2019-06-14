@@ -23,7 +23,8 @@ public class Player {
     int health = 100;
     int mana = 100;
     int stamina = 100;
-    Weapon currentWeapon;
+    Weapon weapon;
+    Armour helmet, chest, legs, boots;
 
     private ArrayList<ArrayList<Texture>> sprites = new ArrayList<ArrayList<Texture>>();
     private ArrayList<Texture> tmpSprites;
@@ -181,5 +182,25 @@ public class Player {
     }
     public int getDamage() {
         return (Integer)stats.get("Attack");
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public Armour getHelmet() {
+        return helmet;
+    }
+
+    public Armour getChest() {
+        return chest;
+    }
+
+    public Armour getLegs() {
+        return legs;
+    }
+
+    public Armour getBoots() {
+        return boots;
     }
 }
