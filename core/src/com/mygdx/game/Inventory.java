@@ -90,16 +90,12 @@ public class Inventory {
             }
             changed = false;
         }
-        System.out.println(Arrays.deepToString(items));
-        System.out.println("hoverX: " +hover_x + "hoverY: " + hover_y );
-        System.out.println(items[hover_y][hover_x].type);
-        if (Gdx.input.isKeyJustPressed(Input.Keys.Z)){
-            //Main.player.use(items[hover_y][hover_x]);//this dddddddkiis everything it is evil wasted 10 minuets dont uncoment it is evillllllllllllllllllllllll
-
-            System.out.println(items[hover_y][hover_x].name);
-            if (items[hover_y][hover_x].name != null && ( items[hover_x][hover_y]).type == null) {
-                Main.player.currentWeapon = (Weapon) items[hover_x][hover_y];
-            }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && items[hover_y][hover_x] != null){
+//            if (items[hover_y][hover_x].getClass() == Weapon.class) {
+//                Main.player.currentWeapon = (Weapon) items[hover_x][hover_y];
+//            }
+            Main.player.use(items[hover_y][hover_x]);//this dddddddkiis everything it is evil wasted 10 minuets dont uncoment it is evillllllllllllllllllllllll
+//            System.out.println(items[hover_y][hover_x].getClass());
         }
         render(batch);
     }

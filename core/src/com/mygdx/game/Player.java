@@ -35,7 +35,7 @@ public class Player {
     ArrayList<Item> inventory = new ArrayList<Item>();
 
     public Player() {
-        player.setSize(player.getWidth() / (float) 1.5, player.getHeight() / (float) 1.5);
+        player.setSize(player.getWidth() / 1.5f, player.getHeight() / 1.5f);
 
         createBody();
 
@@ -57,7 +57,7 @@ public class Player {
         player.setSize(player.getWidth() / (float) 1.5, player.getHeight() / (float) 1.5);
 
         this.render(batch);
-        this.loadData();
+//        this.loadData();
     }
 
     public void createBody() {
@@ -92,7 +92,6 @@ public class Player {
 
             for (int n = 0; n < 4; n++) {
                 tmpSprites.add(new Texture("ASSETS/SPRITES/PLAYER/Sans/" + i + "/" + n + ".png")); // change this to current sprites
-//                tmpSprites.add(new Texture("ASSETS/SPRITES/PLAYER/" + i + "/" + n + ".png")); // change this to current sprites
             }
             sprites.add(tmpSprites);
         }
@@ -107,18 +106,11 @@ public class Player {
     public void unLock() {
         frozen = false;
     }
-    public void equipWeapon(Weapon weapon) {
-        currentWeapon = weapon;
-    }
 
     public void loadData() {
         stats.put("Health", 16);
         stats.put("Mana", 25);
-        if (currentWeapon != null) {
-            stats.put("Attack", 8 + currentWeapon.getValue());
-        } else {
-            stats.put("Attack", 8 );
-        }
+        stats.put("Attack", 8 );
         stats.put("Defense", 11);
         stats.put("Speed", 6);
         stats.put("Smarts", 10);

@@ -160,7 +160,7 @@ public class Main extends ApplicationAdapter {
         if (!displayText && !player.isFrozen()) {
             for (Enemy enemy : wc.getEnemies()) {
                 enemy.encounter(player);
-                System.out.println(enemy.health);
+//                System.out.println(enemy.health);
             }
         }
 
@@ -270,10 +270,10 @@ public class Main extends ApplicationAdapter {
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
                 System.out.println();
-                System.out.println("HEALTH: " + player.stats.get("health"));
-                System.out.println("MANA: " + player.stats.get("mana"));
-                System.out.println("ATTACK: " + player.stats.get("attack"));
-                System.out.println("DEFENSE: " + player.stats.get("defense"));
+                System.out.println("HEALTH: " + player.stats.get("Health"));
+                System.out.println("MANA: " + player.stats.get("Mana"));
+                System.out.println("ATTACK: " + player.stats.get("Attack"));
+                System.out.println("DEFENSE: " + player.stats.get("Defense"));
                 System.out.println();
             }
 
