@@ -32,7 +32,9 @@ public class CollisionListener implements ContactListener {
 
         } else if (contact.getFixtureA().getUserData() == "ENEMY") {
             if (contact.getFixtureB().getUserData() == "CLICK") {
-                System.out.println("CLICKKKKKKK");
+                System.out.println("aaaa0" +contact.getFixtureB().getBody().getUserData() );
+
+                //( contact.getFixtureB().getBody().getUserData()).damage(Main.player.getDamage());
             }
         }
 

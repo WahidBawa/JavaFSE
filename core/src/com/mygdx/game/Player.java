@@ -23,7 +23,7 @@ public class Player {
     int health = 100;
     int mana = 100;
     int stamina = 100;
-
+    Weapon currentWeapon;
 
     private ArrayList<ArrayList<Texture>> sprites = new ArrayList<ArrayList<Texture>>();
     private ArrayList<Texture> tmpSprites;
@@ -106,15 +106,22 @@ public class Player {
     public void unLock() {
         frozen = false;
     }
+    public void equipWeapon(Weapon weapon) {
+        currentWeapon = weapon;
+    }
 
     public void loadData() {
-        stats.put("health", 16);
-        stats.put("mana", 25);
-        stats.put("attack", 8);
-        stats.put("defense", 11);
-        stats.put("speed", 6);
-        stats.put("smarts", 10);
-        stats.put("inventory", inventory);
+        stats.put("Health", 16);
+        stats.put("Mana", 25);
+        if (currentWeapon != null) {
+            stats.put("Attack", 8 + currentWeapon.getValue());
+        } else {
+            stats.put("Attack", 8 );
+        }
+        stats.put("Defense", 11);
+        stats.put("Speed", 6);
+        stats.put("Smarts", 10);
+        stats.put("Inventory", inventory);
     }
 
     public void animationCount() {
@@ -174,5 +181,12 @@ public class Player {
         item.use(this);
         Main.inventory.removeItem(item);
         inventory.remove(item);
+    }
+
+    public HashMap getStats() {
+        return stats;
+    }
+    public int getDamage() {
+        return (Integer)stats.get("Attack");
     }
 }

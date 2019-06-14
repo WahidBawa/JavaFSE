@@ -31,6 +31,7 @@ public class Enemy {
     boolean seen;
     public boolean frozen = false;
     Timer time = new Timer();
+    int health = 5;
 
 
     public Enemy(Rectangle rect) {
@@ -41,8 +42,14 @@ public class Enemy {
 
     private void render(SpriteBatch batch) {
         batch.draw(enemy, body.getPosition().x - enemy.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - enemy.getHeight() * (float) Math.pow(Main.PPM, 2), enemy.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, enemy.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
+        if (health <= 0) {
+            this.kill();
+        }
+    }
+    public void kill() {
 
     }
+
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
         this.render(batch);
@@ -129,6 +136,9 @@ public class Enemy {
     public void attack(Player player) {
         player.setHealth(player.getHealth() - 5);
         System.out.println(player.health);
+    }
+    public void damage(int damage) {
+        health -= damage;
     }
 
     public float getX() {

@@ -91,6 +91,9 @@ public class Inventory {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.X)){
             Main.player.use(items[hover_y][hover_x]);
+            if (Main.weapons.get(items[hover_y][hover_x].name) != null && ((Weapon) items[hover_x][hover_y]).type == null) {
+                Main.player.currentWeapon = (Weapon) items[hover_x][hover_y];
+            }
         }
         render(batch);
     }
@@ -114,6 +117,15 @@ public class Inventory {
                 }
             }
         }
+
+        //font.draw(batch, "Health:" + Main.player.getStats().get("health"), 950, 850);
+        int i = 850;
+        for (Object data :Main.player.getStats().keySet()) {
+
+            font.draw(batch, "" + data + ": "+ Main.player.getStats().get(data)  , 950, i);
+            i-=50;
+        }
+        
         batch.draw(hover, 30 + (hover_x * 60 + inventory.getX() + 4 * hover_x), 187 + (hover_y * -60 + inventory.getY() - 4 * hover_y), 60, 60);
         if (selectedItem) batch.draw(selected, 30 + (selected_x * 60 + inventory.getX() + 4 * selected_x), 187 + (selected_y * -60 + inventory.getY() - 4 * selected_y), 60, 60);
     }

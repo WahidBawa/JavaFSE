@@ -17,4 +17,8 @@ public class  Weapon extends Item {
     public Sprite getImg() {
         return super.getImg();
     }
+
+    public int getValue() {
+        return  value;
+    }
 }

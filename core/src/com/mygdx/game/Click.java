@@ -32,7 +32,7 @@ public class Click implements InputProcessor {
             massOfCLick.mass = (float) (1);//took the avrarage mass of a male and female goose to to discriminate against a certain sex
             body.setMassData(massOfCLick);
 
-            Main.world.destroyBody(body);
+            //Main.world.destroyBody(body);
         }
     }
     //

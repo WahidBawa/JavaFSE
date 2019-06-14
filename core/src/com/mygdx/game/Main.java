@@ -160,6 +160,7 @@ public class Main extends ApplicationAdapter {
         if (!displayText && !player.isFrozen()) {
             for (Enemy enemy : wc.getEnemies()) {
                 enemy.encounter(player);
+                System.out.println(enemy.health);
             }
         }
 
