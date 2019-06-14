@@ -1,3 +1,7 @@
+/*
+    Author: Wahid Bawa & Andi Morarescu
+    Purpose: Stores an item that the player can receive
+ */
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
@@ -11,30 +15,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Inventory {
-    Sprite inventory = new Sprite(new Texture("ASSETS/UI/INVENTORY/Inventory.png"));
-    Item[][] items = new Item[3][7];
-    ArrayList<Item> allItems = new ArrayList<Item>();
-    HashMap<String, HashMap<String, Integer>> inventoryBlocks = new HashMap<String, HashMap<String, Integer>>();
-    BitmapFont font = new BitmapFont();
-    Sprite selected = new Sprite(new Texture("ASSETS/UI/INVENTORY/Selected.png"));
-    int selected_x, selected_y;
-    Sprite hover = new Sprite(new Texture("ASSETS/UI/INVENTORY/Hover.png"));
-    int hover_x, hover_y;
-    boolean selectedItem = false;
-    boolean changed = false;
+    Sprite inventory = new Sprite(new Texture("ASSETS/UI/INVENTORY/Inventory.png")); // this is the image of the inventory
+    Item[][] items = new Item[3][7]; // this stores the place of the items in the grid
+    ArrayList<Item> allItems = new ArrayList<Item>(); // this stores all of the items
+    HashMap<String, HashMap<String, Integer>> inventoryBlocks = new HashMap<String, HashMap<String, Integer>>(); // this is the hashtable that stores the items received along with their x and y and quantity
+    BitmapFont font = new BitmapFont(); // this is used to render font on the screen
+    Sprite selected = new Sprite(new Texture("ASSETS/UI/INVENTORY/Selected.png")); // this is the selected sprite
+    int selected_x, selected_y; // this is the x and y of the selected sprite
+    Sprite hover = new Sprite(new Texture("ASSETS/UI/INVENTORY/Hover.png")); // this is the hover sprite
+    int hover_x, hover_y; // this is the x and y of the hover sprite
+    boolean selectedItem = false; // this check if the item is selected or not
+    boolean changed = false; // this is checking if the item has been changed
 
     public Inventory() {
+        // sets the hover and selected x and y to 0
         hover_x = hover_y = 0;
         selected_x = selected_y = 0;
 
-        inventory.setPosition(Main.WIDTH / 2 - inventory.getWidth() / 2, Main.HEIGHT / 2 - inventory.getHeight() / 2);
+        inventory.setPosition(Main.WIDTH / 2 - inventory.getWidth() / 2, Main.HEIGHT / 2 - inventory.getHeight() / 2); // sets the position of the inventory sprite in the middle of the screen
     }
 
     public void render(SpriteBatch batch) {
-        inventory.draw(batch);
+        inventory.draw(batch); // draws the inventory on to the screen
     }
 
     public void update(SpriteBatch batch) {
+
+        // directional controls for the hover and the selected on the grid
         if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
             hover_x += 1;
             hover_x = hover_x % 7;
@@ -55,18 +62,20 @@ public class Inventory {
             }
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-            //do stuff
-            if (selectedItem){
-                if (items[hover_y][hover_x] == null){
-                    selectedItem = false;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){ // if space pressed
+            if (selectedItem){ // if an item is selected
+                if (items[hover_y][hover_x] == null){ // if the space is empty
+                    selectedItem = false; // item is no longer selected
+                    // switches the spot of the item on the grid
                     inventoryBlocks.get(items[selected_y][selected_x].name).put("X", hover_x);
                     inventoryBlocks.get(items[selected_y][selected_x].name).put("Y", hover_y);
                     items[hover_y][hover_x] = items[selected_y][selected_x];
                     items[selected_y][selected_x] = null;
-                } else if (items[hover_y][hover_x] != null){
+                } else if (items[hover_y][hover_x] != null){ // if the item is meant to replace another item on the grid
 
-                    selectedItem = false;
+                    selectedItem = false; // selected item is made false
+
+                    //exchanges their position on the grid
                     Item selectedItem = items[selected_y][selected_x];
                     Item hoverItem = items[hover_y][hover_x];
 
@@ -79,22 +88,22 @@ public class Inventory {
                     items[hover_y][hover_x] = selectedItem;
                     items[selected_y][selected_x] = hoverItem;
                 }
-                changed = true;
+                changed = true; // changed is true
             }
-            if (items[hover_y][hover_x] != null && !selectedItem && !changed){
+            if (items[hover_y][hover_x] != null && !selectedItem && !changed){ // will set the position of the selected sprite
                 selectedItem = true;
                 selected_x = hover_x;
                 selected_y = hover_y;
             }
             changed = false;
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && items[hover_y][hover_x] != null){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && items[hover_y][hover_x] != null){ // uses the item
             Main.player.use(items[hover_y][hover_x]);
         }
         render(batch);
     }
 
-    public void open(SpriteBatch batch) {
+    public void open(SpriteBatch batch) { // renders all of the items on the grid as well as their quantity
         for (int i = 0; i < items.length; i++) {
             for (int n = 0; n < items[i].length; n++) {
                 if (items[i][n] != null) {
@@ -114,20 +123,13 @@ public class Inventory {
             }
         }
 
-        drawStats(batch);
-        //font.draw(batch, "Health:" + Main.player.getStats().get("health"), 950, 850);
-//        int i = 850;
-//        for (Object data : Main.player.getStats().keySet()) {
-//
-//            font.draw(batch, "" + data + ": "+ Main.player.getStats().get(data)  , 950, i);
-//            i-=50;
-//        }
-        
+        drawStats(batch); // draws the stats on the screen
+        // draws hover or selected sprites
         batch.draw(hover, 30 + (hover_x * 60 + inventory.getX() + 4 * hover_x), 187 + (hover_y * -60 + inventory.getY() - 4 * hover_y), 60, 60);
         if (selectedItem) batch.draw(selected, 30 + (selected_x * 60 + inventory.getX() + 4 * selected_x), 187 + (selected_y * -60 + inventory.getY() - 4 * selected_y), 60, 60);
     }
 
-    public void drawStats(SpriteBatch batch){
+    public void drawStats(SpriteBatch batch){ // iterates through stats and draws them on screen
         int i = 850;
         for (Object data : Main.player.getStats().keySet()) {
 
@@ -141,7 +143,7 @@ public class Inventory {
         allItems.add(item);
         HashMap tmp = new HashMap();
 
-        if (inventoryBlocks.get(item.name) != null) {
+        if (inventoryBlocks.get(item.name) != null) { // if the item already exists it will add to the quantity
             HashMap t = inventoryBlocks.get(item.name);
             tmp.put("X", t.get("X"));
             tmp.put("Y", t.get("Y"));
@@ -150,7 +152,7 @@ public class Inventory {
         } else {
             for (int i = 0; i < items.length; i++) {
                 for (int n = 0; n < items[i].length; n++) {
-                    if (items[i][n] == null && !itemAdded) {
+                    if (items[i][n] == null && !itemAdded) { // will put the item in the first empty spot found
                         items[i][n] = item;
 
                         tmp.put("X", n);
@@ -169,31 +171,15 @@ public class Inventory {
         }
     }
 
-    public void removeItem(Item item) {
-        HashMap t = inventoryBlocks.get(item.name);
-        if ((Integer) t.get("Quantity") > 1) {
-            t.put("Quantity", (Integer) t.get("Quantity") - 1);
+    public void removeItem(Item item) { // removes the item
+        HashMap t = inventoryBlocks.get(item.name); // hashmap of the items properties
+        if ((Integer) t.get("Quantity") > 1) { // if the quantity is more than 1
+            t.put("Quantity", (Integer) t.get("Quantity") - 1); // will decrease the quantity by one
             inventoryBlocks.put(item.name, t);
-        } else if ((Integer) t.get("Quantity") == 1) {
-            items[(Integer) t.get("Y")][(Integer) t.get("X")] = null;
-            inventoryBlocks.remove(item.name);
+        } else if ((Integer) t.get("Quantity") == 1) { // if the quantity is one
+            items[(Integer) t.get("Y")][(Integer) t.get("X")] = null; // will erase the item from that spot by making it null
+            inventoryBlocks.remove(item.name); // removes the item
         }
-        allItems.remove(item);
-    }
-
-    public ArrayList<Item> getItems() {
-        return allItems;
-    }
-
-    public Item[][] getItemArray() {
-        return items;
-    }
-
-    public HashMap getInventoryBlocks() {
-        return inventoryBlocks;
-    }
-
-    public Sprite getSprite() {
-        return inventory;
+        allItems.remove(item); // removes item
     }
 }
