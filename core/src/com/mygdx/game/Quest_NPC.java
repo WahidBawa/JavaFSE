@@ -85,7 +85,8 @@ public class Quest_NPC {
     }
 
     public void talk(SpriteBatch batch) {
-        System.out.println("Quest Stage: " + questStage);
+        System.out.println("I AM QUEST NPC");
+
         if (questStage == 1){
             String[] pages = allDialogues[questStage].split("#");
             allText = new ArrayList<ArrayList<String>>();
@@ -107,7 +108,7 @@ public class Quest_NPC {
                 textFinished = true;
                 if (questStage == 0) {
                     questActive = true;
-                    questStage += 1;
+                    questStage++;
                 }
 
             }
@@ -132,6 +133,10 @@ public class Quest_NPC {
         dialoguePage = 0;
         pageLine = -1;
         textFinished = false;
+    }
+
+    public void advanceQuest(){
+        questStage++;
     }
 
     public Body getBody() {

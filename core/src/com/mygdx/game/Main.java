@@ -261,7 +261,8 @@ public class Main extends ApplicationAdapter {
                         currNpc.resetTalk();
                         displayText = true;
                         interactable = false;
-                    } else if (i.getUserData().getClass() == Quest_NPC.class && interactable){
+                    }
+                    if (i.getUserData().getClass() == Quest_NPC.class && interactable){
                         currQuest_NPC = (Quest_NPC) i.getUserData();
                         type = "quest_npc";
                         currQuest_NPC.resetTalk();

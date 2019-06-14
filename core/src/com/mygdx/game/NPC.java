@@ -79,6 +79,7 @@ public class NPC {
     }
 
     public void talk(SpriteBatch batch) {
+        System.out.println("I AM NORMAL NPC");
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if (dialoguePage == allText.size() - 1 && pageLine == allText.get(dialoguePage).size() - 1) {
                 HashMap tmp = (Main.weapons.get(item) != null ? Main.weapons.get(item) : Main.consumables.get(item));

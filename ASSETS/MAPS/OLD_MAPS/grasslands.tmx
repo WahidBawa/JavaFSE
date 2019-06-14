@@ -140,7 +140,7 @@
    <properties>
     <property name="Dialogue" value="Well, Hello There.//Guud Afternuun.//My name is Mrs.Lozo!//I am the teacher infamous for not teaching but just doing//it is a common trait of the people back in serbia#Here is some Potion to keep you alive in class#yeeeeeeeeeeeeeeeeeeeeeeeeeeet"/>
     <property name="Name" value="Village Child Lozo"/>
-    <property name="item" value="Potion"/>
+    <property name="item" value="Rapier"/>
    </properties>
   </object>
   <object id="195" name="Quest_NPC" type="2" x="248" y="781" width="20" height="30">
@@ -162,7 +162,7 @@
     <property name="Complete" type="bool" value="false"/>
     <property name="Dialogue" value="I have a quest for you.#Find the stupid boy and your mission will be complete."/>
     <property name="DialogueFinish" value="Good job child"/>
-    <property name="DialogueQuest" value="Go on, find the Hidden Boy"/>
+    <property name="DialogueQuest" value="Go say HALOO to the Stupid Boy"/>
     <property name="Goal" value="Stupid Boy"/>
     <property name="Key" value="Talk"/>
     <property name="Name" value="Steph"/>
