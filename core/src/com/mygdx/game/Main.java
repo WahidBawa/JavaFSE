@@ -172,7 +172,6 @@ public class Main extends ApplicationAdapter {
             hud_batch.end();
         }
 
-        System.out.println(type);
         if (displayText) {
             hud_batch.begin();
             if (type.equals("npc")) {
@@ -199,15 +198,13 @@ public class Main extends ApplicationAdapter {
         }
 
         //DEBUGGER AND FPS
-        dbr.render(world, camera.combined);
-        dbr.render(world, camera.combined);
+//        dbr.render(world, camera.combined);
 //        fl.log();
-        ShapeRenderer debugRenderer = new ShapeRenderer();
-        Gdx.gl.glLineWidth(4);
-        debugRenderer.setProjectionMatrix(camera.combined);
-        debugRenderer.begin(ShapeRenderer.ShapeType.Line);
-        debugRenderer.setColor(new Color(0, 0, 0, 1));
-//        fl.log();
+//        ShapeRenderer debugRenderer = new ShapeRenderer();
+//        Gdx.gl.glLineWidth(4);
+//        debugRenderer.setProjectionMatrix(camera.combined);
+//        debugRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        debugRenderer.setColor(new Color(0, 0, 0, 1));
     }
 
     @Override
@@ -249,30 +246,31 @@ public class Main extends ApplicationAdapter {
 
             player.getBody().applyLinearImpulse(adder, player.getBody().getWorldCenter(), true);
 
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide || npcQuestCollide) && !moving) {
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && !moving) {
+                System.out.println("Chest: " + chestCollide + " npc: " + npcCollide + " quest: " + npcQuestCollide);
                 for (Fixture i : objs) {
-                    if (i.getUserData().getClass() == Chest.class) {
+                    if (i.getUserData().getClass() == Chest.class && chestCollide) {
                         currChest = (Chest) i.getUserData();
                         if (!currChest.chestOpened) {
                             type = "chest";
                             displayText = true;
                         }
                     }
-                    if (i.getUserData().getClass() == NPC.class && interactable) {
+                    if (i.getUserData().getClass() == NPC.class && interactable && npcCollide) {
                         currNpc = (NPC) i.getUserData();
+//                        objs.remove(objs.indexOf(i));
                         type = "npc";
                         currNpc.resetTalk();
                         displayText = true;
                         interactable = false;
-                        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                     }
-                    if (i.getUserData().getClass() == Quest_NPC.class && interactable){
+                    if (i.getUserData().getClass() == Quest_NPC.class && interactable && npcQuestCollide){
                         currQuest_NPC = (Quest_NPC) i.getUserData();
+//                        objs.remove(i);
                         type = "quest_npc";
                         currQuest_NPC.resetTalk();
                         displayText = true;
                         interactable = false;
-                        System.out.println("REEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
                     }
                 }
             }
@@ -306,11 +304,9 @@ public class Main extends ApplicationAdapter {
             showInventory = !showInventory;
             if (showInventory) {
                 player.lock();
-                System.out.println("OPENING INVENTORY");
             }
             else {
                 player.unLock();
-                System.out.println("CLOSING INVENTORY");
             }
         }
     }

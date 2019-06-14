@@ -104,7 +104,6 @@ public class Quest_NPC {
                 } else if (Main.weapons.get(item) != null) {
                     Main.player.receiveItem(new Weapon(item, null, (Integer) tmp.get("damage"), false));
                 }
-                System.out.println("large oof");
                 textFinished = true;
                 if (questStage == 0) {
                     questActive = true;
