@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 public class NPC {
     Body body;
-    Sprite npc = new Sprite(new Texture("ASSETS/SPRITES/NPC/0/DOWN.png"));
+    Sprite npc = new Sprite(new Texture("ASSETS/SPRITES/NPC/17.png"));
     String name, dialogue, item;
     Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box2.png"));
     BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
@@ -68,7 +68,7 @@ public class NPC {
 
         body = Main.world.createBody(bdef);
 
-        shape.setAsBox(npc.getWidth() / 2 * Main.PPM, npc.getHeight() / 2 * Main.PPM);
+        shape.setAsBox(npc.getWidth() / 3 * Main.PPM, npc.getHeight() / 3 * Main.PPM);
 
         def.shape = shape;
 

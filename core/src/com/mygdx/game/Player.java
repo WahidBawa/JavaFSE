@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 import java.awt.*;
@@ -31,7 +30,6 @@ public class Player {
 
 
     HashMap stats = new HashMap();
-    HashMap<String, Item> equipment = new HashMap<String, Item>();
 
     ArrayList<Item> inventory = new ArrayList<Item>();
 
@@ -58,7 +56,6 @@ public class Player {
         player.setSize(player.getWidth() / (float) 1.5, player.getHeight() / (float) 1.5);
 
         this.render(batch);
-//        this.loadData();
     }
 
     public void createBody() {
@@ -84,7 +81,6 @@ public class Player {
         MassData thiccc = new MassData();
         thiccc.mass = 90f;//in kg
         this.body.setMassData(thiccc);
-
     }
 
     public void loadSprites() {
@@ -115,7 +111,7 @@ public class Player {
         stats.put("Defense", 11);
         stats.put("Speed", 6);
         stats.put("Smarts", 10);
-//        stats.put("Inventory", inventory);
+        stats.put("Inventory", inventory);
     }
 
     public void animationCount() {
@@ -135,7 +131,7 @@ public class Player {
 
     public void receiveItem(Item item) {
         Main.inventory.addItem(item);
-//        stats.put("inventory", inventory);
+        stats.put("inventory", inventory);
     }
 
 
