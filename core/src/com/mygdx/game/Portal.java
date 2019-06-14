@@ -1,3 +1,7 @@
+/*
+    Author: Wahid Bawa & Andi Morarescu
+    Purpose: is used to change the map for that is being displayed on screen
+ */
 package com.mygdx.game;
 
 import com.badlogic.gdx.math.Rectangle;
@@ -10,13 +14,13 @@ public class Portal {
     Body body;
     Rectangle rect;
     String type;
-    float newX, newY;
+    float newX, newY; // stores the newx and y if the player collides
     public Portal(Rectangle rect, String type, int newX, int newY){
         this.rect = rect;
         this.type = type;
         this.newX = newX;
         this.newY = newY;
-        createBody();
+        createBody(); // creates body
     }
 
 
@@ -39,7 +43,7 @@ public class Portal {
 
         this.body.getFixtureList().get(0).setUserData(this);
     }
-
+    //getters for body, type, x, and y
     public Body getBody() {
         return body;
     }
