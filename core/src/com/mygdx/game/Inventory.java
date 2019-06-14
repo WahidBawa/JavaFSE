@@ -1,6 +1,6 @@
 /*
     Author: Wahid Bawa & Andi Morarescu
-    Purpose: Stores an item that the player can receive
+    Purpose: Stores all the items that the player has received and makes them usable
  */
 package com.mygdx.game;
 
