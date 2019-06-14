@@ -76,33 +76,7 @@ public class Enemy {
     public void unLock() {
         frozen = false;
     }//unlocks it and lets it move freely
-    /*
-    public void encounter(Player player) {//similar to pokemon there is a dramatic zoom in when the player gets close to an enemy
-        if (!seen && Math.pow(body.getPosition().x - player.getBody().getPosition().x, 2) + Math.pow(body.getPosition().y - player.getBody().getPosition().y, 2) < 500) { // if you are withing 500 units close to player
-            player.lock();//locks the player
-            this.lock();//locks itself
-            Main.PPM +=0.1;
-            Main.camera.update();
 
-            if (Main.PPM > 5) {//zooms util it reaches a certain zoom and pauses
-
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                seen = true;
-                Main.PPM = 0.3f;//resets it
-            }
-
-
-            player.unLock();//unlocks
-            this.unLock();//unlocks
-        }
-        if (seen) {
-            move(player);
-        }
-     }*/
     public void move(Player player) {
         if (!frozen) {
 
@@ -122,26 +96,10 @@ public class Enemy {
     public void damage(int damage) {
         health -= damage;
     }//damage to itself
-    //getter setters
-    public float getX() {
-        return enemy.getX();
-    }
-
-    public float getY() {
-        return enemy.getY();
-    }
-
-    public void setX(float x) {
-        enemy.setX(x);
-    }
-
-    public void setY(float y) {
-        enemy.setY(y);
-    }
 
     public Body getBody() {
         return body;
-    }
+    } //returns body
 
 
 }

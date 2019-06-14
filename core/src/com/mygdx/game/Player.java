@@ -26,8 +26,6 @@ public class Player {
     public boolean frozen = false;//if frozen true player will appear frozen
     //player stats
     int health = 100;
-    int mana = 100;
-    int stamina = 100;
     Weapon weapon;
 
 
@@ -111,7 +109,6 @@ public class Player {
         stats.put("Defense", 11);
         stats.put("Speed", 6);
         stats.put("Smarts", 10);
-        stats.put("Inventory", inventory);
     }
 
     public void animationCount() {//keeps track of what frame of animation they are one using the pos variable
@@ -131,7 +128,6 @@ public class Player {
 
     public void receiveItem(Item item) {//when receiving an item from npc or chest this is used to put in inventory
         Main.inventory.addItem(item);//put item in the inventory
-        stats.put("inventory", inventory);
     }
 
 
