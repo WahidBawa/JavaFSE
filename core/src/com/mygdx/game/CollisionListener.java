@@ -33,11 +33,8 @@ public class CollisionListener implements ContactListener {
         } else if (contact.getFixtureA().getUserData().getClass() == Enemy.class) {
             if (contact.getFixtureB().getUserData() == "CLICK") {
                 System.out.println("aaaa0" + contact.getFixtureA().getUserData());
-                //System.out.println(contact.getFixtureB().getUserData().getClass());
-                //(Enemy)(contact.getFixtureA().getUserData())
                 Enemy enemy = (Enemy)contact.getFixtureA().getUserData();
-                enemy.damage(player.getDamage());
-                //( contact.getFixtureB().getBody().getUserData()).damage(Main.player.getDamage());
+                enemy.damage((Integer) player.getStats().get("Attack"));
             }
         }
 

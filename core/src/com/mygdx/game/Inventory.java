@@ -6,10 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import sun.plugin.javascript.navig.Array;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class Inventory {
@@ -91,11 +89,8 @@ public class Inventory {
             changed = false;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.X) && items[hover_y][hover_x] != null){
-//            if (items[hover_y][hover_x].getClass() == Weapon.class) {
-//                Main.player.currentWeapon = (Weapon) items[hover_x][hover_y];
-//            }
-            Main.player.use(items[hover_y][hover_x]);//this dddddddkiis everything it is evil wasted 10 minuets dont uncoment it is evillllllllllllllllllllllll
-//            System.out.println(items[hover_y][hover_x].getClass());
+            Main.player.use(items[hover_y][hover_x]);
+            drawStats(batch);
         }
         render(batch);
     }
@@ -120,21 +115,31 @@ public class Inventory {
             }
         }
 
+        drawStats(batch);
         //font.draw(batch, "Health:" + Main.player.getStats().get("health"), 950, 850);
-        int i = 850;
-        for (Object data :Main.player.getStats().keySet()) {
-
-            font.draw(batch, "" + data + ": "+ Main.player.getStats().get(data)  , 950, i);
-            i-=50;
-        }
+//        int i = 850;
+//        for (Object data : Main.player.getStats().keySet()) {
+//
+//            font.draw(batch, "" + data + ": "+ Main.player.getStats().get(data)  , 950, i);
+//            i-=50;
+//        }
         
         batch.draw(hover, 30 + (hover_x * 60 + inventory.getX() + 4 * hover_x), 187 + (hover_y * -60 + inventory.getY() - 4 * hover_y), 60, 60);
         if (selectedItem) batch.draw(selected, 30 + (selected_x * 60 + inventory.getX() + 4 * selected_x), 187 + (selected_y * -60 + inventory.getY() - 4 * selected_y), 60, 60);
     }
 
+    public void drawStats(SpriteBatch batch){
+        int i = 850;
+        for (Object data : Main.player.getStats().keySet()) {
+
+            font.draw(batch, "" + data + ": "+ Main.player.getStats().get(data)  , 950, i);
+            i-=50;
+        }
+    }
+
     public void addItem(Item item) { // will add item to the first empty spot found
         boolean itemAdded = false;
-        allItems.add(item); // adds to the arraylist which makes it easier to use items for testing TEST
+        allItems.add(item);
         HashMap tmp = new HashMap();
 
         if (inventoryBlocks.get(item.name) != null) {

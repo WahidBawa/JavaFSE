@@ -115,7 +115,7 @@ public class Player {
         stats.put("Defense", 11);
         stats.put("Speed", 6);
         stats.put("Smarts", 10);
-        stats.put("Inventory", inventory);
+//        stats.put("Inventory", inventory);
     }
 
     public void animationCount() {
@@ -180,9 +180,6 @@ public class Player {
     public HashMap getStats() {
         return stats;
     }
-    public int getDamage() {
-        return (Integer)stats.get("Attack");
-    }
 
     public Weapon getWeapon() {
         return weapon;
@@ -202,5 +199,25 @@ public class Player {
 
     public Armour getBoots() {
         return boots;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public void setHelmet(Armour helmet) {
+        this.helmet = helmet;
+    }
+
+    public void setChest(Armour chest) {
+        this.chest = chest;
+    }
+
+    public void setLegs(Armour legs) {
+        this.legs = legs;
+    }
+
+    public void setBoots(Armour boots) {
+        this.boots = boots;
     }
 }

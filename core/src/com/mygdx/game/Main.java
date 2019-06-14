@@ -310,7 +310,6 @@ public class Main extends ApplicationAdapter {
     }
 
     public void loadData() throws FileNotFoundException {
-        //"maps.dat"
         String[] dats = {"weapons.dat", "consumables.dat"};
         for (int i = 0; i < dats.length; i++) { // this is for loading all the inventory data
             String[] str;
