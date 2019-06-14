@@ -1,3 +1,7 @@
+/*
+    Author: Wahid Bawa & Andi Morarescu
+    Purpose: quest npc which will give the player a quest that they must complete
+ */
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
@@ -15,6 +19,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class Quest_NPC {
+    // loads assets
     Body body;
     Sprite npc = new Sprite(new Texture("ASSETS/SPRITES/NPC/1.png"));
     String name, item, goal;
@@ -24,21 +29,20 @@ public class Quest_NPC {
     int dialoguePage, pageLine;
     String[] allDialogues = new String[3];
     int questStage = 0;
-    boolean questActive = false;
 
     boolean textFinished = false;
 
     public Quest_NPC(Rectangle rect, String name, String dialogue, String midQuestDialogue, String questFinishDialogue, String goalNPC, String item) {
         this.name = name;
-
+        // stores the 3 different type of dialogs you can have
         allDialogues[0] = dialogue;
         allDialogues[1] = midQuestDialogue;
         allDialogues[2] = questFinishDialogue;
 
-        goal = goalNPC;
+        goal = goalNPC; // sets the goal npc that you must talk to to complete the quest
         this.item = item;
 
-        String[] pages = dialogue.split("#");
+        String[] pages = dialogue.split("#"); // does all the same formatting as the npc class
         for (String i : pages) {
             ArrayList<String> lines = new ArrayList<String>();
             lines.addAll(Arrays.asList(i.split("//")));
@@ -87,7 +91,7 @@ public class Quest_NPC {
     }
 
     public void talk(SpriteBatch batch) {
-        if (questStage == 1 || questStage == 2){
+        if (questStage == 1 || questStage == 2){ // this will reformat the dialogues depending on the stage of quest completion
             String[] pages = allDialogues[questStage].split("#");
             allText = new ArrayList<ArrayList<String>>();
             for (String i : pages) {
@@ -96,8 +100,8 @@ public class Quest_NPC {
                 allText.add(lines);
             }
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            if (dialoguePage == allText.size() - 1 && pageLine == allText.get(dialoguePage).size() - 1) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) { // if pressing space
+            if (dialoguePage == allText.size() - 1 && pageLine == allText.get(dialoguePage).size() - 1 && questStage == 2){ // this will give the player an item when the quest is completed
                 HashMap tmp = (Main.weapons.get(item) != null ? Main.weapons.get(item) : Main.consumables.get(item));
                 if (Main.consumables.get(item) != null) {
                     Main.player.receiveItem(new Consumable(item, (Integer) tmp.get("stat") == 1 ? "health" : "mana", (Integer) tmp.get("replenishAmount"), true));
@@ -106,13 +110,12 @@ public class Quest_NPC {
                 }
                 textFinished = true;
                 if (questStage == 0) {
-                    questActive = true;
                     questStage++;
                     Main.questRelatedNPCs.add(this);
                 }
 
             }
-            if (!textFinished) {
+            if (!textFinished) { // advances the dialogue
                 pageLine++;
                 if (pageLine == allText.get(dialoguePage).size()) {
                     pageLine = 0;
@@ -120,6 +123,7 @@ public class Quest_NPC {
                 }
             }
         }
+        // draws the dialogue and the text box on screen
         textBox.draw(batch);
         font.setColor(Color.RED);
         font.draw(batch, name, 10, 180 + font.getCapHeight());
@@ -129,7 +133,7 @@ public class Quest_NPC {
         }
     }
 
-    public void resetTalk() {
+    public void resetTalk() { // resets the speech of the quest npc
         dialoguePage = 0;
         pageLine = -1;
         textFinished = false;
@@ -137,13 +141,10 @@ public class Quest_NPC {
 
     public void advanceQuest(){
         questStage++;
-    }
+    } // will advance the quest
 
-    public Body getBody() {
-        return body;
-    }
 
     public String getGoal() {
         return goal;
-    }
+    } // will return the goal of the questf
 }
