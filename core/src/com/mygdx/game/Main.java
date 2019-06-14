@@ -178,13 +178,17 @@ public class Main extends ApplicationAdapter {
                 currNpc.talk(hud_batch);
             } else if (type.equals("chest")) {
                 currChest.open(hud_batch);
+            }else if (type.equals("quest_npc")){
+                currQuest_NPC.talk(hud_batch);
             }
             hud_batch.end();
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                if ((type.equals("npc") && currNpc.textFinished) || (type.equals("quest_npc") && currQuest_NPC.textFinished)) {
+                if (type.equals("npc") && currNpc.textFinished) {
                     displayText = false;
                 } else if (type.equals("chest") && currChest.textFinished) {
+                    displayText = false;
+                } else if (type.equals("quest_npc") && currQuest_NPC.textFinished){
                     displayText = false;
                 }
             }
