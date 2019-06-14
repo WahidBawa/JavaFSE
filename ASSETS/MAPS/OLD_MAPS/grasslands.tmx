@@ -168,7 +168,7 @@
     <property name="Name" value="Steph"/>
     <property name="Quest" type="bool" value="false"/>
     <property name="Received" type="bool" value="false"/>
-    <property name="item" value="Secret Journal"/>
+    <property name="item" value="Sword"/>
    </properties>
   </object>
   <object id="197" name="NPC" type="1" x="295.6" y="966" width="20" height="30">

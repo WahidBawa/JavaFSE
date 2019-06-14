@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class NPC {
+public class Quest_NPC {
     Body body;
-    Sprite npc = new Sprite(new Texture("ASSETS/SPRITES/NPC/17.png"));
-    String name, dialogue, item;
+    Sprite npc = new Sprite(new Texture("ASSETS/SPRITES/NPC/1.png"));
+    String name, dialogue, item, midQuestDialogue, questFinishDialogue;
     Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box2.png"));
     BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
     ArrayList<ArrayList<String>> allText = new ArrayList<ArrayList<String>>();
@@ -25,7 +25,7 @@ public class NPC {
 
     boolean textFinished = false;
 
-    public NPC(Rectangle rect, String name, String dialogue, String item) {
+    public Quest_NPC(Rectangle rect, String name, String dialogue, String midQuestDialogue, String questFinishDialogue, String goalNPC, String item) {
         this.name = name;
         this.dialogue = dialogue;
         this.item = item;

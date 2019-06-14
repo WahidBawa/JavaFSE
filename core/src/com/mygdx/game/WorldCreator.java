@@ -16,6 +16,7 @@ public class WorldCreator {
     private ArrayList<Chest> chests = new ArrayList<Chest>();
     private ArrayList<NPC> npcs = new ArrayList<NPC>();
     private ArrayList<Portal> portals = new ArrayList<Portal>();
+    private ArrayList<Quest_NPC> quest_npcs = new ArrayList<Quest_NPC>();
 
     private ArrayList<Body> toBeDestroyed = new ArrayList<Body>();
 
@@ -53,9 +54,10 @@ public class WorldCreator {
                     npcs.add(new NPC(rect, (String) obj.getProperties().get("Name"), (String) obj.getProperties().get("Dialogue"), (String) obj.getProperties().get("item")));
                 } else if (name.equals("Portal")) {
                     portals.add(new Portal(rect, (String) obj.getProperties().get("type"), (Integer) obj.getProperties().get("xd"), (Integer) obj.getProperties().get("yd")));
+                } else if (name.equals("Quest_NPC")){
+                    quest_npcs.add(new Quest_NPC(rect, (String) obj.getProperties().get("Name"), (String) obj.getProperties().get("Dialogue"), (String) obj.getProperties().get("DialogueQuest"), (String) obj.getProperties().get("DialogueFinish"), (String) obj.getProperties().get("Goal"), (String) obj.getProperties().get("item")));
                 }
 
-//                if (body != null){
                 for (Fixture f : body.getFixtureList()) {
                     f.setUserData(1);
                 }
@@ -78,6 +80,10 @@ public class WorldCreator {
 
     public ArrayList<NPC> getNpcs() {
         return npcs;
+    }
+
+    public ArrayList<Quest_NPC> getQuest_npcs(){
+        return quest_npcs;
     }
 
     public ArrayList<Portal> getPortals() {

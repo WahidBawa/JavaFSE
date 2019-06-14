@@ -304,6 +304,8 @@ public class Main extends ApplicationAdapter {
 
         for (NPC i : wc.getNpcs()) i.update(batch);
 
+        for (Quest_NPC i : wc.getQuest_npcs()) i.update(batch);
+
         for (Enemy i : wc.getEnemies()) i.update(batch);
 
         for (Chest i : wc.getChests()) i.update(batch);

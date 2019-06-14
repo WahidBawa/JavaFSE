@@ -90,7 +90,6 @@ public class Inventory {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.X) && items[hover_y][hover_x] != null){
             Main.player.use(items[hover_y][hover_x]);
-            drawStats(batch);
         }
         render(batch);
     }
