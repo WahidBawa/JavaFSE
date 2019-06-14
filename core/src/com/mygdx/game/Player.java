@@ -1,5 +1,10 @@
 package com.mygdx.game;
-
+//Player Class
+//inits the Player entity
+//This is the main player that you control as you play this game
+//this class holds all of stats of the character and and the methods need to for this character
+//
+//
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,10 +15,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player {
+    //
     Sprite player = new Sprite(new Texture("ASSETS/SPRITES/PLAYER/Sans/1.png"));
     Body body;
     Rectangle rect;
-
     private int counter = 0;
     private int animation_speed = 7;
     private int pos = 0;
