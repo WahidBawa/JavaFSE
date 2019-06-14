@@ -239,13 +239,6 @@
    </properties>
   </object>
   <object id="36" name="wall" x="70.6673" y="100.5" width="33.3333" height="36"/>
-  <object id="37" name="chest" type="2" x="471.333" y="98" width="61.3333" height="60">
-   <properties>
-    <property name="ChestName" value="9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"/>
-    <property name="Item" value="Shield"/>
-   </properties>
-  </object>
-  <object id="38" name="wall" x="472.667" y="99.5" width="33.3333" height="36"/>
   <object id="39" name="NPC" type="1" x="219.833" y="184.833" width="20" height="30">
    <properties>
     <property name="Dialogue" value="Hello there! Welcome to our humble abode!"/>
