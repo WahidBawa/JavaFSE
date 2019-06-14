@@ -1,6 +1,6 @@
 /*
-    Author: Wahid Bawa & Andi Morarescu
-    Purpose: Is a parent class to all other types of items
+Author: Wahid Bawa & Andi Morarescu
+        Purpose: Is a parent class to all other types of items
  */
 package com.mygdx.game;
 
@@ -22,11 +22,11 @@ public abstract class Item {
         img.setSize(40, 40); // sets the size
     }
 
-    public void use(Player player) {
+    public void use(Player player) { // the items will over ride this method
 
     }
 
-    public Sprite getImg() {
+    public Sprite getImg() { // returns image
         return img;
     }
 }
