@@ -26,14 +26,17 @@ public class CollisionListener implements ContactListener {
             }else if (contact.getFixtureB().getUserData().getClass() == Portal.class){
                 objs.add(contact.getFixtureB());
             }
-            if (contact.getFixtureB().getUserData() == "ENEMY") {
+            if (contact.getFixtureB().getUserData().getClass() == Enemy.class) {
                 ((Enemy) contact.getFixtureB().getBody().getUserData()).attack(player);
             }
 
-        } else if (contact.getFixtureA().getUserData() == "ENEMY") {
+        } else if (contact.getFixtureA().getUserData().getClass() == Enemy.class) {
             if (contact.getFixtureB().getUserData() == "CLICK") {
-                System.out.println("aaaa0" +contact.getFixtureB().getBody().getUserData() );
-
+                System.out.println("aaaa0" + contact.getFixtureA().getUserData());
+                //System.out.println(contact.getFixtureB().getUserData().getClass());
+                //(Enemy)(contact.getFixtureA().getUserData())
+                Enemy enemy = (Enemy)contact.getFixtureA().getUserData();
+                enemy.damage(player.getDamage());
                 //( contact.getFixtureB().getBody().getUserData()).damage(Main.player.getDamage());
             }
         }

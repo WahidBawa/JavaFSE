@@ -27,7 +27,7 @@ public class Click implements InputProcessor {
             shape.setAsBox(1, 1);
             body.createFixture(fdef);
             body.getFixtureList().get(0).setUserData("CLICK");
-            System.out.println("thicc");
+            //System.out.println("thicc");
             MassData massOfCLick = new MassData();
             massOfCLick.mass = (float) (1);//took the avrarage mass of a male and female goose to to discriminate against a certain sex
             body.setMassData(massOfCLick);

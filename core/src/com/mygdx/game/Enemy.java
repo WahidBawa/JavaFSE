@@ -70,7 +70,9 @@ public class Enemy {
 
         this.body.createFixture(fdef);
 
-        this.body.getFixtureList().get(0).setUserData("ENEMY");
+        //this.body.getFixtureList().get(0).setUserData("ENEMY");
+        //body.getFixtureList().get()
+        this.body.getFixtureList().get(0).setUserData(this);
         MassData massOfEnemy = new MassData();
         massOfEnemy.mass = (float) (6.5 + 5.5) / 2;//took the avrarage mass of a male and female goose to to discriminate against a certain sex
         this.body.setMassData(massOfEnemy);
@@ -135,7 +137,7 @@ public class Enemy {
 
     public void attack(Player player) {
         player.setHealth(player.getHealth() - 5);
-        System.out.println(player.health);
+        //System.out.println(player.health);
     }
     public void damage(int damage) {
         health -= damage;
