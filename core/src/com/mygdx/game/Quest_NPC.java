@@ -24,6 +24,7 @@ public class Quest_NPC {
     int dialoguePage, pageLine;
     String[] allDialogues = new String[3];
     int questStage = 0;
+    boolean questActive = false;
 
     boolean textFinished = false;
 
@@ -84,13 +85,16 @@ public class Quest_NPC {
     }
 
     public void talk(SpriteBatch batch) {
-//        String[] pages = allDialogues[questStage].split("#");
-//        for (String i : pages) {
-//            ArrayList<String> lines = new ArrayList<String>();
-//            lines.addAll(Arrays.asList(i.split("//")));
-//            allText.add(lines);
-//        }
-
+        System.out.println("Quest Stage: " + questStage);
+        if (questStage == 1){
+            String[] pages = allDialogues[questStage].split("#");
+            allText = new ArrayList<ArrayList<String>>();
+            for (String i : pages) {
+                ArrayList<String> lines = new ArrayList<String>();
+                lines.addAll(Arrays.asList(i.split("//")));
+                allText.add(lines);
+            }
+        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if (dialoguePage == allText.size() - 1 && pageLine == allText.get(dialoguePage).size() - 1) {
                 HashMap tmp = (Main.weapons.get(item) != null ? Main.weapons.get(item) : Main.consumables.get(item));
@@ -101,6 +105,11 @@ public class Quest_NPC {
                 }
                 System.out.println("large oof");
                 textFinished = true;
+                if (questStage == 0) {
+                    questActive = true;
+                    questStage += 1;
+                }
+
             }
             if (!textFinished) {
                 pageLine++;
