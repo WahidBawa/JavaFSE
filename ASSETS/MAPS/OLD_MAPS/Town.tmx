@@ -352,7 +352,7 @@
   </object>
   <object id="19" name="NPC" type="0" x="356.333" y="160.667" width="20" height="30">
    <properties>
-    <property name="Dialogue" value="Hello there little prince and princess, here take this potion and this candy! # Remember!  # Sharing is caring!"/>
+    <property name="Dialogue" value="Hello there little prince and princess, here take this//potion and this candy! # Remember!  # Sharing is caring!"/>
     <property name="Name" value="Royal Servant"/>
     <property name="item" value="Potion // Candy"/>
    </properties>
