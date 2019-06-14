@@ -1,3 +1,7 @@
+/*
+    Author: Wahid Bawa & Andi Morarescu
+    Purpose: Stores an item that the player can receive and then later on use
+ */
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
