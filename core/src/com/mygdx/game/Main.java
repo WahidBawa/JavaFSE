@@ -90,6 +90,8 @@ public class Main extends ApplicationAdapter {
 
     Click click = new Click();
 
+    public static ArrayList<Quest_NPC> questRelatedNPCs = new ArrayList<Quest_NPC>();
+
     @Override
     public void create() {
         Gdx.input.setInputProcessor(click);
@@ -247,7 +249,6 @@ public class Main extends ApplicationAdapter {
             player.getBody().applyLinearImpulse(adder, player.getBody().getWorldCenter(), true);
 
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && !moving) {
-                System.out.println("Chest: " + chestCollide + " npc: " + npcCollide + " quest: " + npcQuestCollide);
                 for (Fixture i : objs) {
                     if (i.getUserData().getClass() == Chest.class && chestCollide) {
                         currChest = (Chest) i.getUserData();

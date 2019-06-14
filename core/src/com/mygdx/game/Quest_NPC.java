@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class Quest_NPC {
     Body body;
     Sprite npc = new Sprite(new Texture("ASSETS/SPRITES/NPC/1.png"));
-    String name, item;
+    String name, item, goal;
     Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box2.png"));
     BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
     ArrayList<ArrayList<String>> allText = new ArrayList<ArrayList<String>>();
@@ -34,6 +34,8 @@ public class Quest_NPC {
         allDialogues[0] = dialogue;
         allDialogues[1] = midQuestDialogue;
         allDialogues[2] = questFinishDialogue;
+
+        goal = goalNPC;
         this.item = item;
 
         String[] pages = dialogue.split("#");
@@ -85,9 +87,7 @@ public class Quest_NPC {
     }
 
     public void talk(SpriteBatch batch) {
-        System.out.println("I AM QUEST NPC");
-
-        if (questStage == 1){
+        if (questStage == 1 || questStage == 2){
             String[] pages = allDialogues[questStage].split("#");
             allText = new ArrayList<ArrayList<String>>();
             for (String i : pages) {
@@ -108,6 +108,7 @@ public class Quest_NPC {
                 if (questStage == 0) {
                     questActive = true;
                     questStage++;
+                    Main.questRelatedNPCs.add(this);
                 }
 
             }
@@ -140,5 +141,9 @@ public class Quest_NPC {
 
     public Body getBody() {
         return body;
+    }
+
+    public String getGoal() {
+        return goal;
     }
 }

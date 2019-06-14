@@ -79,7 +79,6 @@ public class NPC {
     }
 
     public void talk(SpriteBatch batch) {
-        System.out.println("I AM NORMAL NPC");
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if (dialoguePage == allText.size() - 1 && pageLine == allText.get(dialoguePage).size() - 1) {
                 HashMap tmp = (Main.weapons.get(item) != null ? Main.weapons.get(item) : Main.consumables.get(item));
@@ -90,6 +89,12 @@ public class NPC {
                 }
 
                 textFinished = true;
+
+                for (int i = 0; i < Main.questRelatedNPCs.size(); i++){
+                    if (Main.questRelatedNPCs.get(i).getGoal().equals(name)){
+                        Main.questRelatedNPCs.get(i).advanceQuest();
+                    }
+                }
             }
             if (!textFinished) {
                 pageLine++;
