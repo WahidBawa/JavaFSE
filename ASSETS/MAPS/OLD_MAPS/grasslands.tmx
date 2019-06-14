@@ -143,20 +143,6 @@
     <property name="item" value="Rapier"/>
    </properties>
   </object>
-  <object id="195" name="Quest_NPC" type="2" x="248" y="781" width="20" height="30">
-   <properties>
-    <property name="Complete" type="bool" value="false"/>
-    <property name="Dialogue" value="QUICK!! I need some help! # Find the Hidden Boy! # He has what I need!"/>
-    <property name="DialogueFinish" value="Thank you so much!!! # Let me do my work now"/>
-    <property name="DialogueQuest" value="Go on! What are you waiting for! Find the Hidden Boy."/>
-    <property name="Goal" value="Hidden Boy"/>
-    <property name="Key" value="Talk"/>
-    <property name="Name" value="FSE Boy"/>
-    <property name="Quest" type="bool" value="false"/>
-    <property name="Received" type="bool" value="false"/>
-    <property name="item" value="Secret Journal"/>
-   </properties>
-  </object>
   <object id="196" name="Quest_NPC" type="0" x="321.5" y="817" width="20" height="30">
    <properties>
     <property name="Complete" type="bool" value="false"/>
@@ -178,20 +164,6 @@
     <property name="item" value="NULL"/>
    </properties>
   </object>
-  <object id="200" name="Quest_NPC" type="0" x="1007" y="864" width="20" height="30">
-   <properties>
-    <property name="Complete" type="bool" value="false"/>
-    <property name="Dialogue" value="Hi, I am the Grasslands Manager. I have a quest for you. # Go to the Desert and talk to the Desert Manager."/>
-    <property name="DialogueFinish" value="Welcome to the grasslands!"/>
-    <property name="DialogueQuest" value="The portal for the Desert is right in front of you."/>
-    <property name="Goal" value="Desert Manager"/>
-    <property name="Key" value="Talk"/>
-    <property name="Name" value="Grasslands Manager"/>
-    <property name="Quest" type="bool" value="false"/>
-    <property name="Received" type="bool" value="false"/>
-    <property name="item" value="Secret Journal"/>
-   </properties>
-  </object>
   <object id="212" name="Portal" type="2" x="-0.036543" y="1.75905" width="32.0707" height="31.9005">
    <properties>
     <property name="xd" type="int" value="86"/>
@@ -202,7 +174,6 @@
   <object id="214" name="wall" x="1600" y="0" width="26" height="1600.67"/>
   <object id="215" name="wall" x="2.545" y="1602.18" width="1598.91" height="31.6364"/>
   <object id="216" name="wall" x="-26.8182" y="-0.971364" width="26" height="1600.67"/>
-  <object id="218" name="wall" x="1009" y="862" width="20" height="30"/>
   <object id="437" name="chest" type="3" x="867.325" y="310.029" width="61.3333" height="60">
    <properties>
     <property name="Item" value="Sword//W//ATTACK//5"/>
@@ -238,13 +209,6 @@
    <properties>
     <property name="Item" value="Sword//W//ATTACK//5"/>
     <property name="chestName" value="4"/>
-   </properties>
-  </object>
-  <object id="495" name="NPC" type="1" x="170.667" y="1289.67" width="20" height="30">
-   <properties>
-    <property name="Dialogue" value="Well wasssup babies.//I FUCKING hate ANNALISE!//SHE IS MY MOST ANNOYING STUDENT!#Anyways, my wife is a toxicologist I'll have you know!!"/>
-    <property name="Name" value="BIG DICK TAV"/>
-    <property name="item" value="Sword"/>
    </properties>
   </object>
  </objectgroup>
