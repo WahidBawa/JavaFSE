@@ -14,15 +14,16 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class Player {
-    //
+    //class fields
     Sprite player = new Sprite(new Texture("ASSETS/SPRITES/PLAYER/Sans/1.png"));
     Body body;
     Rectangle rect;
     private int counter = 0;
     private int animation_speed = 7;
     private int pos = 0;
-    public boolean frozen = false;
+    public boolean frozen = false;//if frozen true player will appear frozen
     //player stats
     int health = 100;
     int mana = 100;
@@ -30,7 +31,7 @@ public class Player {
     Weapon weapon;
     Armour helmet, chest, legs, boots;
 
-    private ArrayList<ArrayList<Texture>> sprites = new ArrayList<ArrayList<Texture>>();
+    private ArrayList<ArrayList<Texture>> sprites = new ArrayList<ArrayList<Texture>>();//different sprites for different directions of moment
     private ArrayList<Texture> tmpSprites;
 
 
@@ -38,27 +39,27 @@ public class Player {
 
     ArrayList<Item> inventory = new ArrayList<Item>();
 
-    public Player() {
-        player.setSize(player.getWidth() / 1.5f, player.getHeight() / 1.5f);
+    public Player() {//constructor
+        player.setSize(player.getWidth() / 1.5f, player.getHeight() / 1.5f);//shrinks the player sprite
 
-        createBody();
+        createBody();//creates body2d body
 
         loadSprites();
 
-        loadData();
+        loadData();//data as in player stats
     }
 
-    private void render(SpriteBatch batch) {
+    private void render(SpriteBatch batch) {//draws player on screen adjusted to the map size using Main.PPM and translated to the middle of the screen
         batch.draw(player, body.getPosition().x - player.getWidth() / 4 * (float) Math.pow(Main.PPM, 2), body.getPosition().y - player.getHeight() / 4 * (float) Math.pow(Main.PPM, 2), player.getWidth() * (float) Math.pow(Main.PPM, 2) / 2, player.getHeight() * (float) Math.pow(Main.PPM, 2) / 2);
     }
 
     public void update(SpriteBatch batch) { // all data will be updated here (pos, char states, etc)
-        player.setPosition(body.getPosition().x, body.getPosition().y);
+        player.setPosition(body.getPosition().x, body.getPosition().y);//sets to its current position
 
-        animationCount();
+        animationCount();//keeps track of every frame on witch in order to display a walking animation
 
-        player.set(new Sprite(sprites.get(Main.dir).get(pos)));
-        player.setSize(player.getWidth() / (float) 1.5, player.getHeight() / (float) 1.5);
+        player.set(new Sprite(sprites.get(Main.dir).get(pos)));//dir being the diction that the character is moving towards on the screen, pos bing on witch frame of the walking animation
+        player.setSize(player.getWidth() / (float) 1.5, player.getHeight() / (float) 1.5);//
 
         this.render(batch);
     }

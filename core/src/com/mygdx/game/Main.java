@@ -153,13 +153,14 @@ public class Main extends ApplicationAdapter {
         updateWorldObjects(); // updates all of the world objects
 
         batch.end();
-
+        /*
         if (!displayText && !player.isFrozen()) {
             for (Enemy enemy : wc.getEnemies()) {
-                enemy.encounter(player);
-//                System.out.println(enemy.health);
+                //enemy.encounter(player);
+                System.out.println(enemy.getBody().getFixtureList().get(0).getUserData());
             }
-        }
+        }*/
+
 
 //        renderer.render(new int[]{4});
 

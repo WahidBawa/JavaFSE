@@ -20,7 +20,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Enemy {
-    //inits variables
+    //class fields
     float speed = 6;
     Sprite enemy = new Sprite(new Texture("ASSETS/SPRITES/ENEMIES/purple_bird/DOWN/1.png"));
     Body body;//using box2d for collision
@@ -34,7 +34,7 @@ public class Enemy {
     public Enemy(Rectangle rect) {//takes a rect and changes the rect to the size of the sprite
         enemy.setPosition(rect.x, rect.y);//set tto the start position
         enemy.setSize(enemy.getWidth() * 2, enemy.getHeight() * 2);//doubles size
-        createBody();
+        this.createBody();
     }
 
     private void render(SpriteBatch batch) {//renders the enemy and scales it to the maps tiles size using the Main.PPM variable
@@ -67,7 +67,7 @@ public class Enemy {
         massOfEnemy.mass = (float) (6.5 + 5.5) / 2;//took the avrarage mass of a male and female goose to to discriminate against a certain sex
         this.body.setMassData(massOfEnemy);//defines the mass
         this.body.setUserData(this);//defines its collision data as itself so that we can easily access all of its data in the collision file
-
+        this.body.getFixtureList().get(0).setUserData(this);//defines its collision data as itself so that we can easily access all of its data in the collision file
         this.body.setTransform(rand.nextInt(Main.MAP_WIDTH - (int) enemy.getWidth()) * Main.PPM, rand.nextInt(Main.MAP_HEIGHT - (int) enemy.getHeight()) * Main.PPM, 0);//enemy starts at a random part of the map
     }
     public void lock() {
@@ -76,7 +76,7 @@ public class Enemy {
     public void unLock() {
         frozen = false;
     }//unlocks it and lets it move freely
-
+    /*
     public void encounter(Player player) {//similar to pokemon there is a dramatic zoom in when the player gets close to an enemy
         if (!seen && Math.pow(body.getPosition().x - player.getBody().getPosition().x, 2) + Math.pow(body.getPosition().y - player.getBody().getPosition().y, 2) < 500) { // if you are withing 500 units close to player
             player.lock();//locks the player
@@ -102,7 +102,7 @@ public class Enemy {
         if (seen) {
             move(player);
         }
-     }
+     }*/
     public void move(Player player) {
         if (!frozen) {
 
