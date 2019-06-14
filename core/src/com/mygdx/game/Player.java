@@ -29,7 +29,7 @@ public class Player {
     int mana = 100;
     int stamina = 100;
     Weapon weapon;
-    Armour helmet, chest, legs, boots;
+
 
     private ArrayList<ArrayList<Texture>> sprites = new ArrayList<ArrayList<Texture>>();//different sprites for different directions of moment
     private ArrayList<Texture> tmpSprites;
@@ -182,39 +182,7 @@ public class Player {
         return weapon;
     }
 
-    public Armour getHelmet() {
-        return helmet;
-    }
 
-    public Armour getChest() {
-        return chest;
-    }
 
-    public Armour getLegs() {
-        return legs;
-    }
 
-    public Armour getBoots() {
-        return boots;
-    }
-
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
-
-    public void setHelmet(Armour helmet) {
-        this.helmet = helmet;
-    }
-
-    public void setChest(Armour chest) {
-        this.chest = chest;
-    }
-
-    public void setLegs(Armour legs) {
-        this.legs = legs;
-    }
-
-    public void setBoots(Armour boots) {
-        this.boots = boots;
-    }
 }
