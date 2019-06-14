@@ -25,11 +25,14 @@ public class NPC {
 
     boolean textFinished = false;
 
-    public NPC(Rectangle rect, String name, String dialogue, String item) {
+    boolean invisible = false;
+    String type;
+
+    public NPC(Rectangle rect, String name, String dialogue, String item, String type) {
         this.name = name;
         this.dialogue = dialogue;
         this.item = item;
-
+        this.type = type;
         String[] pages = dialogue.split("#");
         for (String i : pages) {
             ArrayList<String> lines = new ArrayList<String>();
@@ -44,11 +47,11 @@ public class NPC {
         textBox.setSize(Main.WIDTH, textBox.getHeight());
         npc.setPosition(rect.getX(), rect.getY());
         npc.setSize(npc.getWidth() * 2, npc.getHeight() * 2);
-        createBody();
+        createBody(rect);
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(npc, body.getPosition().x - npc.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - npc.getHeight() * (float) Math.pow(Main.PPM, 2), npc.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, npc.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
+        if (!type.equals("00")) batch.draw(npc, body.getPosition().x - npc.getWidth() * (float) Math.pow(Main.PPM, 2), body.getPosition().y - npc.getHeight() * (float) Math.pow(Main.PPM, 2), npc.getWidth() * (float) Math.pow(Main.PPM, 2) * 2, npc.getHeight() * (float) Math.pow(Main.PPM, 2) * 2);
 
     }
 
@@ -57,18 +60,18 @@ public class NPC {
         render(batch);
     }
 
-    public void createBody() {
+    public void createBody(Rectangle rect) {
         BodyDef bdef = new BodyDef();
         FixtureDef def = new FixtureDef();
         PolygonShape shape = new PolygonShape();
 
         bdef.type = BodyDef.BodyType.StaticBody;
 
-        bdef.position.set(npc.getX() * Main.PPM + npc.getWidth() / 2 * Main.PPM, npc.getY() * Main.PPM + npc.getHeight() / 2 * Main.PPM);
+        bdef.position.set((type.equals("00") ? rect.getX() : npc.getX()) * Main.PPM + (type.equals("00") ? rect.getWidth() : npc.getWidth()) / 2 * Main.PPM, (type.equals("00") ? rect.getY() : npc.getY()) * Main.PPM + (type.equals("00") ? rect.getHeight() : npc.getHeight()) / 2 * Main.PPM);
 
         body = Main.world.createBody(bdef);
 
-        shape.setAsBox(npc.getWidth() / 3 * Main.PPM, npc.getHeight() / 3 * Main.PPM);
+        shape.setAsBox((type.equals("00") ? rect.getWidth() : npc.getWidth()) / 3 * Main.PPM, (type.equals("00") ? rect.getHeight() : npc.getHeight()) / 3 * Main.PPM);
 
         def.shape = shape;
 

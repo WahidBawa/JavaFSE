@@ -51,7 +51,7 @@ public class WorldCreator {
                 } else if (name.equals("chest")) {
                     chests.add(new Chest(rect, (String) obj.getProperties().get("chestName"), (String) obj.getProperties().get("Item")));
                 } else if (name.equals("NPC")) {
-                    npcs.add(new NPC(rect, (String) obj.getProperties().get("Name"), (String) obj.getProperties().get("Dialogue"), (String) obj.getProperties().get("item")));
+                    npcs.add(new NPC(rect, (String) obj.getProperties().get("Name"), (String) obj.getProperties().get("Dialogue"), (String) obj.getProperties().get("item"), (String) obj.getProperties().get("type")));
                 } else if (name.equals("Portal")) {
                     portals.add(new Portal(rect, (String) obj.getProperties().get("type"), (Integer) obj.getProperties().get("xd"), (Integer) obj.getProperties().get("yd")));
                 } else if (name.equals("Quest_NPC")){

@@ -357,7 +357,6 @@
     <property name="item" value="Potion // Candy"/>
    </properties>
   </object>
-  <object id="20" name="wall" type="0" x="356.333" y="161.667" width="20" height="30"/>
   <object id="21" name="NPC" type="00" x="511" y="93" width="33" height="30">
    <properties>
     <property name="Dialogue" value="This is Lill whin! # North - Grasslands"/>
@@ -365,7 +364,7 @@
     <property name="item" value="NULL"/>
    </properties>
   </object>
-  <object id="24" name="NPC" type="00" x="28" y="709" width="438" height="62">
+  <object id="24" name="NPC" type="00" x="28" y="698.767" width="438" height="72.2333">
    <properties>
     <property name="Dialogue" value="Don't Drown!"/>
     <property name="Name" value="Little Lake"/>
