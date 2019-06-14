@@ -57,6 +57,7 @@ public class Player {
         player.setSize(player.getWidth() / (float) 1.5, player.getHeight() / (float) 1.5);
 
         this.render(batch);
+        this.loadData();
     }
 
     public void createBody() {
