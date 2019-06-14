@@ -126,7 +126,7 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void render() {
-//        System.out.println(player.getX() + " " + player.getY());
+        System.out.println(player.getBody().getPosition().x + " " + player.getBody().getPosition().y);
         camera.zoom = PPM;
 
         if (!destroyed) {

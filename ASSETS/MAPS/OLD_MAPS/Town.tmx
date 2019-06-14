@@ -376,8 +376,8 @@
   <object id="44" name="wall" x="618.417" y="526.333" width="135.333" height="68.3333"/>
   <object id="48" name="Portal" type="5" x="93.3333" y="218.667" width="32" height="42.6667">
    <properties>
-    <property name="xd" type="int" value="240"/>
-    <property name="yd" type="int" value="100"/>
+    <property name="xd" type="int" value="95"/>
+    <property name="yd" type="int" value="26"/>
    </properties>
   </object>
   <object id="49" name="Portal" type="6" x="669" y="218.67" width="32" height="42.6667">
