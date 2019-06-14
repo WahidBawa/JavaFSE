@@ -211,29 +211,36 @@ public class Main extends ApplicationAdapter {
 
 
     public void movePlayer() {
+        Vector2 adder = new Vector2(0, 0);
         if (!player.isFrozen()){
             player.getBody().setLinearVelocity(0, 0);
 
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
-                player.getBody().applyLinearImpulse(new Vector2(-speed * 2, 0), player.getBody().getWorldCenter(), true);
+                adder.add(new Vector2(-speed * 2, 0));
                 moving = true;
                 dir = LEFT;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
-                player.getBody().applyLinearImpulse(new Vector2(speed * 2, 0), player.getBody().getWorldCenter(), true);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+                adder.add(new Vector2(speed * 2, 0));
                 moving = true;
                 dir = RIGHT;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
-                player.getBody().applyLinearImpulse(new Vector2(0, -speed * 2), player.getBody().getWorldCenter(), true);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
+                adder.add(new Vector2(0, -speed * 2));
                 moving = true;
                 dir = DOWN;
-            } else if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
-                player.getBody().applyLinearImpulse(new Vector2(0, speed * 2), player.getBody().getWorldCenter(), true);
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
+                adder.add(new Vector2(0, speed * 2));
                 moving = true;
                 dir = UP;
-            } else {
-                player.getBody().applyLinearImpulse(new Vector2(player.getBody().getLinearVelocity().x * -1, player.getBody().getLinearVelocity().y * -1), player.getBody().getWorldCenter(), true);
+            }
+
+            if (adder.equals(new Vector2(0, 0))) {
                 moving = false;
             }
+
+            player.getBody().applyLinearImpulse(adder, player.getBody().getWorldCenter(), true);
 
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide) && !moving) {
                 for (Fixture i : objs) {
