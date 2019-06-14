@@ -17,17 +17,22 @@ import java.util.HashMap;
 public class Quest_NPC {
     Body body;
     Sprite npc = new Sprite(new Texture("ASSETS/SPRITES/NPC/1.png"));
-    String name, dialogue, item, midQuestDialogue, questFinishDialogue;
+    String name, item;
     Sprite textBox = new Sprite(new Texture("ASSETS/UI/DIALOGUE_BOX/box2.png"));
     BitmapFont font = new BitmapFont(Gdx.files.internal("ASSETS/FONTS/myFont.fnt"), false);
     ArrayList<ArrayList<String>> allText = new ArrayList<ArrayList<String>>();
     int dialoguePage, pageLine;
+    String[] allDialogues = new String[3];
+    int questStage = 0;
 
     boolean textFinished = false;
 
     public Quest_NPC(Rectangle rect, String name, String dialogue, String midQuestDialogue, String questFinishDialogue, String goalNPC, String item) {
         this.name = name;
-        this.dialogue = dialogue;
+
+        allDialogues[0] = dialogue;
+        allDialogues[1] = midQuestDialogue;
+        allDialogues[2] = questFinishDialogue;
         this.item = item;
 
         String[] pages = dialogue.split("#");
@@ -79,6 +84,13 @@ public class Quest_NPC {
     }
 
     public void talk(SpriteBatch batch) {
+        String[] pages = allDialogues[questStage].split("#");
+        for (String i : pages) {
+            ArrayList<String> lines = new ArrayList<String>();
+            lines.addAll(Arrays.asList(i.split("//")));
+            allText.add(lines);
+        }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if (dialoguePage == allText.size() - 1 && pageLine == allText.get(dialoguePage).size() - 1) {
                 HashMap tmp = (Main.weapons.get(item) != null ? Main.weapons.get(item) : Main.consumables.get(item));

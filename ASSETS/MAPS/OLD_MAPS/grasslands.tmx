@@ -160,7 +160,7 @@
   <object id="196" name="Quest_NPC" type="0" x="321.5" y="817" width="20" height="30">
    <properties>
     <property name="Complete" type="bool" value="false"/>
-    <property name="Dialogue" value="I have a quest for you. # Find the stupid boy and your mission will be complete."/>
+    <property name="Dialogue" value="I have a quest for you.#Find the stupid boy and your mission will be complete."/>
     <property name="DialogueFinish" value="Good job child"/>
     <property name="DialogueQuest" value="Go on, find the Hidden Boy"/>
     <property name="Goal" value="Stupid Boy"/>

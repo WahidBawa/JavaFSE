@@ -25,6 +25,9 @@ public class CollisionListener implements ContactListener {
                 objs.add(contact.getFixtureB());
             } else if (contact.getFixtureB().getUserData().getClass() == Portal.class) {
                 objs.add(contact.getFixtureB());
+            } else if (contact.getFixtureB().getUserData().getClass() == Quest_NPC.class){
+                Main.npcQuestCollide = true;
+                objs.add(contact.getFixtureB());
             }
             if (contact.getFixtureB().getUserData().getClass() == Enemy.class) {
                 ((Enemy) contact.getFixtureB().getBody().getUserData()).attack(player);
@@ -53,6 +56,9 @@ public class CollisionListener implements ContactListener {
                 objs.remove(contact.getFixtureB());
             } else if (contact.getFixtureB().getUserData().getClass() == Portal.class) {
                 objs.remove(contact.getFixtureB());
+            } else if (contact.getFixtureB().getUserData().getClass() == Quest_NPC.class){
+                Main.npcQuestCollide = false;
+                objs.add(contact.getFixtureB());
             }
         }
         Main.objs = objs;

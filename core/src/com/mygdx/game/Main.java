@@ -60,6 +60,7 @@ public class Main extends ApplicationAdapter {
 
     public static boolean chestCollide = false;
     public static boolean npcCollide = false;
+    public static boolean npcQuestCollide = false;
     public static boolean interactable = true;
 
     public static ArrayList<Fixture> objs = new ArrayList<Fixture>();
@@ -71,9 +72,6 @@ public class Main extends ApplicationAdapter {
 
     public static Inventory inventory;
     private boolean showInventory = false;
-    private boolean invDrag = false;
-    private int xDragOffset = 0;
-    private int yDragOffset = 0;
 
     public static boolean displayText = false;
     public String type = null;
@@ -83,6 +81,7 @@ public class Main extends ApplicationAdapter {
     public static HashMap<String, String> maps = new HashMap<String, String>();
 
     private NPC currNpc;
+    private Quest_NPC currQuest_NPC;
     private Chest currChest;
 
     private ArrayList<Body> bodiesToDestroy = new ArrayList<Body>();
@@ -183,7 +182,7 @@ public class Main extends ApplicationAdapter {
             hud_batch.end();
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                if (type.equals("npc") && currNpc.textFinished) {
+                if ((type.equals("npc") && currNpc.textFinished) || (type.equals("quest_npc") && currQuest_NPC.textFinished)) {
                     displayText = false;
                 } else if (type.equals("chest") && currChest.textFinished) {
                     displayText = false;
@@ -242,7 +241,7 @@ public class Main extends ApplicationAdapter {
 
             player.getBody().applyLinearImpulse(adder, player.getBody().getWorldCenter(), true);
 
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide) && !moving) {
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && (chestCollide || npcCollide || npcQuestCollide) && !moving) {
                 for (Fixture i : objs) {
                     if (i.getUserData().getClass() == Chest.class) {
                         currChest = (Chest) i.getUserData();
@@ -255,6 +254,12 @@ public class Main extends ApplicationAdapter {
                         currNpc = (NPC) i.getUserData();
                         type = "npc";
                         currNpc.resetTalk();
+                        displayText = true;
+                        interactable = false;
+                    } else if (i.getUserData().getClass() == Quest_NPC.class && interactable){
+                        currQuest_NPC = (Quest_NPC) i.getUserData();
+                        type = "quest_npc";
+                        currQuest_NPC.resetTalk();
                         displayText = true;
                         interactable = false;
                     }
