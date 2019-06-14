@@ -172,6 +172,7 @@ public class Main extends ApplicationAdapter {
             hud_batch.end();
         }
 
+        System.out.println(type);
         if (displayText) {
             hud_batch.begin();
             if (type.equals("npc")) {
@@ -186,11 +187,13 @@ public class Main extends ApplicationAdapter {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 if (type.equals("npc") && currNpc.textFinished) {
                     displayText = false;
+                    type = null;
                 } else if (type.equals("chest") && currChest.textFinished) {
                     displayText = false;
+                    type = null;
                 } else if (type.equals("quest_npc") && currQuest_NPC.textFinished){
                     displayText = false;
-                    System.out.println("oofffffffff");
+                    type = null;
                 }
             }
         }
@@ -261,6 +264,7 @@ public class Main extends ApplicationAdapter {
                         currNpc.resetTalk();
                         displayText = true;
                         interactable = false;
+                        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                     }
                     if (i.getUserData().getClass() == Quest_NPC.class && interactable){
                         currQuest_NPC = (Quest_NPC) i.getUserData();
@@ -268,6 +272,7 @@ public class Main extends ApplicationAdapter {
                         currQuest_NPC.resetTalk();
                         displayText = true;
                         interactable = false;
+                        System.out.println("REEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
                     }
                 }
             }
